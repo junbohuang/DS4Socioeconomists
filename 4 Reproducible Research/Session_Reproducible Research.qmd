@@ -1,0 +1,207 @@
+---
+title: "Data Science for Socioeconomists"
+subtitle: "Excercise 14 - Reproducible Research"
+author: Lisa Wegner 
+format:
+  revealjs:
+    incremental: false
+    transition: none
+    background-transition: none
+    theme: white
+    slide-number: true
+    footer: "Data Science for Socioeconomists"
+    embed-resources: true
+    preview-links: auto 
+    smaller: false
+scrollable: true
+execute:
+   echo: true
+editor: visual
+code-annotations: below
+---
+
+# Agenda for today
+
+1.  Personal evaluation
+
+2.  Reproducible science (\~45 minutes)
+
+    1.  Recap
+    2.  Quiz
+    3.  Exercise to improve code in matters of reproduction
+
+3.  Recap, questions (\~45 minutes)
+
+# Evaluation
+
+This evaluation is for my tutorials - so the first half of the semester.
+
+![](images/qrcode_91674411_cb09fe5d463c643a9721ab270082b197.png){width="300"}
+
+[https://evasys-online.uni-hamburg.de/evasys/online.php?pswd=5P3KZ ](https://evasys-online.uni-hamburg.de/evasys/online.php?pswd=5P3KZ)
+
+# Recap: Reproducible Science
+
+::: callout-important
+-   Reproducibility isn't a guarantee of quality
+    -   Value depends on other factors like originality of the question, validity of hypotheses, relevance of results to the field, and the quality of conclusions drawn
+    -   Specific context or conditions could limit the generalizability
+-   Diversity in research standards: Physical experiments have different standards than social science studies
+-   Human factors and interpretation can influence the interpretation and conclusions of results
+:::
+
+# MC Questions
+
+## **Question 1:** What is the primary objective of reproducible research in data science?
+
+a.  To make research findings difficult to replicate
+b.  To ensure that research findings can be independently verified and replicated
+c.  To hide the code and data used in the research
+d.  To make research findings accessible only to a select group
+
+## **Question 2:** Which of the following is NOT a benefit of reproducible research?
+
+a.  Improved collaboration and transparency
+b.  Enhanced credibility and trust in research findings
+c.  Making it harder for others to understand and replicate the study
+d.  Easier identification of errors and corrections in research
+
+## **Question 3:** What is the primary benefit of sharing negative or null results in research?
+
+a.  It enhances competition among researchers
+b.  It prevents other researchers from exploring similar hypotheses
+c.  It reduces publication bias and promotes scientific integrity
+d.  It discourages collaboration between research teams
+
+## **Question 4:** What role does documentation play in reproducible research?
+
+a.  It makes it harder for others to understand the research process
+b.  It helps in understanding and replicating the research
+c.  It's unnecessary in data science research
+d.  It slows down the research process
+
+::: notes
+1.  **Question 1:**
+
+    -   Correct Answer: To ensure that research findings can be independently verified and replicated
+
+2.  **Question 2:**
+
+    -   Correct Answer: Making it harder for others to understand and replicate the study
+
+3.  **Question 3:**
+
+    -   Correct Answer: It reduces publication bias and promotes scientific integrity
+
+4.  **Question 4:**
+
+    -   Correct Answer: It helps in understanding and replicating the research
+:::
+
+# Exercise: Correct poorly documented code
+
+The provided code snippet performs a data analysis task but lacks proper documentation, comments, and variable labels. Your task is to enhance the code by adding comments, providing clear variable names, and improving readability. Rewrite the code to make it more understandable for future collaborators.
+
+# Code
+
+```{r}
+analyze_data <- function(df) {
+  a <- df[1] * 2
+  b <- df[2] + 10
+  result <- a + b
+  return(result)
+}
+
+# Main program
+data <- c(7, 8, 12, 4, 6)
+output <- analyze_data(data)
+print(output)
+```
+
+## **Questions:**
+
+1.  Identify at least three issues with the provided code example in terms of documentation and variable naming.
+2.  Why is it important to have clear and descriptive variable names in code for reproducible research?
+3.  How does adding comments to code contribute to the reproducibility of research?
+4.  Add-on: How can the code be made more performant? How can we avoid error-messages?
+
+# Solutions
+
+## 1. Identify at least three issues with the provided code example in terms of documentation and variable naming.
+
+-   Lack of comments: There are no comments explaining the purpose of the functions or the logic within them.
+-   Unclear variable names: Variable names like `a`, `b`, and `df` don't provide clear indications of their purpose or content.
+-   Absence of function description: There's no documentation specifying what the `analyze_data` function does or what input it expects.
+
+## 2. Why is it important to have clear and descriptive variable names in code for reproducible research?
+
+-   enhance code readability and understanding for both the coder and collaborators
+
+-   descriptive variable names contribute to transparency making it easier for others to follow the logic and replicate the analysis without confusion or misinterpretation
+
+## 3. How does adding comments to code contribute to the reproducibility of research?
+
+-   Comments provide crucial insights into the logic, purpose, and functionality of the code
+-   Comments serve as documentation, guiding others through the code base
+-   Comments explain the logic behind specific steps, functions, or calculations, facilitating replication and comprehension of the research process.
+
+## 4. How can we make the code work smoother and with less errors?
+
+-   Add info about the needed data types of the input variables
+-   Do a check within the function if the provided data fits this type
+
+# Code
+
+```{r}
+# Function to perform data analysis
+calculate_result <- function(input_data) {
+  # Perform calculations: double the first element and add 10 to the second element
+  # input data needs to be numbers (numeric, integers, doubles etc.), this can be assured by conversion
+  input_data <- as.numeric(input_data)
+  
+ # Check if any elements in the input_data are non-numeric (with the ! that stands for not) or (|) NA
+  if (any(is.na(input_data) | !is.numeric(input_data))) {
+    print("One or more elements of the given data are not numbers or contain NA")
+  } else {
+    # Perform calculations only if all elements are numeric
+   doubled_first_element <- input_data[1] * 2
+  increased_second_element <- input_data[2] + 10
+  
+  # Compute the result by adding the calculated values
+  final_result <- doubled_first_element + increased_second_element
+  
+  # Return the final result
+  return(final_result)
+}
+}
+# Example dataset
+input_values <- c(7, 8)  # Replace these values with the actual dataset
+
+# Calling the function to analyze the data and obtain the result
+analysis_output <- calculate_result(input_values)
+
+# Display the output of the analysis
+print(analysis_output)
+```
+
+## **What is new?**
+
+-   added comments
+-   variable names were improved
+-   info about needed variable types was given
+-   a check for the correct data type was added
+
+# Exam
+
+-   Take Home Exam - Timeframe 15:00-19:00 on 19th February
+-   Exam takes 120 minutes to take, additional time was added to avoid inconviniences and stress
+-   Preparation:
+    -   revise tasks from the tutorials
+    -   repeat lecture slides
+-   Exam tasks need to be solved with R-Studio (online or desktop) in **one** file.
+
+## Handouts:
+
+-   Now, Please take a few minutes to go through the steps written in "Guide: upload of exam tasks" that can be found under "exam information" at OpenOlat
+-   Regarding online tools like generative KI: a document regarding such tools will be online in the next few days, we are currently waiting on a binding document by the university administration
+-   template for the exam: can be found under "exam information" at OpenOlat

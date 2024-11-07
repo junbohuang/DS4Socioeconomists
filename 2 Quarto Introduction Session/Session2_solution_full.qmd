@@ -1,0 +1,100 @@
+---
+title: "Solutions Session 2 - Getting started with Quarto"
+author: "Lisa Wegner"
+format: html
+theme: Minty
+smooth-scrool: true
+editor: visual
+---
+
+# Headline Number one, 24.10.2024 {#ref-headline-1}
+
+***Bullet List***
+
+-   Point 1
+
+-   Point 2
+
+-   Point 3
+
+## Headline size 2 {#sec-headline-size-2-}
+
+A.  Number 1
+B.  Number 2
+C.  Number 3
+
+### Headline size 3
+
+i.  Number 1
+
+ii. Number 2
+
+iii. Number 3
+
+# Code Chunk
+
+executable code-cell (with "play" button)
+
+```{r}
+2+2
+```
+
+code that's not executable (called: code block)
+
+``` r
+2+2
+```
+
+# Favorite Animal {#sec-favorite-animal}
+
+![picture-whale](https://123sonography.com/sites/default/files/styles/article_image/public/image/images/whale-us-animal-challenge.jpeg?itok=g8TxOKGB){#fig-whale}
+
+# Table
+
+|     Col1      | Col2 | Col3                |
+|:-------------:|-----:|---------------------|
+|       2       |    3 | 8787982714987432872 |
+| 4345678987654 |    5 | 98234567898765432   |
+| 6234567876543 |    8 | 9123456789098765432 |
+
+: Test Table
+
+# Cross Reference {#sec-cross-reference}
+
+for a picture of a whale check out @fig-whale
+
+# Calculations
+
+R as a calculator\
+In the same Quarto-doc:
+
+1.  What's: **12+8\*145-28+13/2**?
+
+    ```{r}
+    result <- 12+8*145-28+13/2
+    print(result)
+    ```
+
+2.  Is the result the same as **5\*243**? - check by hand and with true/false
+
+    ```{r}
+    result2 <- 5*243
+    print(result2)
+    result2 == result
+    ```
+
+3.  Take the square root the first and the second calculation
+
+```{r}
+sqrt(result)
+sqrt(result2)
+```
+
+4.  Round the results to whole numbers
+
+[google](www.google.com)
+
+```{r}
+round(result, 0)
+round(result2, 0)
+```

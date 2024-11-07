@@ -1,0 +1,279 @@
+---
+title: "Data Science for Socioeconomists"
+subtitle: "Excercise 5 - Data visualization pt. 1"
+author: Lisa Wegner 
+format:
+  revealjs:
+    incremental: false
+    transition: none
+    background-transition: none
+    theme: white
+    slide-number: true
+    footer: "Data Science for Socioeconomists"
+    embed-resources: true
+    preview-links: auto 
+    smaller: false
+    scrollable: true
+    fig-width: 8
+    fig-height: 6
+    execute:
+      echo: TRUE
+    editor: visual
+code-annotations: below
+---
+
+# Agenda for today {#sec-agenda-for-today}
+
+1.  Motivation
+2.  Finding the right plot for your purpose
+3.  Advanced Plotting with ggplot
+4.  Tasks
+5.  Outlook for next week
+
+# 1. Motivation {#sec-recap}
+
+::: columns
+::: {.column width="40%"}
+Why should we do visualizations?
+
+Why should we keep certain principles in mind?
+
+How can we make our graphics accessible?
+:::
+
+::: {.column width="60%"}
+![Benefits of data science visualization via turing.com](https://d2mk45aasx86xg.cloudfront.net/Benefits_of_data_visualization_ac0e5507ec.webp){width="500"}
+:::
+:::
+
+# 2. The right plot for your purpose {#sec-right-plot-for-your-purpose}
+
+## Types of Plots {#sec-types-of-plots}
+
+![via https://medium.com/\@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e](https://miro.medium.com/v2/resize:fit:720/format:webp/1*N0tRnDv63278HUKF_dE4HA.png)
+
+## Boxplot {#sec-boxplot}
+
+![via: [geeksforgeeks](https://www.geeksforgeeks.org/box-plot/)](https://media.geeksforgeeks.org/wp-content/uploads/20201127012952/boxplot-660x233.png){fig-align="center"}
+
+## Help for your decision {#sec-help-for-your-decision}
+
+![via https://medium.com/\@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e](https://miro.medium.com/v2/resize:fit:720/format:webp/1*0Kimz-DJR_WfIm7mLkLqpQ.png)
+
+## **Little quiz** {#sec-little-quiz}
+
+Which plot-type is recommended for which purpose?
+
+<https://particify.uni-hamburg.de/p/61346493>
+
+![](images/QR%20Viz.JPG){fig-align="center"}
+
+# 3. Plotting with ggplot2 {#sec-introduction-to-plotting}
+
+Since you have already done this in the lecture we'll go through the following slides a bit quicker!
+
+We will use randomly generated data (test_dataset) to get an overview over the functions of ggplot2
+
+I've loaded the data set from the package `sozoekds` already
+
+## Idea {#sec-idea}
+
+```         
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) 
++ <GEOM_FUNCTION>()
+```
+
+::: nonincremental
+1.  choose dataset: `data = dataset`
+2.  add `mapping = aes(x=var1, y=var2)`
+3.  with this you get the basic coordinate system
+4.  add layers with further information to the plot
+    1.  What kind of diagram do I want?
+    2.  Which functions do I need for that?
+    3.  What parameters are needed?
+
+------------------------------------------------------------------------
+:::
+
+## 1st step : adding data, colors and different variables {#sec-adding-colors-and-additional-data}
+
+```{r}
+library(sozoekds) 
+test_dataset <- testdata 
+library(ggplot2)  
+ggplot(data = test_dataset,mapping = aes(x=age)) +
+  geom_point(mapping=aes(y= income), 
+                    color="darkgreen")  + 
+  # we have added a color for the viz of age & income
+          geom_point(mapping=aes(y=spending_habits), 
+                     color ="red") 
+# adding a new variable - the connection should be visualized in red
+
+```
+
+------------------------------------------------------------------------
+
+## 2nd: adding labels {#sec-adding-labels}
+
+```{r}
+p <- ggplot(data = test_dataset, mapping = aes(x=age)) + 
+  # dataset and x-variable to plot are defined
+  geom_point(aes(y = income, color = "Income")) + 
+  #y gets the color "Income" assigned - we later tell what this color represents
+  geom_point(aes(y = spending_habits, color = "Spendings")) +
+  #y gets the color "Spendings" assigned 
+  # we later tell what this color represents
+  labs(x = "age", y = "money in €", 
+       title = "Income and Spending habits of made up people") + 
+  #adding a title and axis-labels
+  scale_colour_manual(breaks = c("Income", "Spendings"),
+                      values = c("green", "red")) 
+# assigning colors to the color-representors
+
+p
+```
+
+## Global vs. local aesthetic {#sec-aesthetics}
+
+***global aesthetic:***
+
+aesthetic is defined on the first layer and is used for all following layers - unless a local aesthetic over-writes it
+
+***local aesthetic:***
+
+aesthetic is defined for each layer independently
+
+-   within the first layer we set global values within our plot: `ggplot(data = data, mapping=aes())`
+
+-   within the `geom_point(aes()`) layer we can overwrite the global aesthetic and set a local one
+
+```{r}
+p <- ggplot(data = test_dataset,mapping = aes(x= age)) +
+  geom_point(mapping=aes (y=income)) +
+  geom_point(mapping=aes(y=spending_habits), 
+             color ="purple", shape="triangle")
+p
+```
+
+## Variations {#sec-variation}
+
+For changes in the theme like color, size of points, type of points etc. look for `ggplot2-specs` in the help-console
+
+There are plenty more types of visualization available <https://ggplot2.tidyverse.org/reference/>
+
+[`geom_bar()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) [`geom_col()`](https://ggplot2.tidyverse.org/reference/geom_bar.html) [`stat_count()`](https://ggplot2.tidyverse.org/reference/geom_bar.html)
+
+:   Bar charts
+
+[`geom_dotplot()`](https://ggplot2.tidyverse.org/reference/geom_dotplot.html)
+
+:   Dot plot
+
+[`geom_freqpoly()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) [`geom_histogram()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html) [`stat_bin()`](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
+
+:   Histograms and frequency polygons
+
+## Cheatsheet {#sec-cheatsheet}
+
+Since there are a lot of different options to choose from, some websites might be helpful:
+
+[Data Camp on ggplot2](https://www.datacamp.com/cheat-sheet/ggplot2-cheat-sheet?utm_source=google&utm_medium=paid_search&utm_campaignid=19589720818&utm_adgroupid=152984008934&utm_device=c&utm_keyword=&utm_matchtype=&utm_network=g&utm_adpostion=&utm_creative=680291483433&utm_targetid=dsa-2219652735776&utm_loc_interest_ms=&utm_loc_physical_ms=1004437&utm_content=DSA~blog~R-Programming&utm_campaign=230119_1-sea~dsa~tofu_2-b2c_3-eu_4-prc_5-na_6-na_7-le_8-pdsh-go_9-na_10-na_11-na-bfcm23&gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N3QyVIHWowqxuKhjsbJj-C8qdBSx2EHaMFiAAjuKCH2Cao3c_kyH7hoCFUgQAvD_BwE)
+
+[Cheat Sheet from GitHub](https://rstudio.github.io/cheatsheets/html/data-visualization.html)
+
+| And as always: using the Help-Function in R-Studio and using Google with a term like `geom_boxplot` is really helpful. There are many options to choose from. Sometimes we have to try a few times to find a plot that suits our purpose and needs.
+
+Example: Description on the [Boxplot](https://ggplot2.tidyverse.org/reference/geom_boxplot.html) in ggplot2
+
+# 4. Exercises for today
+
+## Preface {.smaller}
+
+We'll be working with California Housing Data and Exam Data today and in next weeks session. The two data sets can be found in the package `sozoekds` (see last weeks exercise on how to download it or look into the [Read Me](https://gitlab.rrz.uni-hamburg.de/BAQ6370/sozoekds) ).
+
+The data sets have added information about their content - like how the variables are measured, what the measure etc. Looking at the description is helpful since a variable in a data set could have a name like `Median_Age` (in calhouse) which I might think is the...
+
+-   Median age of the inhabitants of the house?
+-   The age of the person who did the observation?
+-   The median age of a house within a block?
+
+`Median_Age` measures the last thing - it it measures it on a block-scale. This way it's already an aggregated value for multiple buildings. We can still calculate the mean or median over all observations.
+
+## Todays and next weeks exercises {.smaller}
+
+Now: Work in a Quarto Document with your group on the Jupyter Hub!
+
+-   Choose just **one** of the two data sets (calhouse or examdata) and do the responding exercises.
+
+-   While doing the tasks:
+
+    -   Please choose an accurate type of plot for the purpose of the question.
+
+    -   Give an explanation on why this type of visualization is accurate.
+
+    -   Also look at the scales, colors, headlines, type and size of lines/dots, legends... - and choose a style that fits.
+
+## California Housing {#sec-california-housing}
+
+***today***
+
+::: nonincremental
+1.  Create a diagram that visualizes the distribution of the Median House Value
+2.  Afterwards create a diagram that puts Median House Value and the distance to the coast together
+3.  Add labels, color and scales in a way that suit the purpose of your graphic
+4.  Explain your decision of the type of visualization
+5.  Interpret the result
+:::
+
+***next week***
+
+1.  Revisit last weeks plots - how can you re-style them with the principles we learned today?
+
+2.  New plot(s)
+
+    ::: {.nonincremental .smaller}
+    a.  Create a new variable called `Avg_Rooms` that displays the average amount of rooms in each household in a certain neighborhood (block)
+
+        *Hint: for one observation there might be 20 households, and 50 rooms in total - this leads to an average of 2.5 rooms per household*
+
+    b.  Plot Avg_Rooms against Median_Income - interpret the result
+
+    c.  Eliminate values in Avg_Rooms that are greater then 10 rooms from your data set - then plot task 2 again
+
+    d.  as before: Explain your decision of the type of visualization + Interpret the results
+    :::
+
+## Exam Scores {#sec-exam-scores}
+
+***today***
+
+::: nonincremental
+1.  Create a diagram that visualizes the distribution of the MathScore
+2.  Plot the distribution of the different test scores in regards to Gender
+3.  Add labels, color and scales in a way that suit the purpose of your graphic
+4.  Explain your decision of the type of visualization
+5.  Interpret the result
+:::
+
+***next week***
+
+1.  Revisit last weeks plots - how can you re-style them with the principles we learned today?
+
+2.  New plot(s)
+
+::: nonincremental
+a.  Create a new variable called `full_score` that is the mean score of all three testscores (Math, Reading, Writing)
+
+b.  Calculate grades from the `full_score` using the american system ([hint here](https://en.wikipedia.org/wiki/Academic_grading_in_the_United_States))
+
+c.  Plot the distribution of grades by number of study hours per week\
+    Hint: create a factor variable from WklyStudyHours
+
+    Hint: You could do this in one plot with multiple lines or in more than one graphic where all the plots are printed in one frame (<https://intro2r.com/mult_graphs.html>)
+
+d.  as before: Explain your decision of the type of visualization + Interpret the results
+:::
+
+# Next week
+
+Adding labels, axis-titles, changing colors, thinking about accessibility

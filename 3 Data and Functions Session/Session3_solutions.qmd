@@ -1,0 +1,212 @@
+---
+title: "Session 4 - Solutions"
+author: "L. Wegner"
+format: html
+theme: minty
+editor: visual
+---
+
+# Today's Exercise
+
+## Task 1 - Using functions
+
+Take this vector:
+
+``` r
+vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56)
+```
+
+1\. What is the lowest number of the vector?
+
+```{r} vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56) min(vector)}
+```
+
+2\. What is the mean value? What is the median value? How far are they apart from each other?
+
+```{r} vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56) mean <- mean(vector) median <- median(vector) diff <- mean - median diff}
+```
+
+3\. How big is the range of the vector?
+
+```{r} vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56) range(vector)}
+```
+
+## Task 2 - Calculator Function
+
+-   We want a function that calculates the sum of the square roots of two numbers,
+
+    ```{r} calcu <- function(x,y) {  root_x <- sqrt(x)  root_y <- sqrt(y)   result <- root_x + root_y   return (result) }
+    ```
+
+-   rounds it to two digits
+
+    ```{r} calcu <- function(x,y) {   root_x <- sqrt(x)   root_y <- sqrt(y)   result <- root_x + root_y   rounded <- round(result, digits =2)   return (round) }
+    ```
+
+-   and then does a check: when the result is bigger then a third number return: bigger then z, otherwise return: smaller then z
+
+```{r} calcu <- function(x, y, z) {   root_x <- sqrt(x)   root_y <- sqrt(y)   result <- root_x + root_y   rounded <- round(result, digits = 2)   if (rounded >= z) {     return("result is bigger then z")   } else {     return("result is smaller then z")   } }
+```
+
+-   check by using x=10.33, y=20.78 and z=40.47
+
+    ```{r} calcu(10.33,20.78,40.47)}
+    ```
+
+## 3. loading data into R
+
+| 1. first load either the data-set "Exam_Score" or "California Housing" (can be found at OpenOlat) into R using package-functions of readr (the data-sets are both in csv-format).
+| Describe the steps of your process via comments.
+
+Installing the "Readr" package
+
+``` r
+#install.packages("readr")
+library(readr)
+```
+
+Loading the csv-file from either the internet
+
+``` r
+cal_housing_internet <- read_csv("Link_that_ends_with_csv.csv")
+exam_data_internet <- read_csv("link_that_also_ends_with_csv.csv")
+```
+
+.... or from it's folder on my computer
+
+I download the file from OpenOlat, then store it in a folder and give this path to the function.
+
+::: callout-note
+Note: .csv needs to be the ending of my file-name here as well!
+:::
+
+::: callout-caution
+The file-path on my computer is: Z:\\\\wiso\\Datasets\\cal_housing.csv
+
+**R can not take this! I have to change the \\ to /**
+
+We can do that with Strg + F and then put \\ in the **find-field** and **replace** it by /
+
+Z://wiso/Datasets/cal_housing.csv
+:::
+
+``` r
+cal_housing_laptop <- read_csv("Z://Datasets/edited_California_Houses.csv")
+
+exam_data_laptop <- read_csv("Z://Datasets/exam score/Expanded_data_studentexams_soz.csv")
+```
+
+| 2. load the other data-set from our package "sozoekds" (load & install this package first, then load the data-set)
+
+Install devtools and load to library if you have not done that yet (remove the \# from the code)
+
+```{r}
+#install.packages("devtools")
+#library(devtools)
+#devtools::install_git("https://gitlab.rrz.uni-hamburg.de/baq6370/sozoekds.git")
+library(sozoekds)
+```
+
+Load the data set from the package - under "packages" you can click on sozoekds and find out the names of the data sets
+
+```{r}
+# first there is the new name (left side) - on the right side there is the name of the data set in the package
+cal_housing <- calhouse
+exam_data <- examscores
+
+```
+
+## 4. descriptive analysis
+
+<div>
+
+| How many variables are there?
+
+</div>
+
+exam_data includes 15 variables
+
+| Type of those variables?
+
+I can find out the type of a variable three ways (works for both data sets the same way)
+
+```{r}
+class(exam_data$MathScore)
+```
+
+Or by checking "Data" in the "Environment" on the right side - I can see the name of the data set, its variables and their types and get a glimpse of the values.
+
+If I click on the little table (right upper corner of picture) I can see a full table - by hovering over the variable names I can find out their types as well.
+
+# Exam Scores
+
+### descriptive analysis
+
+| Calculations: Mean, Median, Range - what do you think is helpful (and why) to get a good overview over your data
+
+```{r}
+# for the writing score a mean value would be helpful
+mean(exam_data$WritingScore)
+# Interpretation: the mean writing score is 68,4 points - the contestants had on average almost 70% of the writing tasks correct.
+```
+
+```{r}
+# range of Math Scores shows the highest and lowest scores in this category.
+range(exam_data$MathScore)
+# Interpretation: One (or more) persons hat zero points, one or more had 100 points
+
+```
+
+| Are there other ways to get an overview over the data?
+
+```{r}
+# How many persons had zero points?
+# The == is a check if the Score equals the 0 - persons where this expression is true get summed up
+sum(exam_data$MathScore == 0)
+# Interpretation: 1 Person had 0 points
+
+# How many had 100 points?
+sum(exam_data$MathScore == 100)
+# Interpretation: 275 persons had everything right.
+```
+
+Categorical variables can also be summed up
+
+```{r}
+# Table of the Weekly Study Hours 
+result <- table(exam_data$WklyStudyHours) 
+print(result) 
+```
+
+Interpretation: for 955 persons there is no answer, 8238 persons studied under 5h per week.... etc.}
+
+### Transformation
+
+| Transform ethnic group to factor
+
+```{r}
+exam_data$EthnicGroup <- as.factor(exam_data$EthnicGroup)
+
+str(exam_data$EthnicGroup)
+```
+
+There are 6 ethnic groups within the data set
+
+| calculate the total points in all tests per person
+| use 300 as 100% and calculate a percentage using the total points
+
+### total points
+
+```{r}
+for (i in exam_data) { exam_data$total_score <- exam_data$WritingScore + exam_data$MathScore + exam_data$ReadingScore }
+
+for (i in exam_data) { exam_data$grade_percent <- round(exam_data$total_score/(300/100), digits = 0) }
+```
+
+### passed?
+
+with more than 50% a person has passed
+
+```{r}
+exam_data$passing <- ifelse(exam_data$grade_percent < 50, "TRUE", "FALSE")
+```

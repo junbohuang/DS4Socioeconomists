@@ -1,0 +1,190 @@
+---
+title: "Data Science for Socioeconomists"
+subtitle: "Excercise 3 and 4 - Data and Functions"
+author: Lisa Wegner & Junbo Huang
+format:
+  revealjs:
+    echo: true
+    incremental: true
+    transition: none
+    background-transition: none
+    theme: white
+    slide-number: true
+    footer: "Data Science for Socioeconomists"
+    embed-resources: true
+    preview-links: auto 
+    smaller: false
+    scrollable: true
+editor: visual
+code-annotations: below
+---
+
+# Agenda for today:
+
+1.  Recap on functions
+
+2.  Recap on loading data
+
+3.  Tasks for today
+
+# 1. Recap on functions
+
+-   Functions are objects that include statements that are run together every time the function is called
+-   Functions make codes more elegant, help avoiding mistakes and make code easier to read
+
+They can be built-in or self-written
+
+## using built in functions
+
+***How is the function structured? What arguments do we need to hand over?***
+
+-   we can use the "help" function in R-Studio by directly searching for the function that we want to use - or type `?as.data.frame` into the console/a code block to also be guided to the documentation.
+
+-   when typing `as.data.frame(` we also get help from the auto-fill function of R-Studio and get a hint of what values we need to give to the function)
+
+## Writing your own functions {#sec-writing-your-own-functions}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+# in the lecture you learned
+x <- 10 
+y <- 5 
+result <- x+y 
+print (result)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+# you could also write this as a function:
+addition_function <- function(x,y){
+  z <- x+y 
+  return (z) 
+  } 
+result <- addition_function(10,5) 
+print (result)  
+```
+:::
+:::::
+
+## Taking a closer look {#sec-taking-a-closer-look}
+
+![](images/Function_Important_Terms.PNG)
+
+# 2. Recap on loading data {#sec-types}
+
+-   data can be stored in various formats
+
+-   today we want to focus on csv (excel) files and data packages
+
+## reading csv files with readr package {#sec-functions}
+
+When opening our dataset in excel we see: a`ge,"spending_habits","income","gender"`values separated by `,`
+
+therefore `read_csv` should work
+
+1.  download dataset to own computer
+
+2.  upload to JuypterHub
+
+    ![](Foto_Upload_CSV.JPG)
+
+3.  the csv should be in the same folder as the one that you are currently working in
+
+4.  readr-package: Install (if nessecary) and load to library
+
+    `install.packages("readr)`
+
+    `library(readr)`
+
+5.  load dataset
+
+    `test_dataset <- read_csv("Dataset.csv")`
+
+## Loading data - from packages {#sec-4.-loading-data---from-packages}
+
+In our course we will use a data package. It contains data sets and descriptions of the different variables. The package consists of several data sets:
+
+|  |  |
+|----------------------|--------------------------------------------------|
+| [airbnbbig](http://127.0.0.1:11415/help/library/sozoekds/html/airbnbbig.html) | This data set comprises Airbnb listings in London, UK from 2009 to 5th November 2019. Please note: this is the bigger version of the data set. |
+| [airbnbsmall](http://127.0.0.1:11415/help/library/sozoekds/html/airbnbsmall.html) | This data set comprises Airbnb listings in London, UK from 2009 to 5th November 2019. Please note: this is the smaller version of the data set. |
+| [calhouse](http://127.0.0.1:11415/help/library/sozoekds/html/calhouse.html) | The data pertains to the houses found in a given California district and some summary stats about them based on the 1990 census data. |
+| [examscores](http://127.0.0.1:11415/help/library/sozoekds/html/examscores.html) | This data set includes scores from three test scores of students at a (fictional) public school and a variety of personal and socio-economic factors that may have interaction effects upon them. |
+| [testdata](http://127.0.0.1:11415/help/library/sozoekds/html/testdata.html) | Random generated numbers and values for explanatory purpose. |
+
+#### installation
+
+This package is not on CRAN - we hosted it on another server. R needs additional info to find it:
+
+```{r}
+# install.packages("remotes")    
+library(remotes)   
+remotes::install_gitlab("BAQ6370/sozoekds", host="gitlab.rrz.uni-hamburg.de") 
+library(sozoekds)
+```
+
+```{r}
+#install.packages("devtools")   
+library(devtools)   
+devtools::install_git("https://gitlab.rrz.uni-hamburg.de/baq6370/sozoekds.git") 
+library(sozoekds)
+```
+
+we can use the data from the loaded package directly by calling it:
+
+`airbnbbig`
+
+# Tasks for Today
+
+## using functions {#sec-using-func}
+
+Take this vector and answer the following questions by using programming/code:
+
+``` r
+vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56)
+```
+
+1\. What is the lowest number of the vector?
+
+2\. What is the mean value? What is the median value? How far are they apart from each other?
+
+3\. How big is the range of the vector?
+
+## Calculator Function {#sec-calculator .smaller}
+
+We want a function that...
+
+-   calculates the sum of the square roots of two numbers,
+
+-   rounds it to two digits
+
+-   and then does a check: when the result is bigger than a third number return: bigger then z, otherwise return: smaller then z
+
+-   \[hint: check out if-else-conditions\]
+
+-   check by using x=10, y=20 and z=40
+
+## loading data into R
+
+1\. first load the data-set Exam_Score (can be found at OpenOlat) into R using package-functions of readr (the data-set is in csv-format).
+
+2\. load the data-set Cal_Housing from our package "sozoekds" (load & install this package first, then load the data-set)
+
+## descriptive analysis (for Exam data)
+
+-   How many variables are there?
+-   Type of those variables?
+-   Calculations: Mean, Median, Range - what do you think is helpful (and why) to get a good overview over your data
+-   Are there other ways to get an overview over the data?
+
+## New variables - for the exam data:
+
+-   Transform ethnic group to factor
+
+-   calculate the total points in all tests per person
+
+-   use 300 as 100% and calculate the percentage of answers that the student got right
+
+-   define a "passing" variable using 50% as the boundary for passing
