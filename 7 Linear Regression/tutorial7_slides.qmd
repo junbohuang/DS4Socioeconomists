@@ -1,0 +1,51 @@
+---
+title: "Data Science for Socioeconomists"
+subtitle: "Tutorial 7 - Linear Regression"
+author: Lisa Wegner & Victoria Hünewaldt
+format:
+  revealjs:
+    incremental: false
+    transition: none
+    background-transition: none
+    theme: white
+    slide-number: true
+    footer: "Data Science for Socioeconomists"
+    embed-resources: true
+    preview-links: auto 
+    smaller: false
+    scrollable: true
+editor: visual
+code-annotations: below
+---
+
+# Some questions in advance {#sec-stimmung}
+
+::: nonincremental
+<https://partici.fi/62914988>
+:::
+
+# Questions?
+
+# Revision
+
+# What you will learn today {#sec-goals}
+
+::: nonincremental
+-   how to familiarise with a new data set (airbnb data set)
+
+-   how to derive regression coefficient estimates by hand
+
+-   how to run a linear regression model
+
+-   how to interpret it
+
+-   how to evaluate its performance
+:::
+
+# Next tutorial {#sec-outlook}
+
+Next week we will look at:
+
+::: nonincremental
+-   Linear Probability Model
+:::
