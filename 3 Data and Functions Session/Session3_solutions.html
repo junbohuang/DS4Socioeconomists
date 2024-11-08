@@ -8,7 +8,7 @@
 
 <meta name="author" content="L. Wegner">
 
-<title>Session 4 - Solutions</title>
+<title>Session 3 - Solutions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Session 4 - Solutions</h1>
+<h1 class="title">Session 3 - Solutions</h1>
 </div>
 
 
@@ -105,42 +105,140 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Today’s Exercise</h1>
 <section id="task-1---using-functions" class="level2">
 <h2 class="anchored" data-anchor-id="task-1---using-functions">Task 1 - Using functions</h2>
-<p>Take this vector:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">24</span>,<span class="dv">43</span>,<span class="dv">89</span>,<span class="dv">76</span>,<span class="dv">17</span>,<span class="dv">32</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">350</span>,<span class="dv">56</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Take this vector: vector &lt;- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56)</p>
 <p>1. What is the lowest number of the vector?</p>
-<pre class="{r} vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56) min(vector)}"><code></code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">24</span>,<span class="dv">43</span>,<span class="dv">89</span>,<span class="dv">76</span>,<span class="dv">17</span>,<span class="dv">32</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">350</span>,<span class="dv">56</span>) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>min <span class="ot">&lt;-</span> <span class="fu">min</span>(vector)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>min </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><strong>Answer</strong>: I’ve used the function <code>min()</code> that is built in and stored the result under the name <code>min</code>. When printing <code>min</code> the output is 3, so 3 is the lowest number.</p>
 <p>2. What is the mean value? What is the median value? How far are they apart from each other?</p>
-<pre class="{r} vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56) mean <- mean(vector) median <- median(vector) diff <- mean - median diff}"><code></code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculating the mean value</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(vector) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 52.92857</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculating the median value</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>median <span class="ot">&lt;-</span> <span class="fu">median</span>(vector)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>median</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating their difference</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>difference <span class="ot">&lt;-</span> mean<span class="sc">-</span>median</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>difference</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31.42857</code></pre>
+</div>
+</div>
 <p>3. How big is the range of the vector?</p>
-<pre class="{r} vector <- c(19,3,8,7,24,43,89,76,17,32,8,9,350,56) range(vector)}"><code></code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   3 350</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#we can also do this by:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 350</code></pre>
+</div>
+</div>
+<p>the <code>range()</code> hands out two values, seperated by blank space. using <code>min()</code> and <code>max()</code> gives out the lowest/highest value.</p>
 </section>
 <section id="task-2---calculator-function" class="level2">
 <h2 class="anchored" data-anchor-id="task-2---calculator-function">Task 2 - Calculator Function</h2>
 <ul>
 <li><p>We want a function that calculates the sum of the square roots of two numbers,</p>
-<pre class="{r} calcu <- function(x,y) {  root_x <- sqrt(x)  root_y <- sqrt(y)   result <- root_x + root_y   return (result) }"><code></code></pre></li>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>calcu <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  root_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(x)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  root_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(y)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  root_sum <span class="ot">&lt;-</span> root_x <span class="sc">+</span> root_y</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(root_sum)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
 <li><p>rounds it to two digits</p>
-<p><code>vyz calcu &lt;- function(x,y) {   root_x &lt;- sqrt(x)   root_y &lt;- sqrt(y)   result &lt;- root_x + root_y   rounded &lt;- round(result, digits =2)   return (round) }</code></p></li>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>calcu <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  root_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(x)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  root_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(y)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  root_sum <span class="ot">&lt;-</span> root_x <span class="sc">+</span> root_y</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  rounded_root_sum <span class="ot">&lt;-</span> <span class="fu">round</span>(rrot_sum, <span class="at">digits =</span><span class="dv">2</span>) <span class="co"># new step rounding</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(rounded_root_sum) <span class="co">#returning rounded value</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
 <li><p>and then does a check: when the result is bigger then a third number return: bigger then z, otherwise return: smaller then z</p></li>
 </ul>
-<p><code>vyz calcu &lt;- function(x, y, z) {   root_x &lt;- sqrt(x)   root_y &lt;- sqrt(y)   result &lt;- root_x + root_y   rounded &lt;- round(result, digits = 2)   if (rounded &gt;= z) {     return("result is bigger then z")   } else {     return("result is smaller then z")   } }</code></p>
-<ul>
-<li><p>check by using x=10.33, y=20.78 and z=40.47</p>
-<p><code>vyz calcu(10.33,20.78,40.47)}</code></p></li>
-</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now three values are needed and need to be handed over to the function, z is new</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>calcu <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y,z) {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  root_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(x)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  root_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(y)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  root_sum <span class="ot">&lt;-</span> root_x <span class="sc">+</span> root_y</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  rounded_root_sum <span class="ot">&lt;-</span> <span class="fu">round</span>(root_sum, <span class="at">digits =</span><span class="dv">2</span>) <span class="co"># new step rounding</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (rounded_root_sum <span class="sc">&gt;=</span> z)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">return</span>(<span class="st">"result is bigger then the last value z"</span>)} </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {<span class="fu">return</span>(<span class="st">"result is smaller then the last value z"</span>)}</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>if-else statements follow this structure:</p>
+<p><img src="images/clipboard-1996544503.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calcu</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "result is smaller then the last value z"</code></pre>
+</div>
+</div>
+<p>version for pros:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>calcu_pro <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y,z) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  z_as_word <span class="ot">&lt;-</span> <span class="fu">as.character</span>(z)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  root_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(x)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  root_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(y)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  root_sum <span class="ot">&lt;-</span> root_x <span class="sc">+</span> root_y</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  rounded_root_sum <span class="ot">&lt;-</span> <span class="fu">round</span>(root_sum, <span class="at">digits =</span><span class="dv">2</span>) <span class="co"># new step rounding</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (rounded_root_sum <span class="sc">&gt;=</span> z)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  {<span class="fu">return</span>(<span class="fu">paste</span>(<span class="st">"result is bigger then my value z ="</span>, z_as_word))} </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {<span class="fu">return</span>(<span class="fu">paste</span>(<span class="st">"result is smaller then my value z="</span>, z_as_word))}</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What’s different here? z gets transformed from number ro character/word. In the return statements this is combined with the output by using the paste() function. Therefore we get an output that includes the value</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calcu_pro</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "result is smaller then my value z= 100"</code></pre>
+</div>
+</div>
 </section>
 <section id="loading-data-into-r" class="level2">
 <h2 class="anchored" data-anchor-id="loading-data-into-r">3. loading data into R</h2>
 <p>1. first load either the data-set “Exam_Score” or “California Housing” (can be found at OpenOlat) into R using package-functions of readr (the data-sets are both in csv-format).<br>
 Describe the steps of your process via comments.</p>
 <p>Installing the “Readr” package</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readr")</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readr")</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>installation only needs to be done once - you can check if the package is already installed by going to the console in the lower right corner and click on “packages”.</p>
+<ul>
+<li><p>if the name does not appear there: install.packages(“packagename”) and then library(packagename)</p></li>
+<li><p>if it appears there, just use library(packagename)</p></li>
+</ul>
 <p>Loading the csv-file from either the internet</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cal_housing_internet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Link_that_ends_with_csv.csv"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>exam_data_internet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"link_that_also_ends_with_csv.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cal_housing_internet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Link_that_ends_with_csv.csv"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>exam_data_internet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"link_that_also_ends_with_csv.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>…. or from it’s folder on my computer</p>
-<p>I download the file from OpenOlat, then store it in a folder and give this path to the function.</p>
+<p>I download the file from OpenOlat, then upload it in my working folder in Jupyter hub and use read_csv to read in the data</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -154,38 +252,23 @@ Note
 <p>Note: .csv needs to be the ending of my file-name here as well!</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The file-path on my computer is: Z:\\wiso\Datasets\cal_housing.csv</p>
-<p><strong>R can not take this! I have to change the \ to /</strong></p>
-<p>We can do that with Strg + F and then put \ in the <strong>find-field</strong> and <strong>replace</strong> it by /</p>
-<p>Z://wiso/Datasets/cal_housing.csv</p>
-</div>
-</div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cal_housing_laptop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Z://Datasets/edited_California_Houses.csv"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>exam_data_laptop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Z://Datasets/exam score/Expanded_data_studentexams_soz.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/clipboard-3469245745.png" class="img-fluid"></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cal_housing_laptop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"California_Houses.csv"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>exam_data_laptop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Expanded_data_studentexams_soz.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>2. load the other data-set from our package “sozoekds” (load &amp; install this package first, then load the data-set)</p>
 <p>Install devtools and load to library if you have not done that yet (remove the # from the code)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("devtools")</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(devtools)</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_git("https://gitlab.rrz.uni-hamburg.de/baq6370/sozoekds.git")</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sozoekds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("devtools")</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(devtools)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_git("https://gitlab.rrz.uni-hamburg.de/baq6370/sozoekds.git")</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sozoekds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Load the data set from the package - under “packages” you can click on sozoekds and find out the names of the data sets</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first there is the new name (left side) - on the right side there is the name of the data set in the package</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cal_housing <span class="ot">&lt;-</span> calhouse</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">&lt;-</span> examscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first there is the new name (left side) - on the right side there is the name of the data set in the package</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>cal_housing <span class="ot">&lt;-</span> calhouse</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">&lt;-</span> examscores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="descriptive-analysis" class="level2">
@@ -197,58 +280,49 @@ Caution
 <p>Type of those variables?</p>
 <p>I can find out the type of a variable three ways (works for both data sets the same way)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(exam_data<span class="sc">$</span>MathScore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(exam_data<span class="sc">$</span>MathScore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
 </div>
 <p>Or by checking “Data” in the “Environment” on the right side - I can see the name of the data set, its variables and their types and get a glimpse of the values.</p>
 <p>If I click on the little table (right upper corner of picture) I can see a full table - by hovering over the variable names I can find out their types as well.</p>
-</section>
-</section>
-<section id="exam-scores" class="level1">
-<h1>Exam Scores</h1>
-<section id="descriptive-analysis-1" class="level3">
-<h3 class="anchored" data-anchor-id="descriptive-analysis-1">descriptive analysis</h3>
 <p>Calculations: Mean, Median, Range - what do you think is helpful (and why) to get a good overview over your data</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for the writing score a mean value would be helpful</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(exam_data<span class="sc">$</span>WritingScore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for the writing score a mean value would be helpful</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(exam_data<span class="sc">$</span>WritingScore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 68.41862</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: the mean writing score is 68,4 points - the contestants had on average almost 70% of the writing tasks correct.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Interpretation: the mean writing score is 68,4 points - the contestants had on average almost 70% of the writing tasks correct.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># range of Math Scores shows the highest and lowest scores in this category.</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(exam_data<span class="sc">$</span>MathScore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># range of Math Scores shows the highest and lowest scores in this category.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(exam_data<span class="sc">$</span>MathScore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   0 100</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: One (or more) persons hat zero points, one or more had 100 points</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Are there other ways to get an overview over the data?</p>
+<p>Interpretation: One (or more) persons hat zero points, one or more had 100 points</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many persons had zero points?</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The == is a check if the Score equals the 0 - persons where this expression is true get summed up</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(exam_data<span class="sc">$</span>MathScore <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many persons had zero points?</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The == is a check if the Score equals the 0 - persons where this expression is true get summed up</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(exam_data<span class="sc">$</span>MathScore <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: 1 Person had 0 points</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># How many had 100 points?</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(exam_data<span class="sc">$</span>MathScore <span class="sc">==</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many had 100 points?</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(exam_data<span class="sc">$</span>MathScore <span class="sc">==</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 275</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: 275 persons had everything right.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Categorical variables can also be summed up</p>
+<p>Interpretation: 1 Person had 0 points, 275 persons had everything right.</p>
+<p>Categorical variables can also be summed up:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of the Weekly Study Hours </span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">table</span>(exam_data<span class="sc">$</span>WklyStudyHours) </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of the Weekly Study Hours </span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">table</span>(exam_data<span class="sc">$</span>WklyStudyHours) </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
           &lt; 5   &gt; 10 5 - 10 
@@ -256,14 +330,13 @@ Caution
 </div>
 </div>
 <p>Interpretation: for 955 persons there is no answer, 8238 persons studied under 5h per week…. etc.}</p>
-</section>
 <section id="transformation" class="level3">
 <h3 class="anchored" data-anchor-id="transformation">Transformation</h3>
 <p>Transform ethnic group to factor</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>exam_data<span class="sc">$</span>EthnicGroup <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(exam_data<span class="sc">$</span>EthnicGroup)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(exam_data<span class="sc">$</span>EthnicGroup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>exam_data<span class="sc">$</span>EthnicGroup <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(exam_data<span class="sc">$</span>EthnicGroup)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(exam_data<span class="sc">$</span>EthnicGroup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Factor w/ 6 levels "","group A","group B",..: 1 4 3 2 4 3 3 3 5 3 ...</code></pre>
 </div>
@@ -275,17 +348,18 @@ use 300 as 100% and calculate a percentage using the total points</p>
 <section id="total-points" class="level3">
 <h3 class="anchored" data-anchor-id="total-points">total points</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> exam_data) { exam_data<span class="sc">$</span>total_score <span class="ot">&lt;-</span> exam_data<span class="sc">$</span>WritingScore <span class="sc">+</span> exam_data<span class="sc">$</span>MathScore <span class="sc">+</span> exam_data<span class="sc">$</span>ReadingScore }</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> exam_data) { exam_data<span class="sc">$</span>grade_percent <span class="ot">&lt;-</span> <span class="fu">round</span>(exam_data<span class="sc">$</span>total_score<span class="sc">/</span>(<span class="dv">300</span><span class="sc">/</span><span class="dv">100</span>), <span class="at">digits =</span> <span class="dv">0</span>) }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> exam_data) { exam_data<span class="sc">$</span>total_score <span class="ot">&lt;-</span> exam_data<span class="sc">$</span>WritingScore <span class="sc">+</span> exam_data<span class="sc">$</span>MathScore <span class="sc">+</span> exam_data<span class="sc">$</span>ReadingScore }</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> exam_data) { exam_data<span class="sc">$</span>grade_percent <span class="ot">&lt;-</span> <span class="fu">round</span>(exam_data<span class="sc">$</span>total_score<span class="sc">/</span>(<span class="dv">300</span><span class="sc">/</span><span class="dv">100</span>), <span class="at">digits =</span> <span class="dv">0</span>) }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="passed" class="level3">
 <h3 class="anchored" data-anchor-id="passed">passed?</h3>
 <p>with more than 50% a person has passed</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>exam_data<span class="sc">$</span>passing <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(exam_data<span class="sc">$</span>grade_percent <span class="sc">&lt;</span> <span class="dv">50</span>, <span class="st">"TRUE"</span>, <span class="st">"FALSE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>exam_data<span class="sc">$</span>passing <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(exam_data<span class="sc">$</span>grade_percent <span class="sc">&lt;</span> <span class="dv">50</span>, <span class="st">"TRUE"</span>, <span class="st">"FALSE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 </section>
 </section>
 
