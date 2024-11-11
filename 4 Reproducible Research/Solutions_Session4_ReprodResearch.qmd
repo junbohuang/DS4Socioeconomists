@@ -1,0 +1,90 @@
+---
+title: "Data Science for Socioeconomists"
+subtitle: "Excercise 4 - Reproducible Research"
+author: Lisa Wegner and Junbo Huang
+format:
+  revealjs:
+    incremental: false
+    transition: none
+    background-transition: none
+    theme: white
+    slide-number: true
+    footer: "Data Science for Socioeconomists"
+    embed-resources: true
+    preview-links: auto 
+    smaller: false
+scrollable: true
+execute:
+   echo: true
+editor: visual
+code-annotations: below
+---
+# Solutions
+
+## 1. Identify at least three issues with the provided code example in terms of documentation and variable naming.
+
+-   Lack of comments: There are no comments explaining the purpose of the functions or the logic within them.
+-   Unclear variable names: Variable names like `a`, `b`, and `df` don't provide clear indications of their purpose or content.
+-   Absence of function description: There's no documentation specifying what the `analyze_data` function does or what input it expects.
+
+## 2. Why is it important to have clear and descriptive variable names in code for reproducible research?
+
+-   enhance code readability and understanding for both the coder and collaborators
+
+-   descriptive variable names contribute to transparency making it easier for others to follow the logic and replicate the analysis without confusion or misinterpretation
+
+## 3. How does adding comments to code contribute to the reproducibility of research?
+
+-   Comments provide crucial insights into the logic, purpose, and functionality of the code
+-   Comments serve as documentation, guiding others through the code base
+-   Comments explain the logic behind specific steps, functions, or calculations, facilitating replication and comprehension of the research process.
+
+## 4. How can we make the code work smoother and with less errors?
+
+-   Add info about the needed data types of the input variables
+-   Do a check within the function if the provided data fits this type
+
+# Code
+
+```{r}
+# Function to perform data analysis
+calculate_result <- function(input_data) {
+  # Perform calculations: double the first element and add 10 to the second element
+  # input data needs to be numbers (numeric, integers, doubles etc.), this can be assured by conversion
+  input_data <- as.numeric(input_data)
+  
+ # Check if any elements in the input_data are non-numeric (with the ! that stands for not) or (|) NA
+  if (any(is.na(input_data) | !is.numeric(input_data))) {
+    print("One or more elements of the given data are not numbers or contain NA")
+  } else {
+    # Perform calculations only if all elements are numeric
+   doubled_first_element <- input_data[1] * 2
+  increased_second_element <- input_data[2] + 10
+  
+  # Compute the result by adding the calculated values
+  final_result <- doubled_first_element + increased_second_element
+  
+  # Return the final result
+  return(final_result)
+}
+}
+# Example dataset
+input_values <- c(7, 8)  # Replace these values with the actual dataset
+
+# Calling the function to analyze the data and obtain the result
+analysis_output <- calculate_result(input_values)
+
+# Display the output of the analysis
+print(analysis_output)
+```
+
+## **What is new?**
+
+-   added comments
+
+-   variable names were improved
+
+-   info about needed variable types was given
+
+-   a check for the correct data type was added
+

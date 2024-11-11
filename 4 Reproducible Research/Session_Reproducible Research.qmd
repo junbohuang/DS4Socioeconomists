@@ -1,7 +1,7 @@
 ---
 title: "Data Science for Socioeconomists"
-subtitle: "Excercise 14 - Reproducible Research"
-author: Lisa Wegner 
+subtitle: "Excercise 4 - Reproducible Research"
+author: Lisa Wegner and Junbo Huang
 format:
   revealjs:
     incremental: false
@@ -22,23 +22,69 @@ code-annotations: below
 
 # Agenda for today
 
-1.  Personal evaluation
-
-2.  Reproducible science (\~45 minutes)
-
+1.  Troubleshooting Guide
+2.  Guidelines for names
+3.  Guidelines for comments
+4.  Input on Reproducible science
     1.  Recap
     2.  Quiz
     3.  Exercise to improve code in matters of reproduction
+5.  Tasks
 
-3.  Recap, questions (\~45 minutes)
+# Troubleshooting
 
-# Evaluation
+![](https://cdn.memes.com/up/23422781594433255/i/1595886688295.jpg)
 
-This evaluation is for my tutorials - so the first half of the semester.
+-   We have created a link-list with all things helpful - this can be found under "learning materials" [at OpenOlat](https://www.openolat.uni-hamburg.de/auth/RepositoryEntry/340099667/CourseNode/108537309191894)
 
-![](images/qrcode_91674411_cb09fe5d463c643a9721ab270082b197.png){width="300"}
+-   The code of the lecture-, exercise- and solution slides can be copied! This way you can adapt it to your needs and don't need to start from scratch.
 
-[https://evasys-online.uni-hamburg.de/evasys/online.php?pswd=5P3KZ ](https://evasys-online.uni-hamburg.de/evasys/online.php?pswd=5P3KZ)
+## Usage of stackoverflow
+
+## Usage of Google
+
+## Usage of AI tools like UHHGPT
+
+::: callout-warning
+Even though its tempting: Try not to simply copy-paste answers given by AI. Instead you should try to understand the code there and work with that new knowledge in your own code.
+:::
+
+***Helpful prompts:***
+
+-   To understand code from lecture/tutorial-slides: "Please explain *this code* to me and tell me, which steps were taken."
+
+-   To inform yourself about other solutions: "I have *this code* for *this kind of problem*. Please show me a different way of solving that problem"
+
+-   To inform yourself about packages/functions: "I want to solve *this problem*. Is there an existing package for that purpose? Can I use an existing function? Please tell me its name and give an example for the usage."
+
+    # Guidelines to names in coding
+
+    *"Naming variables follow a simple idea: Create variables that describe their function and which follow a consistent theme throughout your code."* (Coding best practices [by University of Colorado Boulder](https://curc.readthedocs.io/en/latest/programming/coding-best-practices.html))
+
+-   Multiword expressions - choose **one** theme and stick with it!
+
+    -   whitespace should not be used
+
+    -   Snakecase: variable_one; variable_two (Words are delimited by an underscore)
+
+    -   PascalCase: VariableOne; VariableTwo (Words are delimited by capital letters)
+
+    -   camelcase: variableOne; variableTwo (Words are delimited by capital letters, except the initial word)
+
+# Guidelines for using comments
+
+*" It is entirely possible to “over comment” code. Code should be designed in an efficient, consistent and intuitive manner such that comments enhance user understanding but are not needed to describe the entire code."* (Coding best practices [by University of Colorado Boulder](https://curc.readthedocs.io/en/latest/programming/coding-best-practices.html))
+
+```{r}
+test_function <- function(birthyear) { #commenting here works fine
+   age <- #commenting here creates an error 2024 - birthyear 
+     age <- 2024 - birthyear
+   # commenting here creates an error return (age)
+   return(age) # commenting here works
+}
+
+test_function(1921)
+```
 
 # Recap: Reproducible Science
 
@@ -98,7 +144,9 @@ d.  It slows down the research process
     -   Correct Answer: It helps in understanding and replicating the research
 :::
 
-# Exercise: Correct poorly documented code
+# Exercise:
+
+# 1. Correct poorly documented code
 
 The provided code snippet performs a data analysis task but lacks proper documentation, comments, and variable labels. Your task is to enhance the code by adding comments, providing clear variable names, and improving readability. Rewrite the code to make it more understandable for future collaborators.
 
@@ -125,83 +173,9 @@ print(output)
 3.  How does adding comments to code contribute to the reproducibility of research?
 4.  Add-on: How can the code be made more performant? How can we avoid error-messages?
 
-# Solutions
+# 2. Rework of last weeks code
 
-## 1. Identify at least three issues with the provided code example in terms of documentation and variable naming.
+Take a look at your code from last week and enhance its readability and reproducibility. Things to look out for could be
 
--   Lack of comments: There are no comments explaining the purpose of the functions or the logic within them.
--   Unclear variable names: Variable names like `a`, `b`, and `df` don't provide clear indications of their purpose or content.
--   Absence of function description: There's no documentation specifying what the `analyze_data` function does or what input it expects.
-
-## 2. Why is it important to have clear and descriptive variable names in code for reproducible research?
-
--   enhance code readability and understanding for both the coder and collaborators
-
--   descriptive variable names contribute to transparency making it easier for others to follow the logic and replicate the analysis without confusion or misinterpretation
-
-## 3. How does adding comments to code contribute to the reproducibility of research?
-
--   Comments provide crucial insights into the logic, purpose, and functionality of the code
--   Comments serve as documentation, guiding others through the code base
--   Comments explain the logic behind specific steps, functions, or calculations, facilitating replication and comprehension of the research process.
-
-## 4. How can we make the code work smoother and with less errors?
-
--   Add info about the needed data types of the input variables
--   Do a check within the function if the provided data fits this type
-
-# Code
-
-```{r}
-# Function to perform data analysis
-calculate_result <- function(input_data) {
-  # Perform calculations: double the first element and add 10 to the second element
-  # input data needs to be numbers (numeric, integers, doubles etc.), this can be assured by conversion
-  input_data <- as.numeric(input_data)
-  
- # Check if any elements in the input_data are non-numeric (with the ! that stands for not) or (|) NA
-  if (any(is.na(input_data) | !is.numeric(input_data))) {
-    print("One or more elements of the given data are not numbers or contain NA")
-  } else {
-    # Perform calculations only if all elements are numeric
-   doubled_first_element <- input_data[1] * 2
-  increased_second_element <- input_data[2] + 10
-  
-  # Compute the result by adding the calculated values
-  final_result <- doubled_first_element + increased_second_element
-  
-  # Return the final result
-  return(final_result)
-}
-}
-# Example dataset
-input_values <- c(7, 8)  # Replace these values with the actual dataset
-
-# Calling the function to analyze the data and obtain the result
-analysis_output <- calculate_result(input_values)
-
-# Display the output of the analysis
-print(analysis_output)
-```
-
-## **What is new?**
-
--   added comments
--   variable names were improved
--   info about needed variable types was given
--   a check for the correct data type was added
-
-# Exam
-
--   Take Home Exam - Timeframe 15:00-19:00 on 19th February
--   Exam takes 120 minutes to take, additional time was added to avoid inconviniences and stress
--   Preparation:
-    -   revise tasks from the tutorials
-    -   repeat lecture slides
--   Exam tasks need to be solved with R-Studio (online or desktop) in **one** file.
-
-## Handouts:
-
--   Now, Please take a few minutes to go through the steps written in "Guide: upload of exam tasks" that can be found under "exam information" at OpenOlat
--   Regarding online tools like generative KI: a document regarding such tools will be online in the next few days, we are currently waiting on a binding document by the university administration
--   template for the exam: can be found under "exam information" at OpenOlat
+1.  Look at variable names. Are they self-explanatory?
+2.  Place comments in places where they are needed
