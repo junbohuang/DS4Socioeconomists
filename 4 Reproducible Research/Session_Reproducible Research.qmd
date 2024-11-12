@@ -71,7 +71,7 @@ Even though its tempting: Try not to simply copy-paste answers given by AI. Inst
 
     -   camelcase: variableOne; variableTwo (Words are delimited by capital letters, except the initial word)
 
-# Guidelines for using comments
+## Guidelines for using comments
 
 *" It is entirely possible to “over comment” code. Code should be designed in an efficient, consistent and intuitive manner such that comments enhance user understanding but are not needed to describe the entire code."* (Coding best practices [by University of Colorado Boulder](https://curc.readthedocs.io/en/latest/programming/coding-best-practices.html))
 
@@ -86,7 +86,93 @@ test_function <- function(birthyear) { #commenting here works fine
 test_function(1921)
 ```
 
-# Recap: Reproducible Science
+## Example: Making "AI"s with [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B)
+
+-   hosted in the Semantic Systems Group (SEMS) within the Computer Science Department in UHH.
+-   please do not share the following code snippet.
+
+```{r}
+# Load necessary libraries
+library(httr)
+library(glue)
+library(jsonlite)
+
+# Define the function
+make_llama3_api_call <- function(model_param, x) {
+  # Define the URL
+  url <- "https://turbo.skynet.coypu.org/"
+  
+  # Create the request payload as a list
+  data <- list(
+    messages = list(
+      list(
+        role = "user",
+        content = paste0(model_param, "\n", x)
+      )
+    ),
+    temperature = 0.2,
+    max_new_tokens = 10
+  )
+  
+  # Attempt the POST request
+  tryCatch({
+    # Make the POST request, encoding the body as JSON
+    response <- POST(url, body = data, encode = "json")
+    
+    # Check if the request was successful
+    if (status_code(response) == 200) {
+      # Parse the response content
+      content_data <- content(response, as = "parsed", type = "application/json")
+      
+      # Extract and return the "content" field if available
+      return(content_data$content)
+    } else {
+      # Handle the case where the request fails
+      stop("Request failed with status code: ", status_code(response))
+    }
+  }, error = function(e) {
+    # Catch and return any errors encountered
+    return(e$message)
+  })
+}
+```
+
+## Theory-driven Naming
+
+Prompts can express :
+
+-   a context "instantiating" model parameters,
+-   and an independent variable.
+
+```{r}
+# Example of in-context learning: machine translation
+model_param <- "English: Hello, German: Hallo"
+x <- "English: are you fine?"
+y <- make_llama3_api_call(model_param, x) 
+print(y)
+```
+
+## Use-case-driven Naming
+
+Prompts can express task-oriented information.
+
+```{r}
+# Use glue to create a formatted string
+# Define sub-strings
+en <- "Bye"
+de <- "Ciao"
+
+# glue together template and sub-strings to construct a dictionary
+dictionary <- glue("English: {en}, German: {de}")
+print(dictionary)
+
+# define dictionary look-up key
+key <- "English: Whatsup?"
+value <- make_llama3_api_call(dictionary, key)
+print(value)
+```
+
+## Recap: Reproducible Science
 
 ::: callout-important
 -   Reproducibility isn't a guarantee of quality
