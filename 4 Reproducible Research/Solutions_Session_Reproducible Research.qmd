@@ -2,9 +2,10 @@
 title: "Solutions_session4_Reproducable Research"
 format: html
 editor: visual
+theme: minty
 ---
 
-Solution
+# Solution
 
 ```{r}
 drinking_age <- function(age) {
