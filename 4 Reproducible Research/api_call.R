@@ -4,7 +4,7 @@ library(glue)
 library(jsonlite)
 
 # Define the function
-make_llama3_api_call <- function(model_param, x) {
+llama3 <- function(model_param, x, temperature = 0.2, max_new_tokens = 10) {
   # Define the URL
   url <- "https://turbo.skynet.coypu.org/"
   
@@ -16,8 +16,8 @@ make_llama3_api_call <- function(model_param, x) {
         content = paste0(model_param, "\n", x)
       )
     ),
-    temperature = 0.2,
-    max_new_tokens = 10
+    temperature = temperature,
+    max_new_tokens = max_new_tokens
   )
   
   # Attempt the POST request
@@ -48,7 +48,7 @@ make_llama3_api_call <- function(model_param, x) {
 # Example of in-context learning: machine translation
 model_param <- "English: Hello, German: Hallo"
 x <- "English: are you fine?"
-y <- make_llama3_api_call(model_param, x) 
+y <- llama3(model_param, x) 
 print(y)
 
 
@@ -63,5 +63,5 @@ print(dictionary)
 
 # define dictionary look-up key
 key <- "English: Whatsup?"
-value <- make_llama3_api_call(dictionary, key)
+value <- llama3(dictionary, key)
 print(value)
