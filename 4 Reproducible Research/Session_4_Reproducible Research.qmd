@@ -4,6 +4,8 @@ subtitle: "Excercise 4 - Reproducible research"
 author: Lisa Wegner & Junbo Huang
 format:
   revealjs:
+    smaller: true
+    scrollable: true
     echo: true
     incremental: true
     transition: none
@@ -13,8 +15,7 @@ format:
     footer: "Data Science for Socioeconomists"
     embed-resources: true
     preview-links: auto 
-    smaller: false
-    scrollable: true
+    output-file: "Session_4_Reproducible Research.html"
 editor: visual
 code-annotations: below
 ---
@@ -88,16 +89,19 @@ test_function(1921)
 ```
 
 ## Example: Making "AI"s with [Llama 3](https://huggingface.co/meta-llama/Meta-Llama-3-8B) {#sec-example-making-ais-with-llama-3}
--   Llama-3-8b is an open-source large language model (LLM) with 8 billion parameters
--   Popular model used in AI research
--   You can use the provided Llama instance locally hosted in the Semantic Systems Group (SEMS) within the Computer Science Department in UHH.
--   y = Llama3(x, temperature, max_tokens)
 
+-   Llama-3-8b is an open-source large language model (LLM) with 8 billion parameters
+
+-   Popular model used in AI research
+
+-   You can use the provided Llama instance locally hosted in the Semantic Systems Group (SEMS) within the Computer Science Department in UHH.
+
+-   y = Llama3(x, temperature, max_tokens)
 
     ::: callout-important
     -   **temperature** is a parameter of generation, ranging from 0 to 2. Higher temperature introduces randomness/creativity.
     -   **max_token** is a parameter deciding the maximum length of the generated sequence.
-    -    Please do not share the following code snippet.
+    -   Please do not share the following code snippet.
     :::
 
     ::: notes
@@ -207,7 +211,7 @@ print(value)
 
 ## Measurement of Risk: Bus Factor {#subsec-bus-factor}
 
--   There is a project with *n* responsible persons 
+-   There is a project with *n* responsible persons
 -   Thus, *bus_factor = n*
 -   Small *n* depicts higher risk in project
 -   How to reduce impact: documentation
