@@ -4,6 +4,7 @@ subtitle: "Excercise 4 - Reproducible research"
 author: Lisa Wegner & Junbo Huang
 format:
   revealjs:
+    code-overflow: wrap
     smaller: true
     scrollable: true
     echo: true
