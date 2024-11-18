@@ -1,9 +1,11 @@
 ---
 title: "Data Science for Socioeconomists"
 subtitle: "Excercise 6 - Data visualization pt. 2"
-author: Lisa Wegner 
+author: Lisa Wegner & Junbo Huang
 format:
   revealjs:
+    code-overflow: wrap
+    output-file: "Session_5_Data_Visualization_2.html"
     incremental: false
     transition: none
     background-transition: none
@@ -13,18 +15,14 @@ format:
     embed-resources: true
     preview-links: auto 
     smaller: false
-scrollable: true
-execute:
-   echo: true
-editor: visual
+    scrollable: true
+    fig-width: 8
+    fig-height: 6
+    execute:
+      echo: TRUE
+    editor: visual
 code-annotations: below
 ---
-
-![](https://cdn.memes.com/up/23422781594433255/i/1595886688295.jpg){fig-align="center"}
-
--   We have created a link-list with all things helpful - this can be found under "learning materials" [at OpenOlat](https://www.openolat.uni-hamburg.de/auth/RepositoryEntry/340099667/CourseNode/108537309191894)
-
--   The code of the lecture-, exercise- and solution slides can be copied! This way you can adapt it to your needs and don't need to start from scratch.
 
 # Visualization session 2 {#sec-visualization-session-2}
 
@@ -109,7 +107,7 @@ we can also:
 
 What's bad about these visualizations? What can we do better?
 
-::::: columns
+::: columns
 ::: {.column width="50%"}
 ![via: https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-vs-popsize-colored-1.png](https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-vs-popsize-colored-1.png){fig-align="center" width="365"}
 :::
@@ -117,7 +115,7 @@ What's bad about these visualizations? What can we do better?
 ::: {.column width="50%"}
 ![via: https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-US-rainbow-1.png](https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-US-rainbow-1.png){fig-align="center" width="375"}
 :::
-:::::
+:::
 
 ## Things to keep in mind when using colors {#sec-things-to-keep-in-mind-when-using-colors}
 

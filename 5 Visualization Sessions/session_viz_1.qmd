@@ -1,9 +1,11 @@
 ---
 title: "Data Science for Socioeconomists"
 subtitle: "Excercise 5 - Data visualization pt. 1"
-author: Lisa Wegner 
+author: Lisa Wegner & Junbo Huang
 format:
   revealjs:
+    code-overflow: wrap
+    output-file: "Session_5_Data_Visualization_1.html"
     incremental: false
     transition: none
     background-transition: none
@@ -50,31 +52,20 @@ How can we make our graphics accessible?
 
 ## Types of Plots {#sec-types-of-plots}
 
-![via https://medium.com/\@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e](https://miro.medium.com/v2/resize:fit:720/format:webp/1*N0tRnDv63278HUKF_dE4HA.png)
+![Source: [medium blog post](https://medium.com/@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e)](https://miro.medium.com/v2/resize:fit:720/format:webp/1*N0tRnDv63278HUKF_dE4HA.png)
 
 ## Boxplot {#sec-boxplot}
 
-![via: [geeksforgeeks](https://www.geeksforgeeks.org/box-plot/)](https://media.geeksforgeeks.org/wp-content/uploads/20201127012952/boxplot-660x233.png){fig-align="center"}
+![Source: [geeksforgeeks](https://www.geeksforgeeks.org/box-plot/)](https://media.geeksforgeeks.org/wp-content/uploads/20201127012952/boxplot-660x233.png){fig-align="center"}
 
 ## Help for your decision {#sec-help-for-your-decision}
 
-![via https://medium.com/\@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e](https://miro.medium.com/v2/resize:fit:720/format:webp/1*0Kimz-DJR_WfIm7mLkLqpQ.png)
+![Source: [medium blog post](https://medium.com/@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e)](https://miro.medium.com/v2/resize:fit:4800/format:webp/1*0Kimz-DJR_WfIm7mLkLqpQ.png)
 
-## **Little quiz** {#sec-little-quiz}
-
-Which plot-type is recommended for which purpose?
-
-<https://particify.uni-hamburg.de/p/61346493>
-
-![](images/QR%20Viz.JPG){fig-align="center"}
 
 # 3. Plotting with ggplot2 {#sec-introduction-to-plotting}
+![Source: [medium blog post](https://medium.com/@Lynia_Li/as-you-know-there-are-many-types-of-charts-to-be-used-in-data-visualization-54da9b97092e)](https://henrywang.nl/wp-content/uploads/2020/04/theme_elements.png){fig-align="center"}
 
-Since you have already done this in the lecture we'll go through the following slides a bit quicker!
-
-We will use randomly generated data (test_dataset) to get an overview over the functions of ggplot2
-
-I've loaded the data set from the package `sozoekds` already
 
 ## Idea {#sec-idea}
 
@@ -101,13 +92,13 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>))
 library(sozoekds) 
 test_dataset <- testdata 
 library(ggplot2)  
+
+# load dataset and assign variable on the x-axis ("age")
 ggplot(data = test_dataset,mapping = aes(x=age)) +
-  geom_point(mapping=aes(y= income), 
-                    color="darkgreen")  + 
-  # we have added a color for the viz of age & income
-          geom_point(mapping=aes(y=spending_habits), 
-                     color ="red") 
-# adding a new variable - the connection should be visualized in red
+  # add points: income
+  geom_point(mapping=aes(y= income), color="darkgreen")  + 
+  # add points: spending habits
+  geom_point(mapping=aes(y=spending_habits), color ="red") 
 
 ```
 
@@ -116,21 +107,18 @@ ggplot(data = test_dataset,mapping = aes(x=age)) +
 ## 2nd: adding labels {#sec-adding-labels}
 
 ```{r}
-p <- ggplot(data = test_dataset, mapping = aes(x=age)) + 
-  # dataset and x-variable to plot are defined
+# load dataset and assign variable on the x-axis ("age")
+ggplot(data = test_dataset, mapping = aes(x=age)) + 
+  # add points: income
   geom_point(aes(y = income, color = "Income")) + 
-  #y gets the color "Income" assigned - we later tell what this color represents
+  # add points: spending habits
   geom_point(aes(y = spending_habits, color = "Spendings")) +
-  #y gets the color "Spendings" assigned 
-  # we later tell what this color represents
+  # add labels on figure and axes
   labs(x = "age", y = "money in €", 
        title = "Income and Spending habits of made up people") + 
-  #adding a title and axis-labels
+  # add colors to points
   scale_colour_manual(breaks = c("Income", "Spendings"),
                       values = c("green", "red")) 
-# assigning colors to the color-representors
-
-p
 ```
 
 ## Global vs. local aesthetic {#sec-aesthetics}
