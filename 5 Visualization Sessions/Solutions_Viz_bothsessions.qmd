@@ -301,3 +301,15 @@ ggplot(exam_score, aes(x=factor_weekly_study_hours, fill=grade)) +
 ```
 
 | The code creates a plot that shows the distribution of grades within each group while making the bars the same height - this way we can see the relative distribution and relative proportion per group and not just the absolute numbers.
+
+```{r}
+# plotting:
+ggplot(exam_score, aes(x=grade, fill=factor_weekly_study_hours)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(n.breaks = 10) +
+  labs(title = "Grade distribution for weekly study hours",
+       x="grade", y="percentage", fill="study hours") +
+  scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal()
+  
+```
