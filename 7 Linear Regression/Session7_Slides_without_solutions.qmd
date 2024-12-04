@@ -1,0 +1,95 @@
+---
+title: "Linear Regression Part I - Session 7"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# What you will learn today {#sec-goals}
+
+::: nonincremental
+-   how to familiarise with a new data set (airbnb data set)
+
+-   how to derive regression coefficient estimates by hand
+
+-   how to run a linear regression model
+
+-   how to interpret it
+:::
+
+# Recap
+
+real world: $y_i = \beta_0 + \beta_1 x_i + u_i$
+
+our model: $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i$
+
+**important formulas:**
+
+***RSS***\
+$$RSS = \sum_{i=1}^{n} \left(y_i - \hat{y_i} \right)^2 =  \sum_{i=1}^{n} \left(y_i - \hat{\beta_0} - \hat{\beta_1} x_i \right)^2$$
+
+RSS (residual sum of squares) should be minimized
+
+***Covariance***
+
+$Cov(x, y) = \frac{1}{n} \sum_{i=1}^n (x_i - E(x)) (y_i - E(y)) \\= \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})$
+
+***Calculating the coefficients***
+
+![](bhat.png)
+
+## commands to run a linear regression:
+
+```{r}
+library(sozoekds)
+airbnbsmall<- airbnbsmall
+```
+
+We want to know how the cleaning fee can be explained by the number of beds (x \~ y)
+
+```{r}
+usd_cleaning_fee <- airbnbsmall$usd_cleaning_fee
+n_beds <- airbnbsmall$n_beds
+lm(usd_cleaning_fee ~ n_beds)
+```
+
+Interpretation: For a flat with zero beds the cleaning fee would be on average 14.43\$. By each additional bed the cleaning fee would rise up by 11.64\$
+
+Does this sound reasonable to us? Paying more for the cleaning of the flat if it allows for more people to sleep there sounds legit.
+
+# Exercises
+
+Create a .qmd-file and solve the tasks there. Store it in the JupyterHub folder "Session 7".
+
+Please use the airbnbsmall data set. Use our package "sozoekds" to load the data set. Make sure to have installed the package first.
+
+Some of you had difficulties using this package.
+
+This is why we have created a workaround:
+
+Make sure, that the file called *data_sozoekds_package.RData* is copied into your working folder (click on it, then on more, then use copy-to and select your working folder)
+
+```{r}
+load("data_sozoekds_package.RData")
+```
+
+## 1) Make yourself familiar with the dataset:
+
+1.  How many observations does it comprise?
+
+2.  How many variables?
+
+## 2) Linear Regression:
+
+1.  Think about a simple linear regression model with one exogenous variable explaining "price" (= endogenous variable). Write down the equation of your model.\
+    Note: Do NOT use a variable that starts with d\_ , those are dummy variables and will be handled later on
+
+2.  Calculate the intercept and regression coefficient estimate by hand. Remember the formula from the lecture (p.11).
+
+3.  Then, run the regression using a suitable R command. Compare your results to the ones you calculated by hand and interpret the coefficient and intercept.
+
+## 3) Plotting
+
+Plot the relationship of price and number of accommodates, include a trend-line. Take a closer look at the plot and draw conclusions in terms of the explanatory power of the model.
