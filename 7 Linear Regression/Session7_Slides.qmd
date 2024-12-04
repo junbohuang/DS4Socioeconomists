@@ -1,6 +1,5 @@
 ---
 title: "Linear Regression Part I - Session 7"
-author: "L. Wegner & J. Huang"
 format: 
   html:
     self-contained: true
@@ -39,9 +38,14 @@ $Cov(x, y) = \frac{1}{n} \sum_{i=1}^n (x_i - E(x)) (y_i - E(y)) \\= \frac{1}{n} 
 
 ***Calculating the coefficients***
 
-![](images/clipboard-3318172385.png)
+![](bhat.png)
 
 ## commands to run a linear regression:
+
+```{r}
+library(sozoekds)
+airbnbsmall<- airbnbsmall
+```
 
 We want to know how the cleaning fee can be explained by the number of beds (x \~ y)
 
@@ -139,7 +143,7 @@ print (paste("b0hat (intercept) is", b0hat))
 lm(airbnbsmall$price ~ airbnbsmall$n_accommodates)
 ```
 
-## Interpretation: 
+## Interpretation:
 
 Explaining the price of the airbnb listing by the number of accommodates leads to the following results:
 
@@ -152,6 +156,7 @@ Explaining the price of the airbnb listing by the number of accommodates leads t
 We can see that the price varies a lot. Using only the number of accommodates as a metric to explain the price does not serve the complexity of the data.
 
 ```{r}
+library(ggplot2)
 ggplot(data=airbnbsmall, mapping = aes(x=n_accommodates, y= price)) +
   geom_point() +
   geom_smooth() +
