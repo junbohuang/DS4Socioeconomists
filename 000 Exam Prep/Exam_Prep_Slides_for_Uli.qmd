@@ -22,7 +22,7 @@ editor: visual
 
     2.  Interpretation of regression (example below)
 
-    3.  something on trees/validation/evaluation etc.(no example since we have not had these topics yet)
+    3.  something on trees/validation/evaluation etc. (no example since we have not had these topics yet)
 
 ## **Task 1 - MC tasks:**
 
@@ -95,3 +95,34 @@ sampled_examscores
 ```
 
 2.  Choose the right plot for code-snippet, explain plot and make assumptions about distribution, mean etc.
+
+## Task 3 - Regressions
+
+#### *Part 3.1 Conceptual questions:*
+
+1.  Explain the concepts variance, covariance.
+
+2.  How can we use variance and covariance for calculating coefficients in a linear regression? Write down the formulas
+
+Calculate $\hat{\beta_0}$ and $\hat{\beta_1}$ by hand. Choose the right values for your calculation:
+
+-   Covariance(x,y) = 0.8
+-   Variance (x) = 2
+-   Variance(y) = 0.8
+-   Mean(x) = 3
+-   Mean (y) = 4
+
+#### *Part 3.2 Interpreting a given model*
+
+We've got a linear regression and this is it's output (model1)
+
+```{r}
+library(sozoekds)
+
+```
+
+1.  Explain the model in your own words
+
+2.  Interpret the coefficients
+
+3.  Model comparison. Compare the given model with this one (model2) - choose the better one and justify your decisiom
