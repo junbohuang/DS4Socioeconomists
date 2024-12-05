@@ -89,7 +89,9 @@ sampled_examscores$IsFirstChild <- NULL
 sampled_examscores$NrSiblings <- NULL
 sampled_examscores$TransportMeans <- NULL
 
-rename(examscores, observation_number = X )
+rename(sampled_examscores, observation_number = X )
+
+sampled_examscores
 ```
 
-2.  
+2.  Choose the right plot for code-snippet, explain plot and make assumptions about distribution, mean etc.
