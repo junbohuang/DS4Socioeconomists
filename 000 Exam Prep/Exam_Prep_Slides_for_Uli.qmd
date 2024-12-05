@@ -1,0 +1,95 @@
+---
+title: "Exam Data Science"
+format: html
+editor: visual
+---
+
+## Exam Structure and example tasks 
+
+-   Exam will be paper & pen
+
+-   Questions and tasks are based on the lecture and tutorials
+
+-   There will be no coding “by hand” but you will still work with code
+
+## Structure
+
+-   ⅓ of points is in MC questions (examples below)
+
+-   ⅔ of points in text tasks
+
+    1.  Code explanation (extensive example below)
+
+    2.  Interpretation of regression (example below)
+
+    3.  something on trees/validation/evaluation etc.(no example since we have not had these topics yet)
+
+## **Task 1 - MC tasks:**
+
+can be based on lecture content and tutorial content, asking about concepts, programming-terms, statistical formulas…
+
+1.  The challenge of the Big Data revolution can be described with several V’s. Which term is not part of the challenge?
+
+    a.  Volume of data
+    b.  Veracity of data
+    c.  Visibility of data
+    d.  Velocity of data
+
+2.  What does the gg in the package ggplot2 stand for?
+
+    a.  generation of graphics
+    b.  gestalt rules of graphics
+    c.  grammar of graphics
+    d.  generalization of graphics
+
+3.  Which of the following statements is/are not true?
+
+    a.  Lists are special types of vectors which might contain elements of different classes.
+    b.  Lists are special types of data frames.
+    c.  Factors are used to represent categorical data and can be unordered or ordered.
+    d.  Unlike matrices, data frames can store different classes of objects in each column.
+
+## Task 2 - Code explanation
+
+We have a code snippet working with the examscores dataset that you know from the lectures. 
+
+1.  The code takes certain steps with the data like transformations, selection etc. Trace those steps and execute them manually to fill in the data table. You might have to delete/create columns and/or rows.
+
+    ```{r}
+    exam_score <- examscores
+    exam_score$full_score <-(exam_score$ReadingScore + exam_score$WritingScore +
+    exam_score$ReadingScore)/3
+
+
+    exam_score$full_score <- round(exam_score$full_score, digits=0)
+    exam_score$grade <- ifelse(exam_score$full_score >= 90, "A",
+                    	ifelse(exam_score$full_score >= 80 &  
+                             	exam_score$full_score <= 89, "B",
+                     	ifelse(exam_score$full_score >= 70 &  exam_score$full_score <= 79, "C",
+                            	ifelse(exam_score$full_score >= 60 &  exam_score$full_score <= 69, "D", "E"
+                                  	))))
+    ```
+
+![](images/clipboard-373697182.png)
+
+```{r}
+#Sample data was generated with this code
+library(sozoekds)
+library(dplyr)
+examscores <- examscores
+set.seed(123)  #Seed for reproducability
+sampled_examscores <- examscores[sample(nrow(examscores), 15), ]
+
+sampled_examscores$EthnicGroup <- NULL
+sampled_examscores$ParentEduc <- NULL
+sampled_examscores$LunchType <- NULL
+sampled_examscores$ParentMaritalStatus <- NULL
+sampled_examscores$PracticeSport <- NULL
+sampled_examscores$IsFirstChild <- NULL
+sampled_examscores$NrSiblings <- NULL
+sampled_examscores$TransportMeans <- NULL
+
+rename(examscores, observation_number = X )
+```
+
+2.  
