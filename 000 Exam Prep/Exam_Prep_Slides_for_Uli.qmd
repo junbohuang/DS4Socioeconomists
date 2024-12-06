@@ -132,15 +132,13 @@ ggplot(data = airbnbsmall, aes(x=n_guests_included, y=usd_cleaning_fee)) +
 
 ```
 
-a\)
+a)![](images/fig_task2_2a-01.jpg)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeqZIe2gNSbRCty2PKqi90yV08v2rClsSs1FLERxGf_GYD3DpKjxdZ3aZXRb_soT_USVU3AdKg1aRBQQ4Bfpulj7hV-pmuPmvTpHK0a7RBhY7OtKBZzkV5wW5KWxfAFI5hcATrCJg?key=MOmnSh0CTmpM2kU6yT-VKcKo)
+b)![](images/fig_task2_2b.jpg)
 
-b\) ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfMys_uWWq0NXKBc44QwFEFxmlOFMQ2do0_cZKuIL6O201gg9Jv-WU4yCi1vmxOp-wE-oO8Acfg3s6w51D3q3tIfHKr8hxTbojKoyUOC5aYIASMNn_QhruEmVYy2rfI6bZHAiRR0g?key=MOmnSh0CTmpM2kU6yT-VKcKo)
+c)![](images/fig_task2_2c.jpg)
 
-c)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcRb5zMbBCrcMRvnv9PIWRV6h9fHSLzvUKYZVkpGMLEG-mqTr41oE-baOmV4UtwqPV79br-flYqv8COjqyjpvKQstrE3zdvu-B4EPnzb2rVfxcR2fw1w1V0FTpLvwB91DdkZcWwiQ?key=MOmnSh0CTmpM2kU6yT-VKcKo)
-
-d\) ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeWN32OxibLFhihGiuEgCgANJPhqtlb_xVSAf47-BgG1FfqIXqxYHyB3VOs4EZ-dQRplBcCWQ-22w_BRwxKW6C1HIN7AucswD6Q4rpxpDllDJBgc8mSJt8-DiGYYeMQe5Bv5weFsQ?key=MOmnSh0CTmpM2kU6yT-VKcKo)
+d)![](images/fig_task2_2d.jpg)
 
 ## Task 3 - Regressions
 
