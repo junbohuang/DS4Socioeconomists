@@ -1,16 +1,19 @@
 ---
-title: "Exam Data Science"
-format: html
+title: "Exam structure Ws 24/25"
+format: 
+  html:
+    self-contained: true
+    theme: minty
 editor: visual
 ---
 
-## Exam Structure and example tasks 
+## Exam:
 
 -   Exam will be paper & pen
 
--   Questions and tasks are based on the lecture and tutorials
+-   Questions and tasks are based on the lecture and tutorials - so knowing the idea behind a method or approach and also being able to apply that knowledge to practical tasks
 
--   There will be no coding “by hand” but you will still work with code
+-   There will be no coding “by hand” but you will still work with code - Learning the most important terms helps you in the exam and also in your own programming progress.
 
 ## Structure
 
@@ -20,7 +23,7 @@ editor: visual
 
     1.  Code explanation (extensive example below)
 
-    2.  Interpretation of regression (example below)
+    2.  Interpretation of regression (small example below, exam task will be more extensive)
 
     3.  something on trees/validation/evaluation etc. (no example since we have not had these topics yet)
 
@@ -51,11 +54,12 @@ can be based on lecture content and tutorial content, asking about concepts, pro
 
 ## Task 2 - Code explanation
 
-We have a code snippet working with the examscores dataset that you know from the lectures. 
+1.  We have a code snippet working with the examscores dataset that you know from the tutorials.
 
-1.  The code takes certain steps with the data like transformations, selection etc. Trace those steps and execute them manually to fill in the data table. You might have to delete/create columns and/or rows.
+    The code takes certain steps with the data like transformations, selection etc. Trace those steps and execute them manually to fill in the data table by hand. You might have to delete/create columns and/or rows.
 
     ```{r}
+    library(sozoekds)
     exam_score <- examscores
     exam_score$full_score <-(exam_score$ReadingScore + exam_score$WritingScore +
     exam_score$ReadingScore)/3
@@ -73,6 +77,8 @@ We have a code snippet working with the examscores dataset that you know from th
 ![](images/clipboard-373697182.png)
 
 ```{r}
+#| echo: false
+#| output: false
 #Sample data was generated with this code
 library(sozoekds)
 library(dplyr)
@@ -91,38 +97,75 @@ sampled_examscores$TransportMeans <- NULL
 
 rename(sampled_examscores, observation_number = X )
 
-sampled_examscores
+
 ```
 
-2.  Choose the right plot for code-snippet, explain plot and make assumptions about distribution, mean etc.
+2.  We have a code snippet working with the airbnbsmall dataset that you know from the lectures. 
+
+Answer the following questions:
+
+a.  Say we have a linear regression model:\
+    usd_cleaning_fee=𝛽1 n_guests_included + 𝛽0.\
+    Given the plots below: What is the approximate value for 𝛽0 and  𝛽1?
+b.  What does the value for 𝛽0 indicate?
+c.  What does the value for 𝛽1 indicate?
+d.  What does the error bar indicate?
+e.  Given the following code block, which of the following 4 plots is expected?
+
+code:
+
+```{r}
+#| output: false
+library(sozoekds) # it contains airbnbsmall dataset
+library(ggplot2)
+
+# Plot code
+ggplot(data = airbnbsmall, aes(x=n_guests_included, y=usd_cleaning_fee)) +
+geom_point(color="blue") +
+geom_smooth(method="lm", se=TRUE, color="red") +
+labs(
+title="Relationship Between Number of Guests and Cleaning Fee",
+x="Number of Guests",
+y="Cleaning Fee (in USD)") #+
+ # scale_y_continuous(breaks = seq(0, 400, by = 25))
+
+
+```
+
+![](images/clipboard-2109247979.png)
+
+![](images/clipboard-3805619014.png)
+
+![](images/clipboard-4269476900.png)
+
+![](images/clipboard-2089748804.png)
 
 ## Task 3 - Regressions
 
-#### *Part 3.1 Conceptual questions:*
-
-1.  Explain the concepts variance, covariance.
-
-2.  How can we use variance and covariance for calculating coefficients in a linear regression? Write down the formulas
-
-Calculate $\hat{\beta_0}$ and $\hat{\beta_1}$ by hand. Choose the right values for your calculation:
-
--   Covariance(x,y) = 0.8
--   Variance (x) = 2
--   Variance(y) = 0.8
--   Mean(x) = 3
--   Mean (y) = 4
-
-#### *Part 3.2 Interpreting a given model*
+#### *Interpreting a given model*
 
 We've got a linear regression and this is it's output (model1)
 
 ```{r}
 library(sozoekds)
+airbnb_data <- airbnbsmall
 
+model1 <- lm(price~n_accommodates+d_kitchen+n_bathrooms+d_heating,data=airbnb_data)
 ```
 
 1.  Explain the model in your own words
 
-2.  Interpret the coefficients
+2.  Write down the statistical formula for our specific model
 
-3.  Model comparison. Compare the given model with this one (model2) - choose the better one and justify your decisiom
+3.  Interpret the coefficients (value, meaning, significance)
+
+    ```{r}
+    summary(model1)
+    ```
+
+4.  Model comparison. Compare the first model (model1) with this one (model2) - choose the one that explains the price better and justify your decision.
+
+    ```{r}
+    model2<-lm(price~n_accommodates,data=airbnb_data)
+    summary(model2)
+    ```
