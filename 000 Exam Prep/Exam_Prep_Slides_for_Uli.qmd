@@ -121,24 +121,26 @@ library(ggplot2)
 
 # Plot code
 ggplot(data = airbnbsmall, aes(x=n_guests_included, y=usd_cleaning_fee)) +
-geom_point(color="blue") +
-geom_smooth(method="lm", se=TRUE, color="red") +
-labs(
-title="Relationship Between Number of Guests and Cleaning Fee",
-x="Number of Guests",
-y="Cleaning Fee (in USD)") #+
- # scale_y_continuous(breaks = seq(0, 400, by = 25))
-
+  geom_point(color="blue") +
+  geom_smooth(method="lm", se=TRUE, color="red") +
+  scale_y_continuous(breaks = seq(0, 400, by = 25)) +
+  scale_x_continuous(breaks = seq(0, 16, by = 2)) +
+  labs(
+    title="Relationship Between Number of Guests and Cleaning Fee",
+    x="Number of Guests",
+    y="Cleaning Fee (in USD)")
 
 ```
 
-![](images/clipboard-2109247979.png)
+a\)
 
-![](images/clipboard-3805619014.png)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeqZIe2gNSbRCty2PKqi90yV08v2rClsSs1FLERxGf_GYD3DpKjxdZ3aZXRb_soT_USVU3AdKg1aRBQQ4Bfpulj7hV-pmuPmvTpHK0a7RBhY7OtKBZzkV5wW5KWxfAFI5hcATrCJg?key=MOmnSh0CTmpM2kU6yT-VKcKo)
 
-![](images/clipboard-4269476900.png)
+b\) ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfMys_uWWq0NXKBc44QwFEFxmlOFMQ2do0_cZKuIL6O201gg9Jv-WU4yCi1vmxOp-wE-oO8Acfg3s6w51D3q3tIfHKr8hxTbojKoyUOC5aYIASMNn_QhruEmVYy2rfI6bZHAiRR0g?key=MOmnSh0CTmpM2kU6yT-VKcKo)
 
-![](images/clipboard-2089748804.png)
+c)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcRb5zMbBCrcMRvnv9PIWRV6h9fHSLzvUKYZVkpGMLEG-mqTr41oE-baOmV4UtwqPV79br-flYqv8COjqyjpvKQstrE3zdvu-B4EPnzb2rVfxcR2fw1w1V0FTpLvwB91DdkZcWwiQ?key=MOmnSh0CTmpM2kU6yT-VKcKo)
+
+d\) ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeWN32OxibLFhihGiuEgCgANJPhqtlb_xVSAf47-BgG1FfqIXqxYHyB3VOs4EZ-dQRplBcCWQ-22w_BRwxKW6C1HIN7AucswD6Q4rpxpDllDJBgc8mSJt8-DiGYYeMQe5Bv5weFsQ?key=MOmnSh0CTmpM2kU6yT-VKcKo)
 
 ## Task 3 - Regressions
 
