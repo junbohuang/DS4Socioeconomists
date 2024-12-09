@@ -1,0 +1,272 @@
+---
+title: "Exam structure Ws 24/25"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+## Exam:
+
+-   Exam will be paper & pen
+
+-   Questions and tasks are based on the lecture and tutorials - so knowing the idea behind a method or approach and also being able to apply that knowledge to practical tasks
+
+-   There will be no coding “by hand” but you will still work with code - Learning the most important terms helps you in the exam and also in your own programming progress.
+
+## Structure
+
+-   ⅓ of points is in MC questions (examples below)
+
+-   ⅔ of points in text tasks
+
+    1.  Code explanation (extensive example below)
+
+    2.  Interpretation of regression (small example below, exam task will be more extensive)
+
+    3.  something on trees/validation/evaluation etc. (no example since we have not had these topics yet)
+
+## **Task 1 - MC tasks:**
+
+can be based on lecture content and tutorial content, asking about concepts, programming-terms, statistical formulas…
+
+1.  The challenge of the Big Data revolution can be described with several V’s. Which term is not part of the challenge?
+
+    a.  Volume of data
+    b.  Veracity of data
+    c.  **Visibility of data**
+    d.  Velocity of data
+
+2.  What does the gg in the package ggplot2 stand for?
+
+    a.  generation of graphics
+    b.  gestalt rules of graphics
+    c.  **grammar of graphics**
+    d.  generalization of graphics
+
+3.  Which of the following statements is/are not true?
+
+    a.  Lists are special types of vectors which might contain elements of different classes.
+    b.  **Lists are special types of data frames.**
+    c.  Factors are used to represent categorical data and can be unordered or ordered.
+    d.  Unlike matrices, data frames can store different classes of objects in each column.
+
+## Task 2 - Code explanation
+
+### 2.1: We have a code snippet working with the examscores dataset that you know from the tutorials.
+
+The code takes certain steps with the data like transformations, selection etc. Trace those steps and execute them manually to fill in the data table by hand. You might have to delete/create columns and/or rows.
+
+```{r}
+library(sozoekds)
+exam_score <- examscores
+exam_score$full_score <-(exam_score$MathScore + exam_score$WritingScore +
+exam_score$ReadingScore)/3
+
+
+exam_score$full_score <- round(exam_score$full_score, digits=0)
+exam_score$grade <- ifelse(exam_score$full_score >= 90, "A",
+                	ifelse(exam_score$full_score >= 80 &  
+                         	exam_score$full_score <= 89, "B",
+                 	ifelse(exam_score$full_score >= 70 &  exam_score$full_score <= 79, "C",
+                        	ifelse(exam_score$full_score >= 60 &  exam_score$full_score <= 69, "D", "E"
+                              	))))
+```
+
+![](images/clipboard-373697182.png)
+
+```{r}
+#| echo: false #supresses showing of code
+#| output: false #supresses output
+#| label: Sample data was generated with this code
+
+
+library(sozoekds)
+library(dplyr)
+set.seed(123)  #Seed for reproducability
+sampled_examscores <- exam_score[sample(nrow(exam_score), 15), ]
+
+sampled_examscores$EthnicGroup <- NULL
+sampled_examscores$ParentEduc <- NULL
+sampled_examscores$LunchType <- NULL
+sampled_examscores$ParentMaritalStatus <- NULL
+sampled_examscores$PracticeSport <- NULL
+sampled_examscores$IsFirstChild <- NULL
+sampled_examscores$NrSiblings <- NULL
+sampled_examscores$TransportMeans <- NULL
+
+rename(sampled_examscores, observation_number = X )
+
+```
+
+### **Solution to task 2.1:**
+
+![](images/clipboard-2750203037.png)
+
+### 2.2: We have a code snippet working with the dataset on income and years of experience that you know from the tutorials. 
+
+Answer the following questions:
+
+a.  Say we have a linear regression model:\
+    monthly_income=𝛽1 years_of_experience + 𝛽0.\
+    Given the plots below: What is the approximate value for 𝛽0 and  𝛽1?
+b.  What does the value for 𝛽0 indicate?
+c.  What does the value for 𝛽1 indicate?
+d.  What does the error band indicate?
+e.  Given the following code block, which of the following 4 plots is expected and why?
+
+dataset:
+
+```{r}
+#| echo: false #supresses showing of code
+#| output: true
+#| label: Sample data for income and expirience was generated with this code
+
+
+# Set a seed for reproducibility
+set.seed(123)
+
+# Generate random data for years of experience
+years_of_experience <- seq(0, 30, by = 1)  # 0 to 30 years
+
+# Create income based on years of experience with a reasonable starting value
+income <- 1500 + 45 * years_of_experience + rnorm(length(years_of_experience), mean = 0, sd = 100)  # Adding random noise
+
+# Create a data frame
+data <- data.frame(years_of_experience, income)
+data$income <- round(data$income, digits = 2)
+
+library(knitr)
+
+kable(data)
+
+```
+
+code:
+
+```{r}
+#| output: false #suppresses output
+library(sozoekds) # it contains airbnbsmall dataset
+library(ggplot2)
+
+# Plot code
+ggplot(data, aes(x = years_of_experience, y = income)) +
+  geom_point(color = "blue") +  # Add points
+  geom_smooth(method = "lm", color = "red", se = TRUE, fill = "orange") +
+  labs(title = "Scatterplot of Monthly Income vs. Years of Employment",
+       x = "Years of Experience in Company",
+       y = "Monthly Income (EUR)") +
+  scale_y_continuous(breaks = seq(0, 3000, by = 50)) +
+  scale_x_continuous(breaks = seq(0, 30, by = 2)) +
+  coord_cartesian(xlim = c(0, 30), ylim = c(1400, 2500)) +
+  theme_minimal()
+```
+
+a\)
+
+![](images/2_a_plot.png)
+
+b\)
+
+![](images/2_b_plot.jpg)
+
+c\)
+
+![](images/2_c_plot.jpg)
+
+d\)
+
+![](images/2_d_plot.jpg)
+
+### Solution for task 2.2:
+
+a.  Say we have a linear regression model:\
+    monthly_income=𝛽1 years_of_experience + 𝛽0.\
+    Given the plots below: What is the approximate value for 𝛽0 and  𝛽1?
+
+    ```{r}
+    lm(income ~ years_of_experience, data = data)
+    ```
+
+    ***Solution:*** using the graphic: 𝛽0 is around 1525€ (calculated value \[intercept\] is 1525.96€)
+
+    using the graphic: for 0 years of experience the monthly income is around 1525, for 2 years it is around 1600. Approximating 𝛽1 can be done by calculating (1600-1525)/2 = 75/2 = 37,5€ (calculated value is 43.06€)
+
+b.  What does the value for 𝛽0 indicate?
+
+    ***Solution***: at zero years of experience an employee gets an average of 1525€ as the monthly income.
+
+c.  What does the value for 𝛽1 indicate?
+
+    ***Solution***: with each addditional year of experience an employee gets an average of 43€ more as their monthly income.
+
+d.  What does the error band indicate?
+
+    ***Solution***: The error band indicates the **Confidence Interval**: The shaded area around the regression line represents the confidence interval for the predicted values of monthly income based on years of experience. In a simple linear regression, this
+    is typically a 95% confidence interval, which means that we can be 95%
+    confident that the true average monthly income for a given number of
+    years of experience falls within that band. The error band also represents the **Uncertainty of our Prediction**: The width of the error band
+    reflects the uncertainty of the predictions. A larger error band represents more uncertainty in the prediction than a smaller one. \
+    **In our case** the error band has a range of around € ±75€. It suggests that the actual average monthly income for individuals with that level of experience could vary by ±75€ from the predicted value provided by the regression model.
+
+e.  In the following code block, which of the following 4 plots is expected and why?
+
+    a.  Plot a is the right one. We have the data points, a linear regression line in red, and error band in orange and the right scales (2 year-steps on the x-axis and 50€ on the y-axis).
+    b.  Plot b shows the right type of calculation and regression - so using a linear regression but the scales are in steps of 3 years (x-axis) and 75€ (y-axis) not 2 years and 50€ as given in the code.
+    c.  Plot c shows a bumpy red line that was not generated by a linear regression but by a polynomial regression.
+    d.  Plot d shows an downwards sloping regression line that is not linear and does not represent our data set. It was generated using a different data set where experience leads to less income instead of more.
+
+## Task 3 - Regressions
+
+#### *Interpreting a given model*
+
+We've got a linear regression and this is it's output (model1)
+
+```{r}
+library(sozoekds)
+airbnb_data <- airbnbsmall
+
+model1 <- lm(price~n_accommodates+d_kitchen+n_bathrooms+d_heating,data=airbnb_data)
+```
+
+1.  Explain the model in your own words
+
+    ***Solution:*** The price of an airbnb-listing is assumed to be influenced by the number of accommodates that a flat hosts (numeric value) , by the existence of a kitchen (as dummy of yes(1) or no(0)), by the number of bathrooms (numeric value) an by the existence of heating(as dummy of yes(1) or no(0)). The model also includes a basic-price, that is the cost when all other values are zero. The model assumes a linear relationship and uses the airbnbsmall dataset.
+
+2.  Write down the statistical formula for our specific model#
+
+    ***Solution***: $\hat{price} = \hat{\beta_0} + \hat{\beta_1} numberaccommodates+ \hat{\beta_2} kitchen + \hat{\beta_3} numberbathrooms + \hat{\beta_4} heating$
+
+3.  Interpret the coefficients (value, meaning, significance)
+
+    ```{r}
+    summary(model1)
+    ```
+
+    #### *Solutions*
+
+    Intercept -30.6373\*\*\* — When all other values are zero (so 0 accommodates, no kitchen, 0 bathrooms and no heating) the rental costs -30€. This value is highly significant on the 99%-level. This does not have a practical interpretation since negative prices do not make sense in our example.
+
+    n_accommodates 20.7066\*\*\* — Keeping all other values the same an additional accommodate raises the price of the listing by 20.76€ on average. This value is highly significant on the 99%-level.
+
+    d_kitchen 12.0501\*\*\* — Keeping all other values the same the existence of a kitchen raises the price of the listing by 12.05€ on average in comparison to the listing not having a kitchen. This value is highly significant on the 99%-level.
+
+    n_bathrooms 38.4998\*\*\* — Keeping all other values the same an additional bathroom raises the price of the listing by 38.50€ on average. This value is highly significant on the 99%-level.
+
+    d_heating 2.1273 — Keeping all other values the same the existence of a heating raises the price of the listing by 2.13€ on average in comparison to the listing not having heating. This value is not significant on any of the typical significance levels (p = 0.402) and therefore has little explanatory power for the price of the listing.
+
+4.  Model comparison. Compare the first model (model1) with this one (model2) - choose the one with the better in-sample fit and justify your decision.
+
+    ```{r}
+    model2<-lm(price~n_accommodates,data=airbnb_data)
+    summary(model2)
+    ```
+
+#### *Solutions*
+
+In model1 the intercept and the coefficients n_accommodates, d_kitchen, n_bathrooms are highly significant for explaining the price while d_heating is not statistically significant. The residual standard error for model1 is 56.76 representing the average distance that the observed values fall from the regression line.
+
+In model2 the intercept and the coefficient n_accommodates are highly significant as predictors for the price. The residual standard error for model1 is 59.65 representing the average distance that the observed values fall from the regression line. Since this value is bigger than the RMSE for model1 we can conclude, that model1 has the better in-sample fit.
+
+Comparing the adjusted R-squared which accounts for the number of predictors in the model it is 0.4804 for model1 and 0.4261 for model2. A higher value represents that the model is able to explain more of the variance within the data. Therefore model1 is also preferred when looking at that metric.
