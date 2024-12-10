@@ -24,7 +24,7 @@ editor: visual
     ::::: panel-tabset
     ## R²
 
-    In simple terms, R² tells us how much of the total variance in the outcome (dependent variable) can be explained by the predictor(s) (independent variables) in a statistical model.
+    **R²** tells us how much of the total variance in the outcome (dependent variable) can be explained by the predictor(s) (independent variables) in a statistical model.
 
     $$R^2 = \frac{Var(\hat{y_i})}{Var(y_i)} = \frac{Var(y_i)-Var(\varepsilon_i)}{Var(y_i)} = 1-\frac{Var(\varepsilon_i)}{Var(y_i)}$$
 
@@ -64,7 +64,7 @@ editor: visual
 
 -   The confidence interval gives you a range around an estimate that helps you understand the level of uncertainty associated with that estimate. The wider the interval, the more uncertainty there is; a narrower interval suggests more certainty.
 
-## Exampel for model Interpretation
+## Example for model Interpretation
 
 ```{r}
 # Set seed for reproducibility
