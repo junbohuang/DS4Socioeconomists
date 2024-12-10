@@ -1,0 +1,159 @@
+---
+title: "Linear Regression Part I - Session 7"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# Recap
+
+## The most important OLS assumptions in a nutshell
+
+-   The variable $x$ has explanatory power for $y$
+-   The relationship between $y$ and $x$ is linear or can be at least approximated as a linear relationship
+-   Parameters are the same for all observation pairs
+-   Residual series have a mean of zero, a constant variance and are normally distributed
+-   Residuals are not correlated with other residuals (e.g. $p$ lags apart)
+
+## Judgement of the fit
+
+-   We want a model that is as close to the real parameters as possible
+
+    ::::: panel-tabset
+    ## R²
+
+    In simple terms, R² tells us how much of the total variance in the outcome (dependent variable) can be explained by the predictor(s) (independent variables) in a statistical model.
+
+    $$R^2 = \frac{Var(\hat{y_i})}{Var(y_i)} = \frac{Var(y_i)-Var(\varepsilon_i)}{Var(y_i)} = 1-\frac{Var(\varepsilon_i)}{Var(y_i)}$$
+
+    -   **R² = 0** means that the model does not explain any of the variance in the response data around its mean.
+    -   **R² = 1** means that the model explains all the variance in the response data.
+
+    ::: callout-important
+    A higher R² indicates a better fit for the model, while a lower R² suggests that the model might not be capturing the relationships in the data very well.
+    :::
+
+    ## RMSE
+
+    The **RMSE** tells us how well a regression model can predict the value of the response variable in absolute terms while R^2^ tells us how well a model can predict the value of the response variable in percentage terms.
+
+    $Residual=Observed_i - Predicted_i$
+
+    $MSE=\frac{1}{n}\sum_{i=1}^{n}(Residual_i)²$
+
+    $RMSE=\sqrt{MSE​}=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(Observed_i-Predicted_i)²}$
+
+    $RMSE=\sqrt{MSE​}=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(Residual_i)²}$
+
+    ::: callout-important
+    A lower RMSE indicates a better fit for the model, while a higher RMSE suggests that the model is not accurately predicting the observed values in the data.
+    :::
+    :::::
+
+    ## Why look at in-sample fit and not just "fit"?
+
+-   **In-sample fit**: Performance of the model on the data it was trained on.
+
+-   **Out-of-sample fit**: Performance of the model on new, unseen data.
+
+### Inference
+
+-   We can construct **confidence intervalls** for the coefficients
+
+-   The confidence interval gives you a range around an estimate that helps you understand the level of uncertainty associated with that estimate. The wider the interval, the more uncertainty there is; a narrower interval suggests more certainty.
+
+## Exampel for model Interpretation
+
+```{r}
+# Set seed for reproducibility
+set.seed(456)
+
+# Generate sample data
+n <- 50  # number of bakers
+experience <- rnorm(n, mean = 5, sd = 2)  # Average experience around 5 years, variability of 2 years
+cookie_quality <- 5 + (2 * experience) + rnorm(n, mean = 0, sd = 1)  # Linear relationship with noise
+
+# Create a data frame
+cookie_data <- data.frame(experience, cookie_quality)
+
+# Fit the linear regression model
+model <- lm(cookie_quality ~ experience, data = cookie_data)
+
+# View the model summary
+summary(model)
+```
+
+**Interpretation:**
+
+-   **Coefficients**:
+
+    -   **(Intercept)**: The estimated intercept is approximately 4.95 This suggests that if a baker has zero years of experience, the expected quality of the cookies they produce is approximately 4.95 (on a scale of 1 to 10).
+
+    -   **experience**: The estimated coefficient for experience is approximately 2.03 This means that for each additional year of baking experience, the quality of cookies is expected to increase by about 2.03 points.
+
+-   **t value and Pr(\>\|t\|)**:
+
+    -   **t value**: This represents the t-statistic for each coefficient, indicating how many standard deviations each coefficient is from zero.
+
+    -   **Pr(\>\|t\|)**: The p-value associated with each coefficient tests the null hypothesis that the coefficient is equal to zero. A low p-value (\< 0.05) indicates that you can reject the null hypothesis, suggesting a statistically significant relationship.
+
+    -   For \`experience\`, the p-value is very low (2e-08), indicating that baking experience significantly affects the quality of cookies.
+
+-   **Residual Standard Error, R-squared, and Adjusted R-squared**:
+
+    -   **Residual standard error**: This value indicates the standard deviation of the residuals (the differences between the observed and predicted cookie quality). Smaller values imply a better fit. In the example the RMSE is 0.9617 meaning that the predictions are on average 0.96 points off from the real quality of the cookie.
+
+    -   **Multiple R-squared**: This tells us the proportion of the variance in cookie quality that can be explained by the experience level. An R-squared of 0.9529 means that approximately 95.3% of the variance in cookie quality can be explained by the bakers' experience.
+
+    -   **Adjusted R-squared**: This is a modified version of R-squared that adjusts for the number of predictors in the model, providing a more accurate measure when multiple predictors are included.
+
+# Exercises
+
+Since it is almost Christmas, our example will be Christmas related as well:
+
+-   **Cookie Quality**: Response variable, measured on a scale from 1 to 10.
+
+-   **Experience**: Years of baking experience
+
+-   **Oven Temperature**: Temperature in degrees Celsius
+
+-   I**ngredient Quality**: A categorical variable rating ingredient quality on a scale from 1 to 5
+
+-   **Decorating Skill**: A numeric scale from 1 to 10
+
+-   **Gender**: Categorical variable with two levels (e.g., Male and Female)
+
+    1.  Create a two linear regression models to explain the cookie quality. In one model use all given variables, in the other one just use two.
+
+        1.  Write down each model as a formula
+        2.  Run the linear regression using R
+        3.  Interpret the coefficients
+        4.  Compare the models in terms of in-sample fit.
+
+    2.  Set up a model to explain the decorating skill by the using other variables. What is the best model in terms of in-sample fit that you can set up?
+
+```{r}
+set.seed(111)
+
+# Parameters
+n <- 1000  # number of observations (bakers)
+
+# Create predictor variables
+experience <- rnorm(n, mean = 5, sd = 2)  # Years of baking experience
+oven_temperature <- rnorm(n, mean = 180, sd = 10)  # Oven temperature in degrees Celsius
+ingredient_quality <- sample(1:5, n, replace = TRUE)  # Ingredient quality rating from 1 to 5
+decorating_skill <- rnorm(n, mean = 5, sd = 1.5)  # Decorating skill on a scale from 1 to 10
+gender <- sample(c("Male", "Female"), n, replace = TRUE)  # Gender variable with two levels
+
+# Generate cookie quality (response variable) - ensure a positive intercept
+cookie_quality <- 2 + (2 * experience) + (0.1 * oven_temperature) + 
+                  (0.5 * ingredient_quality) + (0.3 * decorating_skill) + 
+                  rnorm(n, mean = 0, sd = 1)  # Ensure intercept remains positive
+
+# Creating a data frame
+cookie_data <- data.frame(cookie_quality, experience, oven_temperature, ingredient_quality, decorating_skill, gender)
+
+
+```
