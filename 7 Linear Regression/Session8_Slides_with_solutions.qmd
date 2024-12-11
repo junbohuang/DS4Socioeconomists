@@ -21,7 +21,7 @@ editor: visual
 
 -   We want a model that is as close to the real parameters as possible
 
-    ::::: panel-tabset
+    ::: panel-tabset
     ## R²
 
     **R²** tells us how much of the total variance in the outcome (dependent variable) can be explained by the predictor(s) (independent variables) in a statistical model.
@@ -30,6 +30,7 @@ editor: visual
 
     -   **R² = 0** means that the model does not explain any of the variance in the response data around its mean.
     -   **R² = 1** means that the model explains all the variance in the response data.
+    -   Therefore, we want to build a model such that it minimizes $Var(\varepsilon_i)$.
 
     ::: callout-important
     A higher R² indicates a better fit for the model, while a lower R² suggests that the model might not be capturing the relationships in the data very well.
@@ -50,7 +51,7 @@ editor: visual
     ::: callout-important
     A lower RMSE indicates a better fit for the model, while a higher RMSE suggests that the model is not accurately predicting the observed values in the data.
     :::
-    :::::
+    :::
 
     ## Why look at in-sample fit and not just "fit"?
 
