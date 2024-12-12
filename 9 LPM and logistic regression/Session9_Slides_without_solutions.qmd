@@ -1,0 +1,155 @@
+---
+title: "LPM and logistic regression - Session 9"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# Recap
+
+## Binary variables 
+
+Binary variables are used when there are only two values that a variable can take.
+
+Typical cases are:
+
+-   all questions that can be answered with yes/no - "Do you have siblings?", "Do you own a car?"
+
+-   gender (when including only male/female and no other identities)
+
+Representation in a functional context (in a linear regression):
+
+-   Case 1 (Ownership = 1): $y_i = \beta_0 + \delta \times 1 + \beta_1 \times x_i$
+-   Case 2 (Ownership = 0): $y_i = \beta_0 + \delta \times 0 + \beta_1 \times x_i$
+-   Case 2 reduces to: $y_i = \beta_0 + \beta_1 \times x_i$ (reference model)
+
+Visual Representation:
+
+![](images/modellvergleich_1.jpg){width="3135"}
+
+------------------------------------------------------------------------
+
+Different types of models are used for different purposes:
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ### Linear regression                                                                                                                                                      | ### Logistic regression                                                                                                                                                         |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| A linear regression algorithm d**efines a linear relationship between independent and dependent variables**.                                                               | Logistic regression’s **output lies between 0 and 1** as the algorithm is designed to predict a binary outcome for an event based on the previous observations of a data set.   |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| It uses a linear equation to identify the line of best fit (straight line) for a problem, thereby **enabling the visualization of the output of the dependent variables.** | It uses independent variables to **predict the occurrence or failure of specific events.**                                                                                      |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| For example, linear regression may inform us about...                                                                                                                      | For example, logistic regression predicts the chance that...                                                                                                                    |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| -   the influence of education on the income.                                                                                                                              | -   someone passes an exam based on their preparation time.                                                                                                                     |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| -   the influence of gender on grades.                                                                                                                                     | -   someone will get a credit based on their income.                                                                                                                            |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| -   **the influence of a number of variables on one dependent variable.**                                                                                                  | -   **an outcome will be achieved based on dependent variables.**                                                                                                               |
+|                                                                                                                                                                            |                                                                                                                                                                                 |
+| ###                                                                                                                                                                        |                                                                                                                                                                                 |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Example in R
+
+### our questions:
+
+1\. **Linear Regression:** How does the age of a house and whether it needs renovations affect its selling price?
+2. **Logistic Regression :** What is the likelihood that a house will be sold based on its age and whether it needs renovations?
+
+```{r}
+# Set seed for reproducibility
+set.seed(101)
+
+# Create a synthetic dataset
+n <- 300  # number of houses
+
+# Generate random house ages (from 0 to 50 years)
+house_age <- sample(0:50, n, replace = TRUE)
+
+# Generate random renovation needs (1 = Yes, 0 = No), but influence the outcome heavily
+needs_renovation <- rbinom(n, 1, prob = 0.2)  # Assume 20% need renovation
+
+# Base price influenced by age and renovation needs, with some noise
+house_price <- 300000 - (3000 * house_age) - (30000 * needs_renovation) + rnorm(n, mean = 0, sd = 1000)
+
+# Create binary classification for house sold (1 = Yes, 0 = No) with perfect separation
+# Let's heavily weight outcomes for extreme cases
+house_sold <- ifelse(house_age < 5 & needs_renovation == 0, 1, 
+                     ifelse(house_age >= 5 & needs_renovation == 1, 0, 
+                            rbinom(n, 1, 0.5)))  # Create more random behavior for other cases
+
+# Convert to factor
+house_sold <- as.factor(house_sold)
+
+# Combine into a data frame
+data_houses <- data.frame(
+  house_age = house_age,
+  needs_renovation = as.factor(needs_renovation),
+  house_price = house_price,
+  house_sold = house_sold
+)
+
+head(data_houses)
+
+# Save the dataset to a CSV file
+write.csv(data_houses, "house_data.csv", row.names = FALSE)
+```
+
+### **Our models**
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Linear Regression (House Price Explanation):**                                                                                                                                                                                                                                                            | **Logistic Regression (House Sold Prediction):**                                                                                                                                                               |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Model:** \`house_price \~ house_age + needs_renovation\`                                                                                                                                                                                                                                                  | **Model:** \`house_sold \~ house_age + needs_renovation\`                                                                                                                                                      |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Intercept (\`β0\`):** The expected price of a house when the age is zero and it does not need renovation (a hypothetical case).                                                                                                                                                                           | **Intercept (\`β0\`):** The log-odds of a house being sold when the house age is zero and it does not need renovations.                                                                                        |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Coefficient for House Age (\`β1\`):** This represents the change in house price for each additional year of age. A negative coefficient indicates that as houses age, their price tends to decrease.                                                                                                      | **Coefficient for House Age (\`β1\`):** Represents the change in log-odds of a house being sold for each additional year of age. A negative coefficient suggests that older houses are less likely to be sold. |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Coefficient for Needs Renovation (\`β2\`):** This coefficient shows the expected price difference between houses that need renovations and those that do not. A negative coefficient means that houses needing renovation are expected to sell for less than similar houses that do not need renovations. | **Coefficient for Needs Renovation (\`β2\`):** Indicates the change in log-odds of selling a house for those that need renovation. A                                                                           |
+|                                                                                                                                                                                                                                                                                                             | negative coefficient means that properties requiring renovations have lower odds of being sold compared to those that do not.                                                                                  |
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+### Running the regressions:
+
+```{r}
+# Linear Regression
+linear_model_houses <- lm(house_price ~ house_age + needs_renovation, data = data_houses)
+summary(linear_model_houses)
+
+# Logistic Regression
+logistic_model_houses <- glm(house_sold ~ house_age + needs_renovation, family = binomial, data = data_houses)
+summary(logistic_model_houses)
+```
+
+### Interpretation:
+
++-------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| Linear Regression                                                                               | Logistic Regression                                                                          |
++=================================================================================================+==============================================================================================+
+| ```                                                                                             | ```                                                                                          |
+| (Intercept)       300186.158*** house_age          -3010.960*** needs_renovation1 -30076.691*** | (Intercept)        0.685808**  house_age         -0.018420*   needs_renovation1 -3.516877*** |
+| ```                                                                                             | ```                                                                                          |
++-------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| Intercept:                                                                                      | Intercept                                                                                    |
++-------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| house age                                                                                       | house age                                                                                    |
++-------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+| need for renovation                                                                             | need for renovation                                                                          |
++-------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+
+
+------------------------------------------------------------------------
+
+# Exercise
+
+1.  Based on this dataset think of two questions: One that can be answered using linear regression, one that can be answered using logistic regression.
+
+    1.  Write down the questions
+
+    2.  Write down the models to answer the questions in a formalized way
+
+    3.  Write code for linear and logistic regression, interpret the coefficients
+
+2.  Look into the slides from the lectures and create a linear probability model
