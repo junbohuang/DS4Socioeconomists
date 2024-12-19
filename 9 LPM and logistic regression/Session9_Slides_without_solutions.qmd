@@ -33,21 +33,52 @@ Visual Representation:
 
 ## Different types of models are used for different purposes:
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ### Linear regression                                                                                                                                                      | ### Logistic regression                                                                                                                                                       |
-|                                                                                                                                                                            |                                                                                                                                                                               |
-| A linear regression algorithm d**efines a linear relationship between independent and dependent variables**.                                                               | Logistic regression’s **output lies between 0 and 1** as the algorithm is designed to predict a binary outcome for an event based on the previous observations of a data set. |
-|                                                                                                                                                                            |                                                                                                                                                                               |
-| It uses a linear equation to identify the line of best fit (straight line) for a problem, thereby **enabling the visualization of the output of the dependent variables.** | It uses independent variables to **predict the occurrence or failure of specific events.**                                                                                    |
-|                                                                                                                                                                            |                                                                                                                                                                               |
-| For example, linear regression may inform us about...                                                                                                                      | For example, logistic regression predicts the chance that...                                                                                                                  |
-|                                                                                                                                                                            |                                                                                                                                                                               |
-| -   the influence of education on the income.                                                                                                                              | -   someone passes an exam based on their preparation time.                                                                                                                   |
-|                                                                                                                                                                            |                                                                                                                                                                               |
-| -   the influence of gender on grades.                                                                                                                                     | -   someone will get a credit based on their income.                                                                                                                          |
-|                                                                                                                                                                            |                                                                                                                                                                               |
-| -   **the influence of a number of variables on one dependent variable.**                                                                                                  | -   **an outcome will be achieved based on dependent variables.**                                                                                                             |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| ### Linear regression                                                                                                                                                      | ### Logistic regression                                                                                                                    |
+|                                                                                                                                                                            |                                                                                                                                            |
+| A linear regression algorithm d**efines a linear relationship between independent and dependent variables**.                                                               | A logistic regression is not regression, but **classification**, with a binary dependent variable and continuous or categorical variables. |
+|                                                                                                                                                                            |                                                                                                                                            |
+| It uses a linear equation to identify the line of best fit (straight line) for a problem, thereby **enabling the visualization of the output of the dependent variables.** | It uses independent variables to **predict the occurrence or failure of specific events.**                                                 |
+|                                                                                                                                                                            |                                                                                                                                            |
+| For example, linear regression may inform us about...                                                                                                                      | For example, logistic regression predicts the chance that...                                                                               |
+|                                                                                                                                                                            |                                                                                                                                            |
+| -   the influence of education on the income.                                                                                                                              | -   someone passes an exam based on their preparation time.                                                                                |
+|                                                                                                                                                                            |                                                                                                                                            |
+| -   the influence of gender on grades.                                                                                                                                     | -   someone will get a credit based on their income.                                                                                       |
+|                                                                                                                                                                            |                                                                                                                                            |
+| -   **the influence of a number of variables on one dependent variable.**                                                                                                  | -   **an outcome will be achieved based on dependent variables.**                                                                          |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Some Details on Logistic Regression
+
+Key concepts:
+
+1.  Given that the probability of the occurrence of an event ***e*** is ***p**,* or ***(1-p)*** for the probability of its not happening;
+
+2.  Dependent variables are $x_1, x_2, x_3$;
+
+3.  Logistic regression is $y=f(x_1, x_2, x_3)$, where $y$ indicates the probability of ***e*** happening.
+
+4.  Linear regression: $y=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3$
+
+5.  Since we need to bound the outcome variable to be between 0 and 1, we can not fit the model to the data as in linear regression.
+
+6.  Instead, we look at $odds\in[0, +\infty)$: The probability of ***e*** happening rather than not happening;
+
+    $$odds_{e} = \frac{p}{(1-p)}$$
+
+7.  If ***p*** is greater than ***(1-p)***, odds \> 1, and vice versa;
+
+    1.  0 \<= odds \< 1: event ***e*** is not likely to occur;
+    2.  1 \<= odds: event ***e*** is likely to occur
+
+8.  Modeling ***y*** is hard, instead, we model ***log(odds)*** with a logit function ***g(.)***
+
+    $$ g(x) = log(odds) = log(\frac{p}{1-p})= \frac{1}{1+e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3)}}$$
+
+9.  Fit ***g(.)*** with Maximum Likelihood Estimator (MLE) - good to know.
+
+10. Since we transform the y-axis from probability (between 0 and 1) to log-odds, **model coefficients are not interpreted in terms of probability.**
 
 ## Example in R
 
