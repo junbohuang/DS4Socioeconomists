@@ -78,7 +78,7 @@ Key concepts:
 
 9.  Fit ***g(.)*** with Maximum Likelihood Estimator (MLE) - good to know.
 
-10. Since we transform the y-axis from probability (between 0 and 1) to log-odds, **model coefficients are not interpreted in terms of probability.**
+10. Since we transform the y-axis from probability (between 0 and 1) to log-odds, **model coefficients are not interpreted in terms of probability -\>** therefore,we use R's ***margins*** package
 
 ## Example in R
 
@@ -199,9 +199,15 @@ Easy for the linear regression, but how do we interpret "log-odds"???
 ```{r}
 #Transforming output of logistic regression to make it interpretable
 #install.packages("margins")
+#install.packages("stargazer")
 library(margins)
+library(stargazer)
+
 margins_logistic_model <- margins(logistic_model_houses)
-summary(margins_logistic_model)
+result <- summary(margins_logistic_model)
+
+stargazer(result, type = "text", summary = FALSE)
+
 ```
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -291,6 +297,8 @@ print(paste("The house that is", age, "years old and", renovation_needed, ", has
 
 # Exercise
 
+### house dataset
+
 We have two models that both use our data set on houses:
 
 ```         
@@ -311,9 +319,39 @@ glm(formula = house_sold ~ lot_size + garage_presence + house_age,family = binom
     a.  The lot is 250m² big, the house has a garage and is 21 years old
     b.  The lot is 55m² big, the house has no garage and is 49 years old
 
-    ------------------------------------------------------------------------
+### airbnbsmall
+
+Given the following code snippet, which models the influence of a set of independent variables (usd_cleaning_fee, d_hottub, d_indoorfireplace, d_heating...) to the rating (independent variable).
+
+1.  Which subset of independent variables should be included in the model and why?
+2.  What is the most profound factor that influence the rating according to this model?
+3.  How much likely that an airbnb is highly rated if it has an indoor fireplace? what about hottub?
+
+```{r}
+library(sozoekds)
+library(margins)
+library(stargazer)
+
+airbnbsmall <- airbnbsmall
+
+airbnbsmall$highly_rated <- ifelse(airbnbsmall$n_review_scores_rating > 90, 1, 0)
+airbnbsmall$highly_rated <- as.factor(airbnbsmall$highly_rated)
+
+model <- glm(highly_rated ~ usd_cleaning_fee + d_hottub + d_indoorfireplace + d_heating, 
+             data = airbnbsmall, family = "binomial")
+
+summary(model)
+
+margins_logistic_model <- margins(model)
+result <- summary(margins_logistic_model)
+
+stargazer(result, type = "text", summary = FALSE)
+
+```
 
 # Solutions
+
+### Solution: house dataset
 
 ## Linear regression:
 
@@ -460,3 +498,45 @@ selling_chance_percent <- round(selling_chance_percent, digits = 2)
 print(paste("The house that is", age, "years old, that", renovation_needed, "and is", size, "m² big, has a chance to be sold within the first 14 days after listing of approximatly", selling_chance_percent, "%."))
 
 ```
+
+### Solution: airbnbsmall
+
+```{r}
+model <- glm(highly_rated ~ usd_cleaning_fee + d_hottub + d_indoorfireplace + d_heating, 
+             data = airbnbsmall, family = "binomial")
+
+summary(model)
+
+margins_logistic_model <- margins(model)
+result <- summary(margins_logistic_model)
+
+stargazer(result, type = "text", summary = FALSE)
+```
+
+1.  Which subset of independent variables should be included in the model and why?
+
+    variables_to_include = {d_heating, d_indoorfireplace, usd_cleaning_fee}
+
+    we want to exclude d_hottub because its effect is insignificant with p \> 0.05
+
+2.  What is the most profound factor that influence the rating according to this model?
+
+    ```{r}
+    model <- glm(highly_rated ~ usd_cleaning_fee + d_indoorfireplace + d_heating, 
+                 data = airbnbsmall, family = "binomial")
+
+    summary(model)
+
+    margins_logistic_model <- margins(model)
+    result <- summary(margins_logistic_model)
+
+    stargazer(result, type = "text", summary = FALSE)
+    ```
+
+    **Answer**: from the table we can see that d_indoorfireplace has the most profound influence on the rating, according to our model.
+
+3.  How much likely that an airbnb is highly rated if it has an indoor fireplace? what about heating?
+
+    indoor fireplace: 12.3% more likely
+
+    heating: 10.5% mode likely
