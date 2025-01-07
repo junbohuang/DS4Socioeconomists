@@ -251,10 +251,10 @@ set.seed(111) # to make the example reproducible, we set a fixed number
 
 cv.error.5 <- rep(0, 5)
 for (i in 1:5) {
-  glm.fit <- glm(price ~ poly(n_beds, i), data = airbnbsmall)
+  glm.fit <- glm(price ~ poly(n_review_scores_rating, i), data = airbnbsmall)
   cv.error.5[i] <- cv.glm(airbnbsmall, glm.fit, K = 5)$delta[1]
 }
 cv.error.5
 ```
 
-Interpretation: The 5 values represent the average RMSE over all 5 folds for each polynomial degree. The average RMSE for the fourth degree is lower than for all other degrees. Therefore a quartic regression has the highest predictive power.
+Interpretation: The 5 values represent the average RMSE over all 5 folds for each polynomial degree. The average RMSE for the second degree is lower than for all other degrees. Therefore a quadratic regression has the highest predictive power.
