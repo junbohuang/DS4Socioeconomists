@@ -1,0 +1,159 @@
+---
+title: "Dimensionality reduction - Session 11"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+editor: visual
+---
+
+# Agenda for today:
+
+1.  Dimensionality problems and ways of solving them
+2.  Focus: Shrinkage Methods
+
+# Dimensionality problems and ways of solving them
+
++-----------------------------------------------------------------------------+--------------------------------------------------------------------+
+| Question                                                                    | Solutions                                                          |
+|                                                                             |                                                                    |
+| *How can we improve the linear model in a world of `many` regressors?*      | -   [Subset selection:]{.underline}                                |
+|                                                                             |                                                                    |
+| We want to have models with a high accuracy and high model interpretability | -   [Shrinkage methods]{.underline} (also known as regularization) |
+|                                                                             |                                                                    |
+|                                                                             | -   [Dimensionality reduction]{.underline}                         |
++-----------------------------------------------------------------------------+--------------------------------------------------------------------+
+
+# Shrinkage methods
+
+Shrinkage methods are important tools in machine learning that help create simpler, more generalized models that perform better on new data
+
+-   **Prevent Overfitting**: Shrinkage techniques help models generalize better to unseen data.
+
+-   **Feature Selection**: They can also help in identifying the most important features by reducing the weights of less significant ones.
+
+-   **Trade-off**: There is a balance in choosing the correct penalty term (λ) – too much shrinkage can lead to underfitting (too simple a model), while too little can lead to overfitting. The optimal λ is typically chosen using cross-validation approaches.
+
+# Ridge and Lasso
+
+## Ridge:
+
+$\sum_{i=1}^n (y_i - \hat{\beta_0} - \sum_{j=1}^p \hat{\beta_j} x_{ij})^2 + \lambda \sum_{j=1}^p \hat{\beta_j}^2$
+
+If λ=0 this is OLS regression
+
+If λ→∞ all coefficients go towards zero
+
+## Lasso:
+
+$\sum_{i=1}^n (y_i - \hat{\beta_0} - \sum_{j=1}^p \hat{\beta_j} x_{ij})^2 + \lambda \sum_{j=1}^p |\hat{\beta_j}|$
+
+Certain coefficients are down-weighted to be exactly zero (as in the subset algorithm)
+
+Example in R
+
+## Ridge Step by Step:
+
+1.  Load packages and data
+
+```{r}
+#install.packages("glmnet")
+library(glmnet)
+data(mtcars) #pre-installed dataset
+head(mtcars)
+```
+
+------------------------------------------------------------------------
+
+2.  Split dataset into target variable (y) and predictors (x1,x2,x3...xn)
+
+    ```{r}
+    # Target variable
+    y <- mtcars$mpg
+
+    # All other columns as predictors
+    x <- as.matrix(mtcars[, -which(names(mtcars) == "mpg")])
+
+    # Check the matrix
+    head(x)
+    ```
+
+    ------------------------------------------------------------------------
+
+3.  Perform ridge regression
+
+    **Why:** The Ridge Regression technique is used to prevent overfitting, especially when predictor variables are highly correlated (multicollinearity). The \`alpha\` parameter is set to \`0\` for Ridge Regression (1 would indicate Lasso Regression).
+
+    ```{r}
+    # Ridge Regression with glmnet
+    ridge_model <- glmnet(x, y, alpha = 0)
+
+    # Display summary of the model
+    print(ridge_model)
+    ```
+
+    **Interpretation**(from `glmnet`-function documentation):
+
+    +---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | `lambda`            | The actual sequence of `lambda` values used. When `alpha=0`, the largest lambda reported does not quite give the zero coefficients reported (`lambda=inf` would in principle). Instead, the largest `lambda` for `alpha=0.001` is used, and the sequence of `lambda` values is derived from this.                                                                 |
+    +---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | `dev.ratio`         | The fraction of (null) deviance explained (for `"elnet"`, this is the R-square). The deviance calculations incorporate weights if present in the model. The deviance is defined to be 2\*(loglike_sat - loglike), where loglike_sat is the log-likelihood for the saturated model (a model with a free parameter per observation). Hence dev.ratio=1-dev/nulldev. |
+    +---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | `df`                | The number of nonzero coefficients for each value of `lambda`. For `"multnet"`, this is the number of variables with a nonzero coefficient for *any* class.                                                                                                                                                                                                       |
+    +---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    ::: callout-important
+    Our table contains the fitted coefficients for different values of the regularization parameter \`lambda\` -\> Still, we need to find the optimal Lambda!
+    :::
+
+    ------------------------------------------------------------------------
+
+4.  Find optimal Lambda
+
+    **What we are doing:**
+    - Setting a seed for reproducibility (ensuring consistent results across runs).
+    - Performing cross-validation to find the optimal value of \`lambda\`.
+    - Plotting the cross-validation results.
+    - Extracting and printing the best lambda value.
+
+    **Why:** The choice of \`lambda\` (the regularization strength) is crucial for Ridge Regression. Cross-validation helps determine the best \`lambda\` that minimizes prediction error.
+
+    ```{r}
+    set.seed(123) # For reproducibility
+    cv_model <- cv.glmnet(x, y, alpha = 0)
+
+    # Plot of cross-validation
+    plot(cv_model)
+
+    # Find the optimal lambda value
+    best_lambda <- cv_model$lambda.min
+    print(best_lambda)
+    ```
+
+    **Interpretation:** The plot shows the cross-validated mean square error for different values of lambda. We also ave two lines: one for the lambda with the lowest MSE and another one that is the highest lambda within one standard deviation of the lambda with the lowest MSE. We typically choose the second value as the best lambda.
+
+    You would look for the minimum error value and then move vertically up to find the error value plus the one standard error. The corresponding lambda value at that point can be considered as a more conservative alternative to the optimal lambda, which may help avoid overfitting.
+
+    **Visual Guides**:
+    If the plot has vertical markers or lines that indicate the best lambda or one-standard-error lambda, use those as guides for identifying the optimal points.
+
+    ------------------------------------------------------------------------
+
+5.  Retrieve coefficients
+
+    **Why we are doing this:**
+     - In Ridge Regression, the coefficients provide insight into how each predictor affects the response variable (in this case, \`mpg\`).
+     - By retrieving the coefficients at \`lambda.min\`, we can understand the relationship between the predictors and the target variable while accounting for the penalty for complexity imposed by regularization.
+     - This step helps in evaluating how much each feature contributes to the prediction without the risk of overfitting that may occur at lower lambda values (more complex models).
+
+    ```{r}
+    # Retrieve coefficients using the optimal lambda value
+    ridge_coefficients <- coef(cv_model, s = "lambda.min")
+
+    # Display the coefficients
+    print(ridge_coefficients)
+    ```
+
+## Tasks for today
