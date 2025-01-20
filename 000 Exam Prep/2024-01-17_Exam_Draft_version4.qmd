@@ -7,11 +7,104 @@ format:
 editor: visual
 ---
 
-# Task 1: MC Questions
+# Task 1: MC Questions (30p)
+
+15 questions, 2p per question -\> 30p
 
 ::: callout-note
-Please note that for the MC questions exactly **one** answer is correct
+Please note, that multiple (max. 2) or single answers are possible.
 :::
+
+## Task 1.1
+
+Working with R: Given the following matrix in R: `matrix_data <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)`. Which R code returns the number of columns in this matrix?
+
+a)  `ncol(matrix_data)`
+b)  `nrow(matrix_data)`
+c)  `length(matrix_data)`
+d)  `dim(matrix_data)[2]`
+
+**Answer:** a) `ncol(matrix_data)`
+
+## Task 1.2
+
+Algorithms: What is the main purpose of an algorithm?
+
+a)  Database management
+b)  Automatic generation of graphics
+c)  Solving a problem through a sequence of steps
+d)  Implementation of hardware components
+
+**Answer:** c) Solving a problem through a sequence of steps
+
+## Task 1.3
+
+Model validation: What is a fundamental step in model validation in Data Science?
+
+a)  Train the model
+b)  Collect data
+c)  Verify the accuracy of the model with new data
+d)  Save the model in a database
+
+**Answer:** c) Verify the accuracy of the model with new data
+
+## Task 1.4
+
+Model performance: Which term describes the ability of a model to perform well on unseen data?
+
+a)  Overfitting
+b)  Generalization
+c)  Data cleaning
+d)  Underfitting
+
+**Answer:** b) Generalization
+
+## Task 1.5
+
+**What does 'pruning' refer to in the context of decision trees?**
+
+a.  Increasing the number of features considered in the model to provide more complexity.
+
+b.  Aggregating the results of multiple decision trees into a single model for better accuracy.
+
+c.  Refining the model by removing branches that do not significantly contribute to predictive power
+
+Utilizing cross-validation techniques to determine significant branches.
+\
+**Answer:** c) Refining the model by removing branches that do not significantly contribute to predictive power
+
+## Task 1.6
+
+**What does dimensionality reduction refer to in data science?**
+
+a.  Expanding the dataset with additional features
+b.  removing large values from a dataset
+c.  Streamlining the analysis by focusing on a smaller number of relevant variables
+d.  Filtering out all categorical variables from the dataset.
+
+**Answer:** c) Streamlining the analysis by focusing on a smaller number of relevant variables
+
+## Task 1.7
+
+Which package in R is commonly used for creating advanced graphics?
+
+a.   ggplot2
+b.  dplyr
+c.  tidyr
+d.  shiny
+
+**Answer:** a) ggplot2
+
+## Task 1.8
+
+In R, what function is commonly used to transform data into a data frame?
+
+a.  matrix()
+b.  as.data.frame()
+c.  df()
+d.  table()
+
+Answer: B) as.data.frame()
 
 # Task 2: Code explanation - 20p
 
@@ -84,7 +177,7 @@ happiness_income_data <- rbind(happiness_income_data, data)
 
 Data Description:
 
-The dataset consists of 111 observations. You will work with a sample (task 1.1) and the full data set (task 1.2 and task 2).
+The dataset consists of 111 observations. You will work with a sample (task 2.1) and the full data set (task 2.2 and task 2).
 
 | name | valuetype | scale | explanation |
 |------------------|------------------|------------------|------------------|
@@ -96,7 +189,7 @@ The dataset consists of 111 observations. You will work with a sample (task 1.1)
 | gdp | numeric |  | GDP in trillions of \$ (Milliarden auf deutsch) |
 | country | character | \- | country name |
 
-## Task 1.1
+## Task 2.1
 
 a.  The following code snippet works with the data set `happiness_income_data`. You see a sample of this original data set below. Some transformations and selections etc. were made - trace those steps and execute them manually to fill in the sampled data table by hand. Your result represents happiness_data_clean and includes the same observations as the original sample (8p)
 
@@ -121,7 +214,7 @@ b.  Did you add singular values and/or rows and/or columns? If you did so, expla
 c.  Did you change the content or name of singular values and/or rows and/or columns? If you did so, explain why. (2p)
 d.  After applying the code: Are any values left that could potentially lead to problems? If so, how could we fix that problem (answer verbally, no code needed)? (2p)
 
-## Task 1.2 - 4p
+## Task 2.2 - 4p
 
 After the listed data transformation steps we apply a linear regression to our full data set (111 observations) and are left with this output:
 
