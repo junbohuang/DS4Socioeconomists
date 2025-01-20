@@ -1,0 +1,223 @@
+---
+title: "Exam draft (first exam) Ws 24/25"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# Task 1: MC Questions
+
+::: callout-note
+Please note that for the MC questions exactly **one** answer is correct
+:::
+
+# Task 2: Code explanation - 20p
+
+The task consists of two elements with 10p each.
+
+We will work with `happiness_income_data`. This dataset includes information about different countries and income, satisfaction of the inhabitants, the GDP, income inequality and other variables.
+
+```{r}
+#| echo: false
+
+library(readr)
+happiness_income_data <- read_csv("happyscore_income_data.csv")
+#View(happiness_income_data)
+happiness_income_data$country...11 <- NULL
+happiness_income_data$country <- happiness_income_data$country...1
+happiness_income_data$country...1 <- NULL
+```
+
+```{r}
+#| echo: false
+library(openxlsx)
+gdp_clean <- read.xlsx("GDP_clean_2023.xlsx")
+gdp_clean$GDP_2023 <- as.numeric(gdp_clean$GDP_2023)
+gdp_clean$gdp <- gdp_clean$GDP_2023/1000000000
+gdp_clean$country <- gdp_clean$Country.Name
+gdp_clean$Country.Name <- NULL
+gdp_clean$GDP_2023 <- NULL
+
+happiness_income_data <- merge(happiness_income_data, gdp_clean, by.x = "country", by.y="country", all.x = TRUE)
+
+happiness_income_data$GDP <- NULL
+
+happiness_income_data_orig <- happiness_income_data
+
+```
+
+```{r}
+#| echo: false
+data <- data.frame(
+  adjusted_satisfaction = c(37, NA, 60, 59, 65, NA, 43, 63, 37, 34),
+  avg_satisfaction = c(4.9, NA, 7.1, 7.2, 7.6, NA, 5.3, 7.2, 4.4, 4.6),
+  std_satisfaction = c(2.42, 3.19, 1.91, NA, 1.80, 5.0, 2.10, 1.72, 2.02, 2.57),
+  avg_income = c(2096.760, NA, 7101.120, 19457.040, 19917.000, NA, 
+                 1265.340, 17168.505, 870.840, 5354.820),
+  median_income = c(-999, NA, 5109.400, 16879.620, 15846.060, NA, 
+                    994.140, 15166.455, 630.240, 4523.565),
+  income_inequality = c(31.44556, NA, -20.56, 30.29625, 35.28500, NA, 
+                        32.66500, 113.5, 39.76000, 34.16250),
+  region = c('Central and Eastern Europe', 'Sub-Saharan Africa', 
+             'Latin America and Caribbean', 'Western Europe', 
+             'Australia and New Zealand', NA, 'Southern Asia', 
+             'Western Europe', 'Sub-Saharan Africa', 
+             'Central and Eastern Europe'),
+  happyScore = c(4.350, NA, 12.32, 7.200, 7.284, NA, 4.694, -6.937, 
+                 3.587, 4.218),
+  gdp = c(14.08, NA, 800, NA, -1.3, NA, 0.39753, 
+          261.4, 0.25812, NA),
+  country = c('Malawi', 'Zambia', 'Guatemala', 'Sierra Leone', 
+              'Panama', NA, 'Burundi', 'Kazakhstan', 
+              'Ghana', 'Laos')
+)
+
+
+happiness_income_data <- rbind(happiness_income_data, data)
+
+#install.packages("openxlsx")
+#library(openxlsx)
+#write.xlsx(happiness_income_data, 'export.xlsx')
+```
+
+Data Description:
+
+The dataset consists of 111 observations. You will work with a sample (task 1.1) and the full data set (task 1.2 and task 2).
+
+| name | valuetype | scale | explanation |
+|------------------|------------------|------------------|------------------|
+| adjusted_satisfaction | numeric | 0 to 100 | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction |
+| avg_income | numeric | 0\$ to thousands of \$ | average annual income in \$ |
+| median_income | numeric | 0\$ to thousands of \$ | median annual income in \$ |
+| income_inequality | numeric | 0 to 100 | income inequality, lower values indicate a lower inequality, higher values indicate a higher inequality |
+| happyScore | numeric | 0-10 | lower values indicate a lower overall happiness, higher values indicate a higher overall happiness |
+| gdp | numeric |  | GDP in trillions of \$ (Milliarden auf deutsch) |
+| country | character | \- | country name |
+
+## Task 1.1
+
+a.  The following code snippet works with the data set `happiness_income_data`. You see a sample of this original data set below. Some transformations and selections etc. were made - trace those steps and execute them manually to fill in the sampled data table by hand. Your result represents happiness_data_clean and includes the same observations as the original sample (8p)
+
+    ```{r}
+       # load("happiness_income_data.RData") #loading data
+    load("happiness_income_data.RData")
+
+    happiness_income_data$happyScore <- ifelse(happiness_income_data$happyScore > 10, NA, happiness_income_data$happyScore)
+
+    happiness_income_data$median_income <- ifelse(happiness_income_data$median_income < 0, NA, happiness_income_data$median_income)
+
+    happiness_income_data$income_inequality <- ifelse(happiness_income_data$income_inequality < 0 | happiness_income_data$income_inequality > 100, NA, happiness_income_data$income_inequality)
+
+    happiness_income_data_clean <- na.omit(happiness_income_data)
+
+    ```
+
+![](images/clipboard-2896833125.png)
+
+a.  Did you remove singular values and/or rows and/or columns? If you did so, explain why. (2p)
+b.  Did you add singular values and/or rows and/or columns? If you did so, explain why. (2p)
+c.  Did you change the content or name of singular values and/or rows and/or columns? If you did so, explain why. (2p)
+d.  After applying the code: Are any values left that could potentially lead to problems? If so, how could we fix that problem (answer verbally, no code needed)? (2p)
+
+## Task 1.2 - 4p
+
+After the listed data transformation steps we apply a linear regression to our full data set (111 observations) and are left with this output:
+
+```{r}
+#| echo: false
+happiness_income_data_clean <- happiness_income_data_orig 
+happiness_income_data_clean <- na.omit(happiness_income_data_clean)
+#make sure the students have the dataset with real values, not the missings/errors that were intentionally included in task 1.1
+summary(happiness_income_data_clean)
+```
+
+```{r}
+options(scipen=999)
+model1 <- lm(adjusted_satisfaction ~ avg_income, happiness_income_data_clean)
+summary(model1)
+```
+
+a.  Which of these graphs best illustrates the results of the linear regression (model1)? (1p)
+
+b.  Why are the other graphics not suitable? (1p each)
+
+    Graph 1
+
+    ```{r}
+    #| echo: false
+
+    library(ggplot2)
+      ggplot(data=happiness_income_data_clean, mapping = aes(x=avg_income, y=adjusted_satisfaction)) +
+        geom_point() +
+        geom_smooth(method = lm, formula = y ~ x) +
+        scale_x_continuous(breaks = seq(0, 25000, 1000)) +
+        scale_y_continuous(breaks = seq(0, 80, 10)) +
+      theme(axis.text.x = element_text(angle = 45), axis.text.y = element_text(angle = 45)) +
+        xlab("average annual income in $") +
+        ylab("adjusted satisfaction")
+    ```
+
+Graph 2
+
+```{r}
+#| echo: false
+library(ggplot2)
+ggplot(data=happiness_income_data_clean, mapping = aes(x = avg_income, y=adjusted_satisfaction)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2)) +
+ xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+
+```
+
+Graph 3
+
+```{r}
+#| echo: false
+library(ggplot2)
+ggplot(data=happiness_income_data_clean, mapping = aes(x = avg_income, y=adjusted_satisfaction)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 7)) +
+ xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+
+```
+
+Graph 4
+
+```{r}
+#| echo: false
+ggplot(data=happiness_income_data_clean, mapping = aes(x=avg_income, y=adjusted_satisfaction)) +
+    geom_point() +
+    geom_smooth(method = lm) +
+    theme(axis.ticks = element_blank(),     
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank()) +
+ xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+```
+
+# Task 3: Regression - 25p
+
+1.  What kind of question do the different models answer? Think of a research question for model1 and of a research question for model2. (2p each) –\> 4p total
+2.  Explain each model in your own words –\> 2,5p each –\> 5p total
+3.  Write down the mathematical formula for each of the models -\> 2p each –\> 4p total
+4.  Interpret the coefficients for the models (value, meaning, significance)–\> 2p per coefficient –\> 4 coefficients per model (0.5 per element) –\> 4\*0,5\*3 -\> 6p per model -\> 12p total
+
+```{r}
+options(scipen = 999)
+linear_model <- lm(happyScore~income_inequality+gdp+median_income,data=happiness_income_data_clean)
+summary(linear_model)
+```
+
+```{r}
+#logistic regression for "happy country" or not
+happiness_income_data_clean$high_happyScore <- ifelse(happiness_income_data_clean$happyScore>=7, 1, 0)
+
+logistic_model <- glm(high_happyScore ~ income_inequality+gdp+median_income, family = binomial, data=happiness_income_data_clean)
+summary(logistic_model)
+```
+
+# 
