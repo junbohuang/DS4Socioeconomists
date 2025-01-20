@@ -1,0 +1,372 @@
+---
+title: "out-of-sample predictions, cross-validation and evaluation metrics - Session 10"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# Recap
+
+## Multivariate regression
+
+-   Multiple linear regression: $Y=\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p+\epsilon$
+    -   so far, `model -> lm(Y ~ X_1 + X_2 + ... + X_p, data=data)`
+    -   now, `model -> glm(Y ~ X_1 + X_2 + ... + X_p, data=data)`
+-   Polynomial regression: $Y_i=\beta_0+\beta_1X_i+\beta_2X_i^2+...+\beta_pX_i^p+\epsilon$
+    -   `model -> glm(Y_i ~ poly(X_i, p), data=data)`
+
+## Evaluation of models
+
+-   Regression:
+    -   Such as linear regression
+    -   Metrics: $R^2$, MSE, RMSE
+-   Classification
+    -   Such as logistic regression
+    -   Metrics: confusion matrix
+        -   False positives: Type 1 error (Males detected as being pregnant.)
+        -   False negatives: Type 2 error (Pregnant females detected as not being pregnant.)
+        -   Precision $=\frac{TP}{FP+TP}$
+        -   Recall $=\frac{TP}{TP+FN}$
+        -   F1 score $=\frac{2\cdot\text{precision}\cdot\text{recall}}{\text{precision}+\text{recall}} =\frac{2TP}{2TP+FP+FN}$ ![source: https://upload.wikimedia.org/wikipedia/commons/2/26/Precisionrecall.svg](https://upload.wikimedia.org/wikipedia/commons/2/26/Precisionrecall.svg)
+
+## Bias-variance trade-off
+
+-   Generalizability: does the model fitted on training set generalize well on test set?
+-   Validation set
+
+::: callout-important
+-   Randomly dividing the available set of observations into two parts, a training set and a validation set.
+-   Fits the model on the training set, and the fitted model is used to make predictions on the validation set.
+:::
+
+-   Three types splits into validation set
+    -   split a small subset of data into validation set
+        -   `train -> sample(n_row, round(n_row *0.7, digits=0))`
+        -   `model -> glm(Y ~ X_1 + X_2 + ... + X_p, data=data, subset = train)`
+    -   K-fold cross-validation
+        -   We use `cv.glm()` function from `library(boot)`
+    -   Leave-one-out cross-validation (in general, a bad idea - too inefficient )
+
+## Regularization
+
+-   Reduce overfitting of models to training data
+    -   Residual Sum of Squares (RSS)
+    -   $RSS = \sum_{i=1}^{n}(y_i - f(x_i))^2$
+-   Lasso regression (L1 penalty)
+    -   $RSS+\lambda\sum_{j=1}^{p}|\beta_j|$
+-   Ridge regression (L2 penalty)
+    -   $RSS+\lambda\sum_{j=1}^{p}|\beta_j|^2$
+-   We use `cv.glmnet()` function in `library(glmnet)` for Lasso and Ridge regression
+-   Hyper-parameters tuning with cross-validation
+    -   Finding the optimal $\lambda$
+
+## Application in R
+
+```{r}
+library(sozoekds)
+library(dplyr) #used for the piping command ( %>% )
+library(boot) #library needed for cross-validation
+set.seed(111) # to make the example reproducible, we set a fixed number
+
+```
+
+1.  Creating training data set
+
+```{r}
+airbnbsmall <- airbnbsmall
+
+#find out number of obervations, 70% in training dataset, 30% in test dataset
+n_row <- as.numeric(nrow(airbnbsmall))
+split_70 <- round(n_row *0.7, digits=0)
+
+train <- sample(n_row, split_70)
+```
+
+2.  Setting up different models: We want to explain the price of an Airbnb listing by its number of bedrooms.
+
+```{r}
+attach(airbnbsmall)
+
+#1 linear regression
+model_1 <- glm(price ~ n_beds, data = airbnbsmall, subset = train)
+rmse_1 <- mean((price - predict(model_1, airbnbsmall))[-train]^2)
+rmse_1 <- round(rmse_1, digits = 2)
+print (paste("The RMSE for the linear regression is", rmse_1))
+
+#2 
+model_2 <- glm(price ~ poly(n_beds, 2), data = airbnbsmall, subset = train)
+rmse_2 <- mean((price - predict(model_2, airbnbsmall))[-train]^2) 
+rmse_2 <- round(rmse_2, digits = 2)
+print (paste("The RMSE for the quadratic regression is", rmse_2))
+
+#3 
+model_3 <- glm(price ~ poly(n_beds, 3), data = airbnbsmall, subset = train)
+rmse_3 <- mean((price - predict(model_3, airbnbsmall))[-train]^2)
+rmse_3 <- round(rmse_3, digits = 2)
+print (paste("The RMSE for the cubic regression is", rmse_3))
+```
+
+**How can we interpret the results? Which of the models has the lowest test error rate?**
+
+3.  Cross validation for polynomial regression models from the degrees 1 to 10 using 10 folds
+
+    *This involves dividing the data into 10 parts, training the model on 9 parts and validating on 1 part, and repeating this process for all parts.*
+
+```{r}
+cross_validation_fits_placeholder <- numeric(10) # Initialize placeholder for results
+
+# Perform cross-validation
+for (i in 1:10) {
+
+  # Fit the model using glm
+  model <- glm(price ~ poly(n_beds, i), data = airbnbsmall)
+  
+  # Perform cross-validation
+  cv_result <- cv.glm(airbnbsmall, model, K = 10)
+  
+  # Store the cross-validation error (delta[1])
+  cross_validation_fits_placeholder[i] <- cv_result$delta[1]
+}
+
+# Display results
+print(cross_validation_fits_placeholder)
+```
+
+Verbal code description: In a loop, we fit a GLM for each degree. The code computes the cross-validation error using 10 folds, and stores the resulting error in the vector. Finally, it outputs the average errors for each polynomial degree.
+
+**How can we interpret the results? Which of the models has the lowest test error rate?**
+
+## Tasks for today
+
+## Task 1
+
+Imagine you are working on a regression problem and have a dataset containing 500 samples. You decide to perform K-Fold Cross-Validation with K=5.
+
+1.  Calculate the number of samples that will be included in each fold and explain what happens in each step during the cross-validation process.
+
+2.  In each of the folds, you obtained the following Root Mean Squared Errors (RMSE):
+
+-   Fold 1: RMSE = 2.5
+-   Fold 2: RMSE = 3.0
+-   Fold 3: RMSE = 2.8
+-   Fold 4: RMSE = 2.9
+-   Fold 5: RMSE = 3.1
+
+Calculate the average RMSE across all folds.
+
+3.  Discuss the significance of RMSE and what it implies if the average RMSE is high. What impact could this have on your model?
+
+## Task 2
+
+Use the airbnbsmall-dataset. Create an 80/20 split based on the code that you have seen in today's example.
+
+We want to explain the price of a listing by the n_review_scores_rating
+
+1.  Set up 5 different models using polynomial regression from degree 1 to 5. (hint: like in step 2 in today's example) and test them on an 80/20 split. Which of the models has the best out-of-sample performance / the lowest test set RMSE?
+
+2.  Perform 5 fold cross validation on the dataset (using polynomial regression from degree 1 to 5) (hint: like in step 3 in today's example). Which of the models has the best out-of-sample performance / the lowest test set RMSE?
+
+## Bonus task: Run Ridge and Lasso regression to find the optimal $\lambda$ with the glmnet package.
+
+-   The following code snippet prepares the airbnbsmall dataset to include only continuous variables (column name starting with "n\_") and convert X and Y into matrix form. Refers to online documentation or the lecture slides to run Ridge and Lasso regression. Try to interpret it.
+
+gmlnet() needs the variables as vector/matrix input. The following code snippets already take care of it for you.
+
+```{r}
+#install.packages("glmnet")
+library(glmnet) 
+# Drop any rows the contain missing values
+airbnbsmall <- na.omit(airbnbsmall)
+
+
+# select columns with continuous variables starting with "n_"
+n_cols <- grep("^n_", names(airbnbsmall), value = TRUE)
+print(paste("Continuous variables in airbnbsmall:", n_cols))
+
+# gmlnet() needs the variables as vector/matrix input
+# X is a matrix that contains all variables from the regression of all continuous variables
+X = model.matrix(price ~ ., airbnbsmall[, c("price", n_cols)])[, -1]
+# y contains the endogenous variable
+y = airbnbsmall$price
+
+```
+
+# Solutions
+
+## **Task 1**
+
+**Solution 1: Number of Samples per Fold**
+
+If the dataset contains 500 samples and you are performing K-Fold Cross-Validation with K=5, you will split the data into 5 equal-sized folds.
+
+**Calculation:** - Number of samples per fold = Total number of samples / K - Number of samples per fold = 500 / 5 = 100
+
+Each fold will contain 100 samples.
+
+**Explanation:** In each step of the cross-validation, one fold is used as the test set while the remaining 4 folds serve as the training set. This process is repeated for all 5 folds, ensuring that every sample in the dataset is used exactly once in the test set.
+
+**Solution 2: Calculate Average RMSE**
+
+The RMSE values for the individual folds are: - Fold 1: RMSE = 2.5 - Fold 2: RMSE = 3.0 - Fold 3: RMSE = 2.8 - Fold 4: RMSE = 2.9 - Fold 5: RMSE = 3.1
+
+**Calculation:** To calculate the average RMSE, add the RMSE values and divide by the number of folds.
+
+Average RMSE = (2.5 + 3.0 + 2.8 + 2.9 + 3.1) / 5 = (14.3) / 5 = 2.86
+
+Thus, the average RMSE across all folds is 2.86.
+
+**Solution 3: Significance of RMSE**
+
+The RMSE is a measure of the average deviation of predictions from the actual values and indicates how well the model captures the underlying patterns in the data. A low RMSE indicates that the model's predictions are close to the actual values. If the average RMSE is high, it could imply several things:
+
+-   The model is struggling to capture the underlying patterns in the data.
+-   It may indicate the selection of an inadequate model or insufficient features.
+-   A high RMSE could also suggest that the model might be overfitting or that there are issues with the quality of the data (e.g., outliers or non-representative data).
+
+In this case, it may be necessary to revise the model, experiment with different modelling approaches, or take additional data preprocessing steps to improve model performance.
+
+## Task 2
+
+1.  Create the split
+
+```{r}
+library(sozoekds)
+set.seed(111) # to make the example reproducible, we set a fixed number
+
+airbnbsmall <- airbnbsmall
+
+#find out number of obervations, 80% in training dataset, 20% in test dataset
+n_row <- as.numeric(nrow(airbnbsmall))
+split_80 <- round(n_row *0.8, digits=0)
+
+train <- sample(n_row, split_80)
+```
+
+2.  Calculate RMSE for GLMs with degree 1 to 5 based on the training/test split of 80/20
+
+```{r}
+library(dplyr)
+attach(airbnbsmall)
+
+#1 linear regression
+model_1 <- lm(price ~ n_review_scores_rating, data = airbnbsmall, subset = train)
+rmse_1 <- mean((price - predict(model_1, airbnbsmall))[-train]^2) 
+rmse_1 <- round(rmse_1, digits = 2)
+print (paste("The RMSE for the linear regression is", rmse_1))
+
+#2 
+model_2 <- lm(price ~ poly(n_review_scores_rating, 2), data = airbnbsmall, subset = train)
+rmse_2 <- mean((price - predict(model_2, airbnbsmall))[-train]^2) 
+rmse_2 <- round(rmse_2, digits = 2)
+print (paste("The RMSE for the quadratic regression is", rmse_2))
+
+#3 
+model_3 <- lm(price ~ poly(n_review_scores_rating, 3), data = airbnbsmall, subset = train)
+rmse_3 <- mean((price - predict(model_3, airbnbsmall))[-train]^2) 
+rmse_3 <- round(rmse_3, digits = 2)
+print (paste("The RMSE for the cubic regression is", rmse_3))
+
+#4 
+model_4 <- lm(price ~ poly(n_review_scores_rating, 4), data = airbnbsmall, subset = train)
+rmse_4 <- mean((price - predict(model_4, airbnbsmall))[-train]^2)
+rmse_4 <- round(rmse_4, digits = 2)
+print (paste("The RMSE for the quartic regression is", rmse_4))
+
+#5 
+model_5 <- lm(price ~ poly(n_review_scores_rating, 5), data = airbnbsmall, subset = train)
+rmse_5 <- mean((price - predict(model_5, airbnbsmall))[-train]^2)
+rmse_5 <- round(rmse_5, digits = 2)
+print (paste("The RMSE for the quintic regression is", rmse_5))
+```
+
+Interpretation: A lower RMSE represents a better predictive performance of the model.
+
+The quadratic regression has the lowest RMSE of all the models, therefore the highest predictive power. After the second degree the RMSE rises until the fifth degree that is lower than the fourth. This indicates that the degree 5 polynomial regression has a higher predictive power than the one for degree 4 which could be due to over fitting of the model. And still the value is higher than for degree 2.
+
+```{r}
+library(boot) #library needed for cross-validation
+set.seed(111) # to make the example reproducible, we set a fixed number
+
+cross_validation_fits_placeholder <- numeric(5) # Initialize placeholder for results
+for (i in 1:5) {
+  model <- glm(price ~ poly(n_review_scores_rating, i), data = airbnbsmall)
+  cross_validation_fits_placeholder[i] <- cv.glm(airbnbsmall, model, K = 5)$delta[1]
+}
+cross_validation_fits_placeholder
+```
+
+Interpretation: The 5 values represent the average RMSE over all 5 folds for each polynomial degree. The average RMSE for the second degree is lower than for all other degrees. Therefore a quadratic regression has the highest predictive power.
+
+## Bonus task: Finding the optimal $\lambda$ for Ridge/Lasso regression
+
+-   The following code snippet prepares the airbnbsmall dataset to include only continuous variables (column name starting with "n\_") and convert X and Y into matrix form.
+
+```{r}
+#install.packages("glmnet")
+library(glmnet) 
+# Drop any rows the contain missing values
+airbnbsmall <- na.omit(airbnbsmall)
+
+
+# select columns with continuous variables starting with "n_"
+n_cols <- grep("^n_", names(airbnbsmall), value = TRUE)
+print(paste("Continuous variables in airbnbsmall:", n_cols))
+
+# gmlnet() needs the variables as vector/matrix input
+# X is a matrix that contains all variables from the regression of all continuous variables
+X = model.matrix(price ~ ., airbnbsmall[, c("price", n_cols)])[, -1]
+# y contains the endogenous variable
+y = airbnbsmall$price
+
+```
+
+#### Ridge Regression
+
+-   `cv.glmnet()` from the glmnet package takes care of doing k-fold cross-validation for you.
+-   Ridge regression: alpha=0
+
+```{r}
+fit_ridge_cv = cv.glmnet(X, y, nfolds=10, alpha = 0)
+plot(fit_ridge_cv)
+```
+
+```{r}
+bestlambda <- fit_ridge_cv$lambda.min
+cat("Best lambda value for Ridge regression is:", bestlambda, "\n")
+coefficients <- coef(fit_ridge_cv, s = "lambda.min")
+# Convert coefficients to a named numeric vector
+coefficients_named <- round(as.numeric(coefficients), 2)
+names(coefficients_named) <- rownames(coefficients)
+
+# Print the named coefficients
+cat("X variables and their coefficients: \n")
+print(coefficients_named)
+cat("Cross-validation error at lambda.min:", fit_ridge_cv$cvm[fit_ridge_cv$lambda == fit_ridge_cv$lambda.min], "\n")
+```
+
+We can see that Ridge regression does not remove variables whose weights are small. Instead, we can use Lasso regression for dimensionality reduction of input space.
+
+#### Lasso regression
+
+-   Lasso regression: alpha=1
+
+```{r}
+fit_lasso_cv = cv.glmnet(X, y, nfolds=10, alpha = 1)
+plot(fit_lasso_cv)
+```
+
+```{r}
+bestlambda <- fit_lasso_cv$lambda.min
+cat("Best lambda value for Lasso regression is:", bestlambda, "\n")
+coefficients <- coef(fit_lasso_cv, s = "lambda.min")
+# Convert coefficients to a named numeric vector
+coefficients_named <- round(as.numeric(coefficients), 2)
+names(coefficients_named) <- rownames(coefficients)
+
+# Print the named coefficients
+cat("X variables and their coefficients: \n")
+print(coefficients_named)
+cat("Cross-validation error at lambda.min:", fit_lasso_cv$cvm[fit_lasso_cv$lambda == fit_lasso_cv$lambda.min], "\n")
+```
