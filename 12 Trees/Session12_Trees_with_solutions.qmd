@@ -1,0 +1,242 @@
+---
+title: "Session 12 - Tree based methods"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# Agenda for today
+
+1.  Recap
+
+2.  Interpretation and Explanation Tasks - there will be no programming example today!
+
+    ------------------------------------------------------------------------
+
+# Recap
+
+## Introduction and motivation
+
+Today we will look at trees. Based on variable characteristics the data is split into different regions. Within a certain region the observations have similar characteristics and we can use that for predictions.
+
+They can be used in the form of **regression trees** for predicting an quantitative response and in the form of **decision trees** for qualitative responses.
+
+## Decision Trees
+
+Decision trees have quite a lot in common with personality tests and quizzes from magazines:
+
+-   What Type Of Bagel Matches Your Personality?
+
+    1.  Do you like sweet foods?: yes/no
+    2.  Do you like seeds on your bagel? yes/no
+    3.  ...
+
+-   What Dog Breed Matches Your Personality?
+
+    1.  Are you an active person? yes/no
+
+    2.  Are you playful and like to goof around? yes/no
+
+    3.  ....
+
+And they also have quite a lot in common with the questions that a detective asks when solving a crime and interrogating a witness:
+
+1.  Was the person committing the crime tall? yes/no
+2.  Did they leave by car? yes/no
+3.  ...
+
+And they mimic human decision processes:
+
+![source: https://www.nomidl.com/machine-learning/decision-tree-for-machine-learning/](https://www.nomidl.com/wp-content/uploads/2022/09/image-78.png)
+
+::: callout-note
+All of the examples above have qualitative responses - they are decision trees, not regression trees!
+:::
+
+## Terminology:
+
+-   branches: connect the nodes
+
+-   internal node: decision nodes - the questions or variables where the data is split into different regions
+
+-   terminal nodes/leaves: ending point
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ## Regression tree                                                                                                                                                                         | ## Classification tree                                                                                                                                                                          |
++============================================================================================================================================================================================+=================================================================================================================================================================================================+
+| Recall that for a regression tree, the predicted response ($\hat{Y}$) for an observation is given by the mean response of the training observations that belong to the same terminal node. | For a classification tree, we predict that each observation belongs to the most commonly occurring class of training observations in the region to which it belongs.                            |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ![](images/regression_tree.PNG)                                                                                                                                                            | ![](https://lh4.googleusercontent.com/2FebdJTJap42Jul_0UqY-7Idq06DflemWVn6pOu2aixIpDxBgyj-fTMiL56z4bJ6CNfz4Is9c2OLZ7HyByOa_zxtEgi9CeCOhaVwiMtlEt1dFYljT8ZECddpefCJ95Agl3-J0mNTq0XsrHG5lMDxTgc)  |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| The process of building a regression tree                                                                                                                                                  | The process of building a decision tree                                                                                                                                                         |
+|                                                                                                                                                                                            |                                                                                                                                                                                                 |
+| -   Divide the predictor space – that is, the set of possible values for X1,X2,...,Xp – into J distinct and non-overlapping regions, R1,R2,...,RJ                                          | -   Divide the predictor space – that is, the set of possible values for X1,X2,...,Xp – into J distinct and non-overlapping regions, R1,R2,...,RJ                                               |
+|                                                                                                                                                                                            |                                                                                                                                                                                                 |
+| -   For every observation that falls into the region Rj, we make the same prediction, which is simply the **mean of the response values** for the training observations in Rj              | -   For the regions we only allow for rectangles or `boxes`                                                                                                                                     |
+|                                                                                                                                                                                            |                                                                                                                                                                                                 |
+| -   For the regions we only allow for rectangles or `boxes`                                                                                                                                | -   For a classification tree, we predict that each observation belongs to the **most commonly occurring class** of training observations in the region to which it belongs.                    |
+|                                                                                                                                                                                            |                                                                                                                                                                                                 |
+| -   The goal is to find boxes that minimize a popular loss function (RSS)                                                                                                                  | -   In classification settings, we focus on node purity (`node purity`— a small value indicates that a node contains `predominantly` observations from a single class) for splitting decisions! |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Common problems
+
+-   Asking too many questions/having too much internal nodes leads to really specific results - and complex trees.
+
+-   This leads to overfitting on the training data
+
+-   This is because the resulting tree `might be too complex`. (Remember: Bias-variance-trade-off!)
+
+-   How to avoid overfitting? `Prune` the tree! Be a good gardener. Take care of your tree!
+
+## Pruning
+
+-   We minimize RSS but add a cost factor that increases with the terminal nodes of trees.
+
+-   This leads us to the best possible tree (or questions for a quiz or an inspector as in the examples)
+
+-   Behind the scenes `rpart` is automatically applying a range of cost complexity (α values) to prune the tree. To compare the error for each α value, `rpart` performs a 10-fold cross validation so that the error associated with a given α value is computed on the hold-out validation data
+
+    ![from: ISLR - James et al. 2023](images/pruning_example.png)\
+
+# Tasks
+
+## Interpretation task
+
+1.  What kind of trees are described in example 1 and example 2?
+
+2.  How many leaves does each tree have? Describe the path that led to each leaf and the outcome for both examples.
+
+    ------------------------------------------------------------------------
+
+**Example 1:** A small retailer wants to decide whether to introduce a new product based on previous sales figures and customer feedback.
+
++---------------+-----------------------------+-------------------+------------------------------+
+| Node          | Condition                   | Yes/No            | Decision                     |
++===============+=============================+===================+==============================+
+| 1             | Sales \< €1000              | Yes               | Go to Node 2                 |
++---------------+-----------------------------+-------------------+------------------------------+
+|               |                             | No                | Introduce New Product        |
++---------------+-----------------------------+-------------------+------------------------------+
+| 2             | Customer Feedback Positive? | Yes               | Introduce New Product        |
++---------------+-----------------------------+-------------------+------------------------------+
+|               |                             | No                | Do Not Introduce New Product |
++---------------+-----------------------------+-------------------+------------------------------+
+
+-   **Interpretation:**
+
+-   If sales are over €1000, a decision is made to introduce the new product.
+
+-   If sales are below €1000, customer feedback is evaluated.
+
+-   Positive feedback also leads to introducing the product, while negative feedback results in not introducing it.
+
+------------------------------------------------------------------------
+
+**Example 2:** A company wants to forecast monthly marketing expenditures based on various factors.
+
++-------------+-----------------------------+-------------+----------------------------------------------+
+| Node        | Condition                   | Yes/No      | Result (Monthly Marketing Expenditure in €)  |
++=============+=============================+=============+==============================================+
+| 1           | Number of Customers \> 1000 | Yes         | Go to Node 2                                 |
++-------------+-----------------------------+-------------+----------------------------------------------+
+|             |                             | No          | 1000€                                        |
++-------------+-----------------------------+-------------+----------------------------------------------+
+| 2           | Marketing team size \>5     | Yes         | 2500€                                        |
++-------------+-----------------------------+-------------+----------------------------------------------+
+|             |                             | No          | 1500€                                        |
++-------------+-----------------------------+-------------+----------------------------------------------+
+
+**Interpretation:**
+
+-   If the company has more than 1000 customers, it further examines whether a marketing campaign is active.
+-   If the marking team has more than 5 workers (Yes), a budget of €2500 is proposed.
+-   If the marking team has less than 5 or exactly 5 workers(No), it is recommended to spend €1500 on marketing.
+-   For fewer than 1000 customers, the marketing expenditure is set at €1000.
+
+## Creating a tree
+
+You have got this dataset and should create a tree (based on the steps listed below):
+
++--------------------------+---------------+-------------------------------------+
+| Years of Experience (x1) | Income (x2)   | Output (y - Job Satisfaction Score) |
++==========================+===============+=====================================+
+| 1                        | 30000         | 3                                   |
++--------------------------+---------------+-------------------------------------+
+| 2                        | 40000         | 4                                   |
++--------------------------+---------------+-------------------------------------+
+| 3                        | 50000         | 5                                   |
++--------------------------+---------------+-------------------------------------+
+| 4                        | 60000         | 7                                   |
++--------------------------+---------------+-------------------------------------+
+| 5                        | 70000         | 8                                   |
++--------------------------+---------------+-------------------------------------+
+| 6                        | 80000         | 9                                   |
++--------------------------+---------------+-------------------------------------+
+| 7                        | 90000         | 6                                   |
++--------------------------+---------------+-------------------------------------+
+| 8                        | 95000         | 7                                   |
++--------------------------+---------------+-------------------------------------+
+| 9                        | 100000        | 8                                   |
++--------------------------+---------------+-------------------------------------+
+| 10                       | 120000        | 10                                  |
++--------------------------+---------------+-------------------------------------+
+
+Where to split the data:
+
+::: callout-warning
+Typically we have an algorithm do that task for us:
+
+-   for classifications: The algorithm calculates the improvement in purity of the data that would be created by each split point of each variable. **The split with the greatest improvement is chosen to partition the data and create child nodes**.
+
+-   for regressions: The algorithm decides where to split the data by calculating the reduction in variance (or the increase in homogeneity) of the target variable that would result from each potential split point of each predictor variable. **The split that leads to the greatest reduction in variance is selected to partition the data and create child nodes.**
+:::
+
+A rule of thumb for manually creating a tree is to split based on the mean or median values. For instance, by calculating the median of \`Years of Experience\`, we could consider a split such as \`Years of Experience \<= a\`. This divides the dataset into two groups: those with less than or equal to a years and those with more than a years.
+
+::: callout-warning
+**Please only use this approach when working by hand since it oversimplifies the process and therefore lacks power**
+:::
+
+**Procedure:**
+
+1.  **Select Splits for Internal Nodes**: You should manually draw a regression tree. You can decide on splits based on the values of \`Years of Experience (x1)\` and \`Income (x2)\`.
+
+2.  **Draw the Tree**: Based on the selected splits, you can create a tree structure
+
+    1.  Start with the root node and evaluate the condition for the first split (\`Years of Experience\`).
+
+    2.  Depending on whether the condition is met, branches will lead to two child nodes.
+
+    3.  At each child node, youshould evaluate the condition for the second split (\`Income\`).
+
+3.  **Calculate Average Output for Leaf Nodes**: For each leaf node of the tree, you should calculate the average job satisfaction score for the observations in that leaf.
+
+Solution
+
++------------+---------------------------+------------+------------------------+----------------+
+| Node       | Condition                 | Yes/No     | Next Step              | Average Output |
++============+===========================+============+========================+================+
+| Root Node  | Years of Experience \<= 5 | Yes        | Go to Node 1           |                |
++------------+---------------------------+------------+------------------------+----------------+
+|            |                           | No         | Leaf (Average y = 9.5) | 9.5            |
++------------+---------------------------+------------+------------------------+----------------+
+| Node 1     | Income \<= 75000          | Yes        | Leaf (Avg y = 5)       | 5              |
++------------+---------------------------+------------+------------------------+----------------+
+|            |                           | No         | Leaf (Avg y = 8)       | 8              |
++------------+---------------------------+------------+------------------------+----------------+
+
+Explanation of the Table:
+
+-   The Root Node checks if Years of Experience is less than or equal to 5.
+
+    -   If yes, it goes to Node 1.
+    -   If the condition at the root node is no, it directly leads to a leaf node with an average job satisfaction score of 9.5.
+
+-   Node 1 checks if Income is less than or equal to 75,000.
+
+    -   If yes, it results in a leaf node with an average job satisfaction score of 5.
+
+    -   If no, it results in another leaf node with an average job satisfaction score of 8.
