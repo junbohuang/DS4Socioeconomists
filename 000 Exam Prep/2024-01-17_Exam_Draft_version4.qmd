@@ -19,45 +19,53 @@ Please note, that multiple (max. 2) or single answers are possible.
 
 Working with R: Given the following matrix in R: `matrix_data <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)`. Which R code returns the number of columns in this matrix?
 
-a)  `ncol(matrix_data)`
-b)  `nrow(matrix_data)`
-c)  `length(matrix_data)`
-d)  `dim(matrix_data)[2]`
+a.  `ncol(matrix_data)`
+b.  `nrow(matrix_data)`
+c.  `length(matrix_data)`
+d.  `dim(matrix_data)[2]`
 
-**Answer:** a) `ncol(matrix_data)`
+**Answer:**
+
+a\. `ncol(matrix_data)`
 
 ## Task 1.2
 
 Algorithms: What is the main purpose of an algorithm?
 
-a)  Database management
-b)  Automatic generation of graphics
-c)  Solving a problem through a sequence of steps
-d)  Implementation of hardware components
+a.  Database management
+b.  Automatic generation of graphics
+c.  Solving a problem through a sequence of steps
+d.  Implementation of hardware components
 
-**Answer:** c) Solving a problem through a sequence of steps
+**Answer:**
+
+c\. Solving a problem through a sequence of steps
 
 ## Task 1.3
 
 Model validation: What is a fundamental step in model validation in Data Science?
 
-a)  Train the model
-b)  Collect data
-c)  Verify the accuracy of the model with new data
-d)  Save the model in a database
+a.  Train the model
+b.  Collect data
+c.  Verify the accuracy of the model with new data
+d.  Save the model in a database
 
-**Answer:** c) Verify the accuracy of the model with new data
+**Answer:**
+
+c\. Verify the accuracy of the model with new data (Junbo: i will rather say model performance instead of accuracy)
 
 ## Task 1.4
 
 Model performance: Which term describes the ability of a model to perform well on unseen data?
 
-a)  Overfitting
-b)  Generalization
-c)  Data cleaning
-d)  Underfitting
+a.  Overfitting
+b.  Generalization
+c.  Data cleaning
+d.  Underfitting
 
-**Answer:** b) Generalization
+**Answer:**
+
+b\. Generalization
 
 ## Task 1.5
 
@@ -69,9 +77,11 @@ b.  Aggregating the results of multiple decision trees into a single model for b
 
 c.  Refining the model by removing branches that do not significantly contribute to predictive power
 
-Utilizing cross-validation techniques to determine significant branches.
-\
-**Answer:** c) Refining the model by removing branches that do not significantly contribute to predictive power
+d.  Utilizing cross-validation techniques to determine significant branches.
+
+**Answer:**
+
+c\. Refining the model by removing branches that do not significantly contribute to predictive power
 
 ## Task 1.6
 
@@ -82,18 +92,22 @@ b.  removing large values from a dataset
 c.  Streamlining the analysis by focusing on a smaller number of relevant variables
 d.  Filtering out all categorical variables from the dataset.
 
-**Answer:** c) Streamlining the analysis by focusing on a smaller number of relevant variables
+**Answer:**
+
+c\. Streamlining the analysis by focusing on a smaller number of relevant variables
 
 ## Task 1.7
 
 Which package in R is commonly used for creating advanced graphics?
 
-a.   ggplot2
+a.  ggplot2
 b.  dplyr
 c.  tidyr
 d.  shiny
 
-**Answer:** a) ggplot2
+**Answer:**
+
+a\. ggplot2
 
 ## Task 1.8
 
@@ -104,7 +118,173 @@ b.  as.data.frame()
 c.  df()
 d.  table()
 
-Answer: B) as.data.frame()
+**Answer**:
+
+b\. as.data.frame()
+
+## Task 1.9 +
+
+What is the primary purpose of a validation set in data science?
+
+a\. To train the model on labeled data. b. To evaluate the model's performance during training. c. To test the model's final performance on unseen data. d. To preprocess and clean the dataset.
+
+**Answer:**
+
+b\. To evaluate the model's performance during training.
+
+## Task 1.10 +
+
+What is the main objective of regularization as seen in ridge/lasso regression?
+
+a.  To improve training speed by reducing the dataset size.
+b.  To handle missing values in the dataset effectively.
+c.  To prevent overfitting by penalizing large model coefficients.
+d.  To increase the complexity of the model for better accuracy.
+
+**Answer:**
+
+c\. To prevent overfitting by penalizing large model coefficients.
+
+## Task 1.11 ++
+
+In regularization techniques like Ridge and Lasso regression, what effect does increasing the regularization parameter (\$\lambda\$) have on the model?
+
+a.  It increases the complexity of the model by allowing larger coefficients.
+b.  It reduces the magnitude of coefficients, leading to simpler models and less overfitting.
+c.  It has no impact on the model's coefficients or complexity.
+d.  It increases the model's sensitivity to noise in the training data.
+
+**Answer:**
+
+b\. It reduces the magnitude of coefficients, leading to simpler models and less overfitting.
+
+## Task 1.12 +
+
+What type of problem is logistic regression primarily used to solve?
+
+a.  Regression problems where the target variable is continuous.
+b.  Classification problems where the target variable is categorical.
+c.  Clustering problems where the data is grouped into clusters.
+d.  Dimensionality reduction problems.
+
+**Answer**:
+
+b\. Classification problems where the target variable is categorical.
+
+## Task 1.13 +++
+
+Which of the following assumptions is not a requirement for linear regression to produce valid and unbiased results?
+
+a.  Linearity: The relationship between the predictors and the target variable is linear.
+b.  Homoscedasticity: The variance of the residuals is constant across all levels of the predictors.
+c.  Multicollinearity: Predictors should be highly correlated with each other to improve model stability.
+d.  Independence: The residuals are independent of each other.
+
+**Answer**:
+
+c\. Multicollinearity: Predictors should be highly correlated with each other to improve model stability.
+
+## Task 1.14 +
+
+Which of the following metrics is most commonly used to evaluate the goodness of fit in a linear regression model?
+
+a.  Accuracy
+b.  Mean Squared Error (MSE)
+c.  F1-score
+d.  Precision
+
+**Answer** : b. Mean Squared Error (MSE)
+
+## Task 1.15 +++
+
+When evaluating the performance of a linear regression model, which of the following statements about R-squared (R²) is incorrect?
+
+a.  R² measures the proportion of the variance in the dependent variable that is explained by the independent variables.
+b.  A higher R² value indicates a better fit of the model to the data.
+c.  R² can never be negative.
+d.  R² increases when adding more predictors to the model, even if those predictors do not improve the model.
+
+**Answer**:
+
+c\. R² can never be negative.
+
+## Task 1.16 ++
+
+In Ordinary Least Squares (OLS) linear regression, which of the following does Residual Sum of Squares (RSS) measure? The equation for RSS is:
+
+```{=tex}
+\begin{equation}
+RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\end{equation}
+```
+a.  The total variance explained by the model.
+b.  The difference between the predicted and actual values of the dependent variable.
+c.  The sum of squared errors between the observed and predicted values.
+d.  The amount of variance not explained by the regression model.
+
+**Answers**:
+
+c\. The sum of squared errors between the observed and predicted values.
+
+d\. The amount of variance not explained by the regression model.
+
+## Task 1.17 +++
+
+When comparing multiple linear regression models, which of the following statements are the most accurate regarding **R-squared (R²)** and **Mean Squared Error (MSE)**?
+
+a\. R² is always the best metric to use when comparing models, regardless of the context.\
+b. A higher R² always indicates a better model, even if it leads to overfitting.\
+c. MSE is a better metric for evaluating model performance on unseen data.\
+d. R² and MSE are used to directly compare models that have different numbers of predictors.
+
+**Answers:**\
+c. MSE is a better metric for evaluating model performance on unseen data.\
+d. R² and MSE are used to directly compare models that have different numbers of predictors.
+
+## Task 1.18 +
+
+In the context of data science, which of the following best describes the concept of **generalizability**?
+
+a\. The ability of a model to perfectly predict the target variable for the training data.\
+b. The ability of a model to identify patterns in a dataset that can be applied to other similar datasets.\
+c. The ability of a model to memorize specific examples from the training data.\
+d. The ability to visualize and interpret the training data in multiple ways.
+
+**Correct Answer:**\
+b. The ability of a model to identify patterns in a dataset that can be applied to other similar datasets.
+
+## Task 1.19 +
+
+Which of the following are symptoms of **overfitting** in a linear regression model?
+
+a\. The model performs well on training data but poorly on unseen test data.\
+b. The model has high bias and performs poorly on both training and test data.\
+c. The model performs well on both training and test data.\
+d. The model has high variance and captures noise in the training data.
+
+**Answers:**\
+a. The model performs well on training data but poorly on unseen test data.\
+d. The model has high variance and captures noise in the training data.
+
+## Task 1.20 ++
+
+After fitting a linear regression model in R using the `lm()` function, you obtain the following output for the model coefficients:
+
+$$\text{(Intercept)} = 5.2, \quad \beta_1 = 2.4, \quad \beta_2 = -0.8$$ Given this model:
+
+$$ \hat{y} = 5.2 + 2.4 \times X_1 - 0.8 \times X_2$$
+
+What can be inferred from $\beta_1$ in this model?
+
+a.  For each unit increase in $X_1$, the predicted value of $y$ will increase by 5.2.
+b.  For each unit increase in $X_1$, the predicted value of $y$ will increase by 2.4, assuming $X_2$ remains constant.
+c.  For each unit increase in $X_2$, the predicted value of $y$ will decrease by 0.8, assuming $X_1$ remains constant.
+d.  The value of $y$ is independent of $X_1$ and only depends on $X_2$.
+
+**Correct Answer:**\
+b. For each unit increase in $X_1$, the predicted value of $y$ will increase by 2.4, assuming $X_2$ remains constant.
+
+c\. For each unit increase in $X_2$, the predicted value of $y$ will decrease by 0.8, assuming $X_1$ remains constant.
 
 # Task 2: Code explanation - 20p
 
@@ -116,7 +296,7 @@ We will work with `happiness_income_data`. This dataset includes information abo
 #| echo: false
 
 library(readr)
-happiness_income_data <- read_csv("happyscore_income_data.csv")
+happiness_income_data <- read_csv("happyscore_income.csv")
 #View(happiness_income_data)
 happiness_income_data$country...11 <- NULL
 happiness_income_data$country <- happiness_income_data$country...1
@@ -179,15 +359,15 @@ Data Description:
 
 The dataset consists of 111 observations. You will work with a sample (task 2.1) and the full data set (task 2.2 and task 2).
 
-| name | valuetype | scale | explanation |
+| name                  | valuetype | scale                  | explanation                                                                                             |
 |------------------|------------------|------------------|------------------|
-| adjusted_satisfaction | numeric | 0 to 100 | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction |
-| avg_income | numeric | 0\$ to thousands of \$ | average annual income in \$ |
-| median_income | numeric | 0\$ to thousands of \$ | median annual income in \$ |
-| income_inequality | numeric | 0 to 100 | income inequality, lower values indicate a lower inequality, higher values indicate a higher inequality |
-| happyScore | numeric | 0-10 | lower values indicate a lower overall happiness, higher values indicate a higher overall happiness |
-| gdp | numeric |  | GDP in trillions of \$ (Milliarden auf deutsch) |
-| country | character | \- | country name |
+| adjusted_satisfaction | numeric   | 0 to 100               | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction          |
+| avg_income            | numeric   | 0\$ to thousands of \$ | average annual income in \$                                                                             |
+| median_income         | numeric   | 0\$ to thousands of \$ | median annual income in \$                                                                              |
+| income_inequality     | numeric   | 0 to 100               | income inequality, lower values indicate a lower inequality, higher values indicate a higher inequality |
+| happyScore            | numeric   | 0-10                   | lower values indicate a lower overall happiness, higher values indicate a higher overall happiness      |
+| gdp                   | numeric   |                        | GDP in trillions of \$ (Milliarden auf deutsch)                                                         |
+| country               | character | \-                     | country name                                                                                            |
 
 ## Task 2.1
 
