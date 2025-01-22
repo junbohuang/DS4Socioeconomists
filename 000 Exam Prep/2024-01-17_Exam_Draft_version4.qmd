@@ -493,4 +493,20 @@ logistic_model <- glm(high_happyScore ~ income_inequality+gdp+median_income, fam
 summary(logistic_model)
 ```
 
-# 
+### Bonus Questions with the above dataset:
+
+#### 1. Feature Selection with Regularization (4 points)
+
+Suppose you use **Ridge** or **Lasso regression** on the linear regression model (as the following equation) to identify the most important predictors in the above dataset
+
+happyScore = $\beta_1$ income_inequality + $\beta_2$ gdp + $\beta_3$ median_income
+
+Say, income_inequality and median_income are highly correlated. How might the coefficients change if you use ridge regression? What about lasso regression?
+
+**Answer:** Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model. Lasso, on the other hand, may set one coefficient (e.g., median income) to zero, effectively removing it and prioritizing GDP.
+
+#### 2. Generalizability Testing (3 points)
+
+Describe a method to evaluate the **generalizability** of the linear regression model in Task 3.
+
+**Answer**: split the data into training, validation and/or testing set; apply validation method such as k-fold cross-validation

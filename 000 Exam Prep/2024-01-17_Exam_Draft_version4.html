@@ -3779,9 +3779,21 @@ AIC: 53.76
 Number of Fisher Scoring iterations: 7</code></pre>
 </div>
 </div>
+<section id="bonus-questions-with-the-above-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="bonus-questions-with-the-above-dataset">Bonus Questions with the above dataset:</h3>
+<section id="feature-selection-with-regularization-4-points" class="level4">
+<h4 class="anchored" data-anchor-id="feature-selection-with-regularization-4-points">1. Feature Selection with Regularization (4 points)</h4>
+<p>Suppose you use <strong>Ridge</strong> or <strong>Lasso regression</strong> on the linear regression model (as the following equation) to identify the most important predictors in the above dataset</p>
+<p>happyScore = <span class="math inline">\(\beta_1\)</span> income_inequality + <span class="math inline">\(\beta_2\)</span> gdp + <span class="math inline">\(\beta_3\)</span> median_income</p>
+<p>Say, income_inequality and median_income are highly correlated. How might the coefficients change if you use ridge regression? What about lasso regression?</p>
+<p><strong>Answer:</strong> Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model. Lasso, on the other hand, may set one coefficient (e.g., median income) to zero, effectively removing it and prioritizing GDP.</p>
 </section>
-<section id="section" class="level1">
-<h1></h1>
+<section id="generalizability-testing-3-points" class="level4">
+<h4 class="anchored" data-anchor-id="generalizability-testing-3-points">2. Generalizability Testing (3 points)</h4>
+<p>Describe a method to evaluate the <strong>generalizability</strong> of the linear regression model in Task 3.</p>
+<p><strong>Answer</strong>: split the data into training, validation and/or testing set; apply validation method such as k-fold cross-validation</p>
+</section>
+</section>
 </section>
 
 </main>
