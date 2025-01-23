@@ -96,13 +96,11 @@ head(mtcars)
 
     **Interpretation**(from `glmnet`-function documentation):
 
-    +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |             |                                                                                                                                                                                                                                                                                                                                                                   |
+    |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     | `lambda`    | The actual sequence of `lambda` values used. When `alpha=0`, the largest lambda reported does not quite give the zero coefficients reported (`lambda=inf` would in principle). Instead, the largest `lambda` for `alpha=0.001` is used, and the sequence of `lambda` values is derived from this.                                                                 |
-    +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | `dev.ratio` | The fraction of (null) deviance explained (for `"elnet"`, this is the R-square). The deviance calculations incorporate weights if present in the model. The deviance is defined to be 2\*(loglike_sat - loglike), where loglike_sat is the log-likelihood for the saturated model (a model with a free parameter per observation). Hence dev.ratio=1-dev/nulldev. |
-    +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | `df`        | The number of nonzero coefficients for each value of `lambda`. For `"multnet"`, this is the number of variables with a nonzero coefficient for *any* class.                                                                                                                                                                                                       |
-    +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     ::: callout-important
     Our table contains the fitted coefficients for different values of the regularization parameter \`lambda\` -\> Still, we need to find the optimal Lambda!
@@ -248,9 +246,8 @@ cat("Cross-validation error at lambda.min:", fit_lasso_cv$cvm[fit_lasso_cv$lambd
 
     -   Ridge and lasso regression are types of regularized linear regression models designed to address overfitting and multicollinearity. Both add a penalty term to the linear regression cost function to shrink coefficients:
 
-    ```{=html}
     <!-- -->
-    ```
+
     -   Ridge regression penalizes the sum of the squared coefficients (L2-norm).
 
     -   Lasso regression penalizes the sum of the absolute values of the coefficients (L1-norm), which can set some coefficients to exactly zero, performing variable selection.
