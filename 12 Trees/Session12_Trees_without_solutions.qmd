@@ -43,7 +43,7 @@ Decision trees have quite a lot in common with personality tests and quizzes fro
 
 ![source: https://www.16personalities.com/](https://blog.tcea.org/wp-content/uploads/2019/05/Personality-Test.png)
 
-### And they mimic human decision processes:
+## And they mimic human decision processes:
 
 ![source: https://www.nomidl.com/machine-learning/decision-tree-for-machine-learning/](https://www.nomidl.com/wp-content/uploads/2022/09/image-78.png)
 
@@ -109,59 +109,61 @@ All of the examples above have qualitative responses - they are decision trees, 
 
 **Example 1:** A small retailer wants to decide whether to introduce a new product based on previous sales figures and customer feedback.
 
-| Node | Condition                   | Yes/No | Decision                     |
-|------|-----------------------------|--------|------------------------------|
-| 1    | Sales \< €1000              | Yes    | Go to Node 2                 |
-|      |                             | No     | Introduce New Product        |
-| 2    | Customer Feedback Positive? | Yes    | Introduce New Product        |
-|      |                             | No     | Do Not Introduce New Product |
-
-**Interpretation:**
-
--   If sales are over €1000, a decision is made to introduce the new product.
-
--   If sales are below €1000, customer feedback is evaluated.
-
--   Positive feedback also leads to introducing the product, while negative feedback results in not introducing it.
++--------------+-----------------------------+--------------+------------------------------+
+| Node         | Condition                   | Yes/No       | Decision                     |
++==============+=============================+==============+==============================+
+| 1            | Sales \< €1000              | Yes          | Go to Node 2                 |
++--------------+-----------------------------+--------------+------------------------------+
+|              |                             | No           | Introduce New Product        |
++--------------+-----------------------------+--------------+------------------------------+
+| 2            | Customer Feedback Positive? | Yes          | Introduce New Product        |
++--------------+-----------------------------+--------------+------------------------------+
+|              |                             | No           | Do Not Introduce New Product |
++--------------+-----------------------------+--------------+------------------------------+
 
 ------------------------------------------------------------------------
 
 **Example 2:** A company wants to forecast monthly marketing expenditures based on various factors.
 
-| Node | Condition | Yes/No | Result (Monthly Marketing Expenditure in €) |
-|----|----|----|----|
-| 1 | Number of Customers \> 1000 | Yes | Go to Node 2 |
-|  |  | No | 1000€ |
-| 2 | Marketing team size \>5 | Yes | 2500€ |
-|  |  | No | 1500€ |
-
-**Interpretation:**
-
--   If the company has more than 1000 customers, it further examines whether a marketing campaign is active.
--   If the marking team has more than 5 workers (Yes), a budget of €2500 is proposed.
--   If the marking team has less than 5 or exactly 5 workers(No), it is recommended to spend €1500 on marketing.
--   For fewer than 1000 customers, the marketing expenditure is set at €1000.
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
++------------+-----------------------------+------------+---------------------------------------------+
+| Node       | Condition                   | Yes/No     | Result (Monthly Marketing Expenditure in €) |
++============+=============================+============+=============================================+
+| 1          | Number of Customers \> 1000 | Yes        | Go to Node 2                                |
++------------+-----------------------------+------------+---------------------------------------------+
+|            |                             | No         | 1000€                                       |
++------------+-----------------------------+------------+---------------------------------------------+
+| 2          | Marketing team size \>5     | Yes        | 2500€                                       |
++------------+-----------------------------+------------+---------------------------------------------+
+|            |                             | No         | 1500€                                       |
++------------+-----------------------------+------------+---------------------------------------------+
 
 ## Creating a tree
 
 You have got this dataset and should create a tree (based on the steps listed below):
 
-| Years of Experience (x1) | Income (x2) | Output (y - Job Satisfaction Score) |
-|--------------------------|-------------|-------------------------------------|
-| 1                        | 30000       | 3                                   |
-| 2                        | 40000       | 4                                   |
-| 3                        | 50000       | 5                                   |
-| 4                        | 60000       | 7                                   |
-| 5                        | 70000       | 8                                   |
-| 6                        | 80000       | 9                                   |
-| 7                        | 90000       | 6                                   |
-| 8                        | 95000       | 7                                   |
-| 9                        | 100000      | 8                                   |
-| 10                       | 120000      | 10                                  |
++--------------------------+---------------+-------------------------------------+
+| Years of Experience (x1) | Income (x2)   | Output (y - Job Satisfaction Score) |
++==========================+===============+=====================================+
+| 1                        | 30000         | 3                                   |
++--------------------------+---------------+-------------------------------------+
+| 2                        | 40000         | 4                                   |
++--------------------------+---------------+-------------------------------------+
+| 3                        | 50000         | 5                                   |
++--------------------------+---------------+-------------------------------------+
+| 4                        | 60000         | 7                                   |
++--------------------------+---------------+-------------------------------------+
+| 5                        | 70000         | 8                                   |
++--------------------------+---------------+-------------------------------------+
+| 6                        | 80000         | 9                                   |
++--------------------------+---------------+-------------------------------------+
+| 7                        | 90000         | 6                                   |
++--------------------------+---------------+-------------------------------------+
+| 8                        | 95000         | 7                                   |
++--------------------------+---------------+-------------------------------------+
+| 9                        | 100000        | 8                                   |
++--------------------------+---------------+-------------------------------------+
+| 10                       | 120000        | 10                                  |
++--------------------------+---------------+-------------------------------------+
 
 Where to split the data:
 
@@ -192,25 +194,3 @@ A rule of thumb for manually creating a tree is to split based on the mean or me
     3.  At each child node, youshould evaluate the condition for the second split (\`Income\`).
 
 3.  **Calculate Average Output for Leaf Nodes**: For each leaf node of the tree, you should calculate the average job satisfaction score for the observations in that leaf.
-
-# Solution
-
-| Node | Condition | Yes/No | Next Step | Average Output |
-|----|----|----|----|----|
-| Root Node | Years of Experience \<= 5 | Yes | Go to Node 1 |  |
-|  |  | No | Leaf (Average y = 9.5) | 9.5 |
-| Node 1 | Income \<= 75000 | Yes | Leaf (Avg y = 5) | 5 |
-|  |  | No | Leaf (Avg y = 8) | 8 |
-
-Explanation of the Table:
-
--   The Root Node checks if Years of Experience is less than or equal to 5.
-
-    -   If yes, it goes to Node 1.
-    -   If the condition at the root node is no, it directly leads to a leaf node with an average job satisfaction score of 9.5.
-
--   Node 1 checks if Income is less than or equal to 75,000.
-
-    -   If yes, it results in a leaf node with an average job satisfaction score of 5.
-
-    -   If no, it results in another leaf node with an average job satisfaction score of 8.
