@@ -18,6 +18,9 @@ editor: visual
 -   Points: 90p total
 
     -   MC questions: 30p
+    -   code interpretation ~20p
+    -   regressions ~20p
+    -   Evaluation, 
 
 ## Focus on:
 
