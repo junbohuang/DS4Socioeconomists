@@ -27,10 +27,10 @@ They can be used in the form of **regression trees** for predicting an quantitat
 
 Decision trees have quite a lot in common with personality tests and quizzes from magazines:
 
--   What Type Of Bagel Matches Your Personality?
+-   What is your personality type?
 
-    1.  Do you like sweet foods?: yes/no
-    2.  Do you like seeds on your bagel? yes/no
+    1.  Do you enjoy social events with lots of people? (yes/no)
+    2.  Do you plan your travels extensively? (yes/no)
     3.  ...
 
 -   What Dog Breed Matches Your Personality?
@@ -41,13 +41,9 @@ Decision trees have quite a lot in common with personality tests and quizzes fro
 
     3.  ....
 
-And they also have quite a lot in common with the questions that a detective asks when solving a crime and interrogating a witness:
+![source: https://www.16personalities.com/](https://blog.tcea.org/wp-content/uploads/2019/05/Personality-Test.png)
 
-1.  Was the person committing the crime tall? yes/no
-2.  Did they leave by car? yes/no
-3.  ...
-
-And they mimic human decision processes:
+## And they mimic human decision processes:
 
 ![source: https://www.nomidl.com/machine-learning/decision-tree-for-machine-learning/](https://www.nomidl.com/wp-content/uploads/2022/09/image-78.png)
 

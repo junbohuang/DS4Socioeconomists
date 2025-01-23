@@ -27,10 +27,10 @@ They can be used in the form of **regression trees** for predicting an quantitat
 
 Decision trees have quite a lot in common with personality tests and quizzes from magazines:
 
--   What Type Of Bagel Matches Your Personality?
+-   What is your personality type?
 
-    1.  Do you like sweet foods?: yes/no
-    2.  Do you like seeds on your bagel? yes/no
+    1.  Do you enjoy social events with lots of people? (yes/no)
+    2.  Do you plan your travels extensively? (yes/no)
     3.  ...
 
 -   What Dog Breed Matches Your Personality?
@@ -41,13 +41,9 @@ Decision trees have quite a lot in common with personality tests and quizzes fro
 
     3.  ....
 
-And they also have quite a lot in common with the questions that a detective asks when solving a crime and interrogating a witness:
+![source: https://www.16personalities.com/](https://blog.tcea.org/wp-content/uploads/2019/05/Personality-Test.png)
 
-1.  Was the person committing the crime tall? yes/no
-2.  Did they leave by car? yes/no
-3.  ...
-
-And they mimic human decision processes:
+### And they mimic human decision processes:
 
 ![source: https://www.nomidl.com/machine-learning/decision-tree-for-machine-learning/](https://www.nomidl.com/wp-content/uploads/2022/09/image-78.png)
 
@@ -113,17 +109,12 @@ All of the examples above have qualitative responses - they are decision trees, 
 
 **Example 1:** A small retailer wants to decide whether to introduce a new product based on previous sales figures and customer feedback.
 
-+-----------+-----------------------------+-----------+------------------------------+
-| Node      | Condition                   | Yes/No    | Decision                     |
-+===========+=============================+===========+==============================+
-| 1         | Sales \< €1000              | Yes       | Go to Node 2                 |
-+-----------+-----------------------------+-----------+------------------------------+
-|           |                             | No        | Introduce New Product        |
-+-----------+-----------------------------+-----------+------------------------------+
-| 2         | Customer Feedback Positive? | Yes       | Introduce New Product        |
-+-----------+-----------------------------+-----------+------------------------------+
-|           |                             | No        | Do Not Introduce New Product |
-+-----------+-----------------------------+-----------+------------------------------+
+| Node | Condition                   | Yes/No | Decision                     |
+|------|-----------------------------|--------|------------------------------|
+| 1    | Sales \< €1000              | Yes    | Go to Node 2                 |
+|      |                             | No     | Introduce New Product        |
+| 2    | Customer Feedback Positive? | Yes    | Introduce New Product        |
+|      |                             | No     | Do Not Introduce New Product |
 
 **Interpretation:**
 
@@ -137,17 +128,12 @@ All of the examples above have qualitative responses - they are decision trees, 
 
 **Example 2:** A company wants to forecast monthly marketing expenditures based on various factors.
 
-+----------------+-----------------------------+----------------+---------------------------------------------+
-| Node           | Condition                   | Yes/No         | Result (Monthly Marketing Expenditure in €) |
-+================+=============================+================+=============================================+
-| 1              | Number of Customers \> 1000 | Yes            | Go to Node 2                                |
-+----------------+-----------------------------+----------------+---------------------------------------------+
-|                |                             | No             | 1000€                                       |
-+----------------+-----------------------------+----------------+---------------------------------------------+
-| 2              | Marketing team size \>5     | Yes            | 2500€                                       |
-+----------------+-----------------------------+----------------+---------------------------------------------+
-|                |                             | No             | 1500€                                       |
-+----------------+-----------------------------+----------------+---------------------------------------------+
+| Node | Condition | Yes/No | Result (Monthly Marketing Expenditure in €) |
+|----|----|----|----|
+| 1 | Number of Customers \> 1000 | Yes | Go to Node 2 |
+|  |  | No | 1000€ |
+| 2 | Marketing team size \>5 | Yes | 2500€ |
+|  |  | No | 1500€ |
 
 **Interpretation:**
 
@@ -164,29 +150,18 @@ All of the examples above have qualitative responses - they are decision trees, 
 
 You have got this dataset and should create a tree (based on the steps listed below):
 
-+--------------------------+---------------+-------------------------------------+
-| Years of Experience (x1) | Income (x2)   | Output (y - Job Satisfaction Score) |
-+==========================+===============+=====================================+
-| 1                        | 30000         | 3                                   |
-+--------------------------+---------------+-------------------------------------+
-| 2                        | 40000         | 4                                   |
-+--------------------------+---------------+-------------------------------------+
-| 3                        | 50000         | 5                                   |
-+--------------------------+---------------+-------------------------------------+
-| 4                        | 60000         | 7                                   |
-+--------------------------+---------------+-------------------------------------+
-| 5                        | 70000         | 8                                   |
-+--------------------------+---------------+-------------------------------------+
-| 6                        | 80000         | 9                                   |
-+--------------------------+---------------+-------------------------------------+
-| 7                        | 90000         | 6                                   |
-+--------------------------+---------------+-------------------------------------+
-| 8                        | 95000         | 7                                   |
-+--------------------------+---------------+-------------------------------------+
-| 9                        | 100000        | 8                                   |
-+--------------------------+---------------+-------------------------------------+
-| 10                       | 120000        | 10                                  |
-+--------------------------+---------------+-------------------------------------+
+| Years of Experience (x1) | Income (x2) | Output (y - Job Satisfaction Score) |
+|--------------------------|-------------|-------------------------------------|
+| 1                        | 30000       | 3                                   |
+| 2                        | 40000       | 4                                   |
+| 3                        | 50000       | 5                                   |
+| 4                        | 60000       | 7                                   |
+| 5                        | 70000       | 8                                   |
+| 6                        | 80000       | 9                                   |
+| 7                        | 90000       | 6                                   |
+| 8                        | 95000       | 7                                   |
+| 9                        | 100000      | 8                                   |
+| 10                       | 120000      | 10                                  |
 
 Where to split the data:
 
