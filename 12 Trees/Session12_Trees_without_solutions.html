@@ -3152,10 +3152,10 @@ Note
 <p><strong>Example 1:</strong> A small retailer wants to decide whether to introduce a new product based on previous sales figures and customer feedback.</p>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 34%">
-<col style="width: 13%">
-<col style="width: 35%">
+<col style="width: 16%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -3192,20 +3192,14 @@ Note
 </tr>
 </tbody>
 </table>
-<p><strong>Interpretation:</strong></p>
-<ul>
-<li><p>If sales are over €1000, a decision is made to introduce the new product.</p></li>
-<li><p>If sales are below €1000, customer feedback is evaluated.</p></li>
-<li><p>Positive feedback also leads to introducing the product, while negative feedback results in not introducing it.</p></li>
-</ul>
 <hr>
 <p><strong>Example 2:</strong> A company wants to forecast monthly marketing expenditures based on various factors.</p>
 <table class="table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 26%">
-<col style="width: 15%">
-<col style="width: 41%">
+<col style="width: 12%">
+<col style="width: 28%">
+<col style="width: 12%">
+<col style="width: 44%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -3242,15 +3236,6 @@ Note
 </tr>
 </tbody>
 </table>
-<p><strong>Interpretation:</strong></p>
-<ul>
-<li>If the company has more than 1000 customers, it further examines whether a marketing campaign is active.</li>
-<li>If the marking team has more than 5 workers (Yes), a budget of €2500 is proposed.</li>
-<li>If the marking team has less than 5 or exactly 5 workers(No), it is recommended to spend €1500 on marketing.</li>
-<li>For fewer than 1000 customers, the marketing expenditure is set at €1000.</li>
-</ul>
-<hr>
-<hr>
 </section>
 <section id="creating-a-tree" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-tree">Creating a tree</h2>
@@ -3365,63 +3350,6 @@ Warning
 <li><p><strong>Calculate Average Output for Leaf Nodes</strong>: For each leaf node of the tree, you should calculate the average job satisfaction score for the observations in that leaf.</p></li>
 </ol>
 </section>
-</section>
-<section id="solution" class="level1">
-<h1>Solution</h1>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Node</th>
-<th>Condition</th>
-<th>Yes/No</th>
-<th>Next Step</th>
-<th>Average Output</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Root Node</td>
-<td>Years of Experience &lt;= 5</td>
-<td>Yes</td>
-<td>Go to Node 1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>No</td>
-<td>Leaf (Average y = 9.5)</td>
-<td>9.5</td>
-</tr>
-<tr class="odd">
-<td>Node 1</td>
-<td>Income &lt;= 75000</td>
-<td>Yes</td>
-<td>Leaf (Avg y = 5)</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>No</td>
-<td>Leaf (Avg y = 8)</td>
-<td>8</td>
-</tr>
-</tbody>
-</table>
-<p>Explanation of the Table:</p>
-<ul>
-<li><p>The Root Node checks if Years of Experience is less than or equal to 5.</p>
-<ul>
-<li>If yes, it goes to Node 1.</li>
-<li>If the condition at the root node is no, it directly leads to a leaf node with an average job satisfaction score of 9.5.</li>
-</ul></li>
-<li><p>Node 1 checks if Income is less than or equal to 75,000.</p>
-<ul>
-<li><p>If yes, it results in a leaf node with an average job satisfaction score of 5.</p></li>
-<li><p>If no, it results in another leaf node with an average job satisfaction score of 8.</p></li>
-</ul></li>
-</ul>
 </section>
 
 </main>
