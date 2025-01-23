@@ -1,0 +1,40 @@
+---
+title: "Exam recap"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+## For the exam:
+
+-   There will be no coding "by hand" - but you should have basic code-understanding
+
+-   structure follows the exam prep materials that are already online
+
+-   Look into the tutorial slides and solutions for applications of concepts and methods
+
+-   Points: 90p total
+
+    -   MC questions: 30p
+
+## Focus on:
+
+-   Data cleaning and data types, outliers, NAs
+
+-   Linear regression and assumptions
+
+-   Logistic
+
+Other points:
+
+-   MC questions:
+
+    -   when 1 answer is right and you get it right -\> 2p
+
+    -   when 2 answers are right and you get both right -\> 2p
+
+    -   when 2 answers are right and you get one right and one wrong // when 1 is right and you choose it and another one -\> 0p
+
+    -   when 2 answers re right and you get only one right and leave the other answer unmarked -\> 1p
