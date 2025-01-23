@@ -12,11 +12,11 @@ editor: visual
 There will be four different tasks with various sub-tasks and the following points:
 
 1.  MC questions - 30p
-2.  Code explanation - 25p
-3.  Regression - 20p
-4.  Regularization and Generalisability - 15p
+2.  Code explanation - 20p
+3.  Regression - 22p
+4.  Regularization and Generalisability - 18p
 
-The exam consits of 90p total.
+The exam consists of 90p total.
 
 You are not supposed to answer with handwritten code but rather with "normal" text.
 
@@ -300,8 +300,6 @@ c\. For each unit increase in $X_2$, the predicted value of $y$ will decrease by
 
 # Task 2: Code explanation - 20p
 
-The task consists of two elements with 10p each.
-
 We will work with `happiness_income_data`. This dataset includes information about different countries and income, satisfaction of the inhabitants, the GDP, income inequality and other variables. Below you get an extensive data description and the tasks.
 
 ```{r}
@@ -372,7 +370,7 @@ happiness_income_data <- rbind(happiness_income_data, data)
 The dataset consists of 111 observations. You will work with a sample (task 2.1) and the full data set (task 2.2 and task 2).
 
 | name | valuetype | scale | explanation |
-|-----------------|-----------------|-----------------|----------------------|
+|-----------------|-----------------|-----------------|---------------------|
 | adjusted_satisfaction | numeric | 0 to 100 | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction |
 | avg_income | numeric | 0\$ to thousands of \$ | average annual income in \$ |
 | median_income | numeric | 0\$ to thousands of \$ | median annual income in \$ |
@@ -381,7 +379,7 @@ The dataset consists of 111 observations. You will work with a sample (task 2.1)
 | gdp | numeric |  | GDP in trillions of \$ (Milliarden auf deutsch) |
 | country | character | \- | country name |
 
-## Task 2.1 (16p)
+## Task 2.1 (14p)
 
 a.  The following code snippet works with the data set `happiness_income_data`. You see a sample of this original data set below. Some transformations and selections etc. were made - trace those steps and execute them manually to fill in the sampled data table by hand. Your result represents `happiness_data_clean` and includes the same observations as the original sample (8p)\
     ***answer: 1p for each correctly changed value and eliminated row***
@@ -400,7 +398,7 @@ a.  The following code snippet works with the data set `happiness_income_data`. 
 
     ```
 
-![](images/tabelle_Klausur.PNG)
+![](tabelle_Klausur.PNG)
 
 b.  Did you remove singular values and/or rows and/or columns? If you did so, explain why. (2p)\
     ***answer***: ***4 rows were removed due to including NAs***
@@ -409,7 +407,9 @@ c.  Did you change the content or name of singular values and/or rows and/or col
 d.  After applying the code: Are any values left that could potentially lead to problems? If so, how could we fix that problem (answer verbally, no code needed)? (2p)\
     ***answer: for happyScore a negative value remains that potentially causes distortion***
 
-## Task 2.2 - 4p
+![](tabelle_Klausur_solution.PNG)
+
+## Task 2.2 - 6p
 
 After the listed data transformation steps we apply a linear regression to our full data set (111 observations) and are left with this output:
 
@@ -494,7 +494,7 @@ ggplot(data=happiness_income_data_clean, mapping = aes(x=avg_income, y=adjusted_
 
 ***answer: Graph4 consists of a straight line similar to Graph1 but we cannot see specific values since the axis labels and tick-marks as well as scales are completely missing (1p)***
 
-# Task 3: Regression - 25p
+# Task 3: Regression - 22p
 
 1.  What kind of question do the different models answer? Think of a research question for `model1` and of a research question for `model2`. (2p each) –\> 4p total
 
@@ -522,14 +522,11 @@ summary(linear_model)
 ***answer: Interpretation model1:***
 
 | coefficients | interpretation |
-|-------------------------------|-----------------------------------|
+|----------------------------------|--------------------------------------|
 | (Intercept) 3.244930846\*\*\* | When all other variables are 0 the happyScore is approximately 3.24p. there is no meaningful explanation in our case. The value is highly significant on the 99.9% level. |
 | income_inequality 0.031412802\*\*\* | Keeping all other values stable the happyScore increases approx. 0.03p with each additional point of income inequality. This means that a rise in income inequality slightly increases the happyScore. The value is highly significant on the 99.9% level. |
 | gdp -0.000008244 - | Keeping all other values stable the happyScore lowers by 0.000008244p if the gdp rises by 1 unit, meaning by 1 trillion. This value is not significant on any of the standard levels (p = 0.77) and therefore has little explanatory power. |
 | median_income 0.000183292\*\*\* | Keeping all other values stable the happyScore rises approx. by 0.000183292 points with each additional dollar in median income. This means that a rise in the median income increases the happyScore slightly. The value is highly significant on the 99.9% level. |
-
-```         
-```
 
 ```{r}
 #logistic regression for "happy country" or not
@@ -539,7 +536,7 @@ logistic_model <- glm(high_happyScore ~ income_inequality+gdp+median_income, fam
 summary(logistic_model)
 ```
 
-# Task 4: Regularization and Generalizability - 15p
+# Task 4: Regularization and Generalizability - 18p
 
 #### 4.1 Feature Selection with Regularization (4 points)
 
