@@ -550,27 +550,29 @@ summary(logistic_model)
 
 # Task 4: Regularization and Generalizability - 18p
 
-Given the linear regression models below, answer the following questions:
+Given the linear regression models below,
 
 happyScore = $\beta_1$ income_inequality + $\beta_2$ gdp + $\beta_3$ median_income
 
-#### 4.1 Feature Selection with Regularization (6 points)
+answer the following questions:
 
-4.1.1 Suppose you want to use **Ridge** or **Lasso regression** to reduce overfitting and to identify the most important predictors. Say, income_inequality and median_income are highly correlated. How might the coefficients ($\beta_1$ and $\beta_3$) change if you use ridge regression? (3p)
+#### 4.1 Regularization: Ridge and Lasso regression (6 points)
+
+4.1.1 Suppose you want to use Ridge or Lassoregression to reduce overfitting of the model to training data. **Say, variables income_inequality and median_income are highly correlated. How might the coefficients (**$\beta_1$ **and** $\beta_3$**) change if you use ridge regression?** (3p)
 
 > **Answer:** Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model.
 
-4.1.2 What about lasso regression? (3p)
+4.1.2 **What about lasso regression?** (3p)
 
 > **Answer:** Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model.
 
 #### 4.2 Generalizability Testing (6 points)
 
-4.2.1 Generalizability refers to models' ability to make correct predictions on unseen data. Given the happiness_income_data_clean dataset, please describe a method to evaluate the **generalizability** of the linear regression model. (2p)
+4.2.1 Generalizability refers to models' ability to make correct predictions on unseen data. Given the happiness_income_data_clean dataset, **please describe a method to evaluate the generalizability of the linear regression model.** (2p)
 
 > **Answer**: split the data into training, validation and/or testing set; apply validation method such as k-fold cross-validation
 
-4.2.2 Given the following results from a 5-fold cross-validation, calculate the average R-squared value. (2p)
+4.2.2 Given the following results from a 5-fold cross-validation, **calculate the average R-squared value**. (2p)
 
 | **Fold** | **R-squared Value** |
 |----------|---------------------|
@@ -588,7 +590,7 @@ happyScore = $\beta_1$ income_inequality + $\beta_2$ gdp + $\beta_3$ median_inco
 
 #### 4.3 **Decision Tree Construction (6 points)**
 
-Given the following dataset for predicting happiness score (HappyScore) based on **GDP** and **Income Inequality** (all variables are categorical variables), draw the decision tree you would construct for predicting HappyScore based on GDP and Income Inequality. (6p)
+Given the following dataset for predicting happiness score (HappyScore) based on GDP and IncomeInequality (all variables are categorical variables), **draw the decision tree you would construct for predicting HappyScore based on GDP and Income Inequality.** (6p)
 
 | **GDP** | **Income Inequality** | **HappyScore** |
 |---------|-----------------------|----------------|
