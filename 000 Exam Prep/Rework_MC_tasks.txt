@@ -1,0 +1,18 @@
+Überarbeiten:
+
+MC tasks
+1.6: DONE Comment: check info: There are different ways in dimensionality reduction. Sometimes we boil down the information to a subset of variables, reduce the importance of variables or create latent factors (often as linear combinations of the original variables). Reformulate (check out the chapter in Hastie et al.)!
+1.9: DONE Comment: check info: Comment We do cross-validation after training the model. The relevant metric is out-of-sample performance. Reformulate (check out Hastie et al.)!
+1.10: DONE Comment: rephrase: Comment: Better “To prevent overfitting by penalizing model coefficients with under assumption of a specific loss function”.
+1.11: DONE Comment: rephrase: “It reduces the magnitude of small coefficients, leading to simpler models and less overfitting.”
+1.13: Comment: remove and think of new question
+1.15: Comment: remove and think of new question
+1.16: Comment: rephrase and only one answer should be valid
+1.17: Comment: rephrase and only one answer should be valid
+1.19: DONE Comment: only one answer should be vaild
+1.20: DONE Comment: only one answer should be valid
+
+
+
+
+
