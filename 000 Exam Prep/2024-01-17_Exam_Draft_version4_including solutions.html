@@ -3902,26 +3902,27 @@ Number of Fisher Scoring iterations: 7</code></pre>
 </section>
 <section id="task-4-regularization-and-generalizability---18p" class="level1">
 <h1>Task 4: Regularization and Generalizability - 18p</h1>
-<p>Given the linear regression models below, answer the following questions:</p>
+<p>Given the linear regression models below,</p>
 <p>happyScore = <span class="math inline">\(\beta_1\)</span> income_inequality + <span class="math inline">\(\beta_2\)</span> gdp + <span class="math inline">\(\beta_3\)</span> median_income</p>
-<section id="feature-selection-with-regularization-6-points" class="level4">
-<h4 class="anchored" data-anchor-id="feature-selection-with-regularization-6-points">4.1 Feature Selection with Regularization (6 points)</h4>
-<p>4.1.1 Suppose you want to use <strong>Ridge</strong> or <strong>Lasso regression</strong> to reduce overfitting and to identify the most important predictors. Say, income_inequality and median_income are highly correlated. How might the coefficients (<span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_3\)</span>) change if you use ridge regression? (3p)</p>
+<p>answer the following questions:</p>
+<section id="regularization-ridge-and-lasso-regression-6-points" class="level4">
+<h4 class="anchored" data-anchor-id="regularization-ridge-and-lasso-regression-6-points">4.1 Regularization: Ridge and Lasso regression (6 points)</h4>
+<p>4.1.1 Suppose you want to use Ridge or Lassoregression to reduce overfitting of the model to training data. <strong>Say, variables income_inequality and median_income are highly correlated. How might the coefficients (</strong><span class="math inline">\(\beta_1\)</span> <strong>and</strong> <span class="math inline">\(\beta_3\)</span><strong>) change if you use ridge regression?</strong> (3p)</p>
 <blockquote class="blockquote">
 <p><strong>Answer:</strong> Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model.</p>
 </blockquote>
-<p>4.1.2 What about lasso regression? (3p)</p>
+<p>4.1.2 <strong>What about lasso regression?</strong> (3p)</p>
 <blockquote class="blockquote">
 <p><strong>Answer:</strong> Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model.</p>
 </blockquote>
 </section>
 <section id="generalizability-testing-6-points" class="level4">
 <h4 class="anchored" data-anchor-id="generalizability-testing-6-points">4.2 Generalizability Testing (6 points)</h4>
-<p>4.2.1 Generalizability refers to models’ ability to make correct predictions on unseen data. Given the happiness_income_data_clean dataset, please describe a method to evaluate the <strong>generalizability</strong> of the linear regression model. (2p)</p>
+<p>4.2.1 Generalizability refers to models’ ability to make correct predictions on unseen data. Given the happiness_income_data_clean dataset, <strong>please describe a method to evaluate the generalizability of the linear regression model.</strong> (2p)</p>
 <blockquote class="blockquote">
 <p><strong>Answer</strong>: split the data into training, validation and/or testing set; apply validation method such as k-fold cross-validation</p>
 </blockquote>
-<p>4.2.2 Given the following results from a 5-fold cross-validation, calculate the average R-squared value. (2p)</p>
+<p>4.2.2 Given the following results from a 5-fold cross-validation, <strong>calculate the average R-squared value</strong>. (2p)</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -3954,13 +3955,13 @@ Number of Fisher Scoring iterations: 7</code></pre>
 </table>
 <blockquote class="blockquote">
 <p><strong>Answer:</strong> (0.85 + 0.85 + 0.84 + 0.83 + 0.83) / 5 = 0.84</p>
-<p>4.2.3. What does this average, combined with the consistency of the fold results, tell you about the model’s ability to generalize? (2p)</p>
+<p>4.2.3. <strong>What does this average, combined with the consistency of the fold results, tell you about the model’s ability to generalize?</strong> (2p)</p>
 <p><strong>Answer</strong>: The average R-squared value of 0.84indicates that, on average, the model explains 84% of the variance in the data, which suggests good predictive performance. The results are consistent across the folds (with values ranging from 0.83 to 0.85), showing that the model performs reliably on different subsets of the data. This consistency indicates that the model generalizes well to unseen data and is not overfitting or underfitting.</p>
 </blockquote>
 </section>
 <section id="decision-tree-construction-6-points" class="level4">
 <h4 class="anchored" data-anchor-id="decision-tree-construction-6-points">4.3 <strong>Decision Tree Construction (6 points)</strong></h4>
-<p>Given the following dataset for predicting happiness score (HappyScore) based on <strong>GDP</strong> and <strong>Income Inequality</strong> (all variables are categorical variables), draw the decision tree you would construct for predicting HappyScore based on GDP and Income Inequality. (6p)</p>
+<p>Given the following dataset for predicting happiness score (HappyScore) based on GDP and IncomeInequality (all variables are categorical variables), <strong>draw the decision tree you would construct for predicting HappyScore based on GDP and Income Inequality.</strong> (6p)</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">

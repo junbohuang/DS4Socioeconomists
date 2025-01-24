@@ -584,7 +584,7 @@ answer the following questions:
 
 > **Answer:** (0.85 + 0.85 + 0.84 + 0.83 + 0.83) / 5 = 0.84
 >
-> 4.2.3. What does this average, combined with the consistency of the fold results, tell you about the model's ability to generalize? (2p)
+> 4.2.3. **What does this average, combined with the consistency of the fold results, tell you about the model's ability to generalize?** (2p)
 >
 > **Answer**: The average R-squared value of 0.84indicates that, on average, the model explains 84% of the variance in the data, which suggests good predictive performance. The results are consistent across the folds (with values ranging from 0.83 to 0.85), showing that the model performs reliably on different subsets of the data. This consistency indicates that the model generalizes well to unseen data and is not overfitting or underfitting.
 
