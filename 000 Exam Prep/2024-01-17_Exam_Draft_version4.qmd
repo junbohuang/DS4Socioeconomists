@@ -250,7 +250,7 @@ b. The ability of a model to identify patterns in a dataset that can be applied 
 c. The ability of a model to memorize specific examples from the training data.\
 d. The ability to visualize and interpret the training data in multiple ways.
 
-**Correct Answer:**\
+**Answer:**\
 b. The ability of a model to identify patterns in a dataset that can be applied to other similar datasets.
 
 ## Task 1.19 +
@@ -360,7 +360,7 @@ Data Description:
 The dataset consists of 111 observations. You will work with a sample (task 2.1) and the full data set (task 2.2 and task 2).
 
 | name                  | valuetype | scale                  | explanation                                                                                             |
-|------------------|------------------|------------------|------------------|
+|-----------------------|-----------|------------------------|---------------------------------------------------------------------------------------------------------|
 | adjusted_satisfaction | numeric   | 0 to 100               | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction          |
 | avg_income            | numeric   | 0\$ to thousands of \$ | average annual income in \$                                                                             |
 | median_income         | numeric   | 0\$ to thousands of \$ | median annual income in \$                                                                              |

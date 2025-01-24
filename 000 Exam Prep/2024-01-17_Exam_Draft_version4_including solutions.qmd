@@ -37,9 +37,9 @@ b.  `nrow(matrix_data)`
 c.  `length(matrix_data)`
 d.  `dim(matrix_data)[2]`
 
-**Answer:**
-
-a\. `ncol(matrix_data)`
+> **Answer:**
+>
+> a\. `ncol(matrix_data)`
 
 ## Task 1.2
 
@@ -50,9 +50,9 @@ b.  Automatic generation of graphics
 c.  Solving a problem through a sequence of steps
 d.  Implementation of hardware components
 
-**Answer:**
-
-c\. Solving a problem through a sequence of steps
+> **Answer:**
+>
+> c\. Solving a problem through a sequence of steps
 
 ## Task 1.3
 
@@ -63,9 +63,9 @@ b.  Collect data
 c.  Verify the accuracy of the model with new data
 d.  Save the model in a database
 
-**Answer:**
-
-c\. Verify the accuracy of the model with new data (Junbo: i will rather say model performance instead of accuracy)
+> **Answer:**
+>
+> c\. Verify the accuracy of the model with new data (Junbo: i will rather say model performance instead of accuracy)
 
 ## Task 1.4
 
@@ -76,25 +76,22 @@ b.  Generalization
 c.  Data cleaning
 d.  Underfitting
 
-**Answer:**
-
-b\. Generalization
+> **Answer:**
+>
+> b\. Generalization
 
 ## Task 1.5
 
 **What does 'pruning' refer to in the context of decision trees?**
 
 a.  Increasing the number of features considered in the model to provide more complexity.
-
 b.  Aggregating the results of multiple decision trees into a single model for better accuracy.
-
 c.  Refining the model by removing branches that do not significantly contribute to predictive power
-
 d.  Utilizing cross-validation techniques to determine significant branches.
 
-**Answer:**
-
-c\. Refining the model by removing branches that do not significantly contribute to predictive power
+> **Answer:**
+>
+> c\. Refining the model by removing branches that do not significantly contribute to predictive power
 
 ## Task 1.6
 
@@ -105,9 +102,9 @@ b.  removing large values from a dataset
 c.  Streamlining the analysis by focusing on a smaller number of relevant variables
 d.  Filtering out all categorical variables from the dataset.
 
-**Answer:**
-
-c\. Streamlining the analysis by focusing on a smaller number of relevant variables
+> **Answer:**
+>
+> c\. Streamlining the analysis by focusing on a smaller number of relevant variables
 
 ## Task 1.7
 
@@ -118,9 +115,9 @@ b.  dplyr
 c.  tidyr
 d.  shiny
 
-**Answer:**
-
-a\. ggplot2
+> **Answer:**
+>
+> a\. ggplot2
 
 ## Task 1.8
 
@@ -131,19 +128,22 @@ b.  as.data.frame()
 c.  df()
 d.  table()
 
-**Answer**:
-
-b\. as.data.frame()
+> **Answer**:
+>
+> b\. as.data.frame()
 
 ## Task 1.9 +
 
 What is the primary purpose of a validation set in data science?
 
-a\. To train the model on labeled data. b. To evaluate the model's performance during training. c. To test the model's final performance on unseen data. d. To preprocess and clean the dataset.
+a.  To train the model on labeled data.
+b.  To evaluate the model's performance during training.
+c.  To test the model's final performance on unseen data.
+d.  To preprocess and clean the dataset.
 
-**Answer:**
-
-b\. To evaluate the model's performance during training.
+> **Answer:**
+>
+> b\. To evaluate the model's performance during training.
 
 ## Task 1.10 +
 
@@ -154,9 +154,9 @@ b.  To handle missing values in the dataset effectively.
 c.  To prevent overfitting by penalizing large model coefficients.
 d.  To increase the complexity of the model for better accuracy.
 
-**Answer:**
-
-c\. To prevent overfitting by penalizing large model coefficients.
+> **Answer:**
+>
+> c\. To prevent overfitting by penalizing large model coefficients.
 
 ## Task 1.11 ++
 
@@ -167,9 +167,9 @@ b.  It reduces the magnitude of coefficients, leading to simpler models and less
 c.  It has no impact on the model's coefficients or complexity.
 d.  It increases the model's sensitivity to noise in the training data.
 
-**Answer:**
-
-b\. It reduces the magnitude of coefficients, leading to simpler models and less overfitting.
+> **Answer:**
+>
+> b\. It reduces the magnitude of coefficients, leading to simpler models and less overfitting.
 
 ## Task 1.12 +
 
@@ -180,9 +180,9 @@ b.  Classification problems where the target variable is categorical.
 c.  Clustering problems where the data is grouped into clusters.
 d.  Dimensionality reduction problems.
 
-**Answer**:
-
-b\. Classification problems where the target variable is categorical.
+> **Answer**:
+>
+> b\. Classification problems where the target variable is categorical.
 
 ## Task 1.13 +++
 
@@ -193,9 +193,9 @@ b.  Homoscedasticity: The variance of the residuals is constant across all level
 c.  Multicollinearity: Predictors should be highly correlated with each other to improve model stability.
 d.  Independence: The residuals are independent of each other.
 
-**Answer**:
-
-c\. Multicollinearity: Predictors should be highly correlated with each other to improve model stability.
+> **Answer**:
+>
+> c\. Multicollinearity: Predictors should be highly correlated with each other to improve model stability.
 
 ## Task 1.14 +
 
@@ -206,7 +206,9 @@ b.  Mean Squared Error (MSE)
 c.  F1-score
 d.  Precision
 
-**Answer** : b. Mean Squared Error (MSE)
+> **Answer** :
+>
+> b\. Mean Squared Error (MSE)
 
 ## Task 1.15 +++
 
@@ -217,28 +219,29 @@ b.  A higher R² value indicates a better fit of the model to the data.
 c.  R² can never be negative.
 d.  R² increases when adding more predictors to the model, even if those predictors do not improve the model.
 
-**Answer**:
-
-c\. R² can never be negative.
+> **Answer**:
+>
+> c\. R² can never be negative.
 
 ## Task 1.16 ++
 
 In Ordinary Least Squares (OLS) linear regression, which of the following does Residual Sum of Squares (RSS) measure? The equation for RSS is:
 
+```{=tex}
 \begin{equation}
 RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
 \end{equation}
-
+```
 a.  The total variance explained by the model.
 b.  The difference between the predicted and actual values of the dependent variable.
 c.  The sum of squared errors between the observed and predicted values.
 d.  The amount of variance not explained by the regression model.
 
-**Answers**:
-
-c\. The sum of squared errors between the observed and predicted values.
-
-d\. The amount of variance not explained by the regression model.
+> **Answers**:
+>
+> c\. The sum of squared errors between the observed and predicted values.
+>
+> d\. The amount of variance not explained by the regression model.
 
 ## Task 1.17 +++
 
@@ -249,9 +252,9 @@ b. A higher R² always indicates a better model, even if it leads to overfitting
 c. MSE is a better metric for evaluating model performance on unseen data.\
 d. R² and MSE are used to directly compare models that have different numbers of predictors.
 
-**Answers:**\
-c. MSE is a better metric for evaluating model performance on unseen data.\
-d. R² and MSE are used to directly compare models that have different numbers of predictors.
+> **Answers:**\
+> c. MSE is a better metric for evaluating model performance on unseen data.\
+> d. R² and MSE are used to directly compare models that have different numbers of predictors.
 
 ## Task 1.18 +
 
@@ -262,8 +265,8 @@ b. The ability of a model to identify patterns in a dataset that can be applied 
 c. The ability of a model to memorize specific examples from the training data.\
 d. The ability to visualize and interpret the training data in multiple ways.
 
-**Correct Answer:**\
-b. The ability of a model to identify patterns in a dataset that can be applied to other similar datasets.
+> **Answer:**\
+> b. The ability of a model to identify patterns in a dataset that can be applied to other similar datasets.
 
 ## Task 1.19 +
 
@@ -274,9 +277,9 @@ b. The model has high bias and performs poorly on both training and test data.\
 c. The model performs well on both training and test data.\
 d. The model has high variance and captures noise in the training data.
 
-**Answers:**\
-a. The model performs well on training data but poorly on unseen test data.\
-d. The model has high variance and captures noise in the training data.
+> **Answers:**\
+> a. The model performs well on training data but poorly on unseen test data.\
+> d. The model has high variance and captures noise in the training data.
 
 ## Task 1.20 ++
 
@@ -293,10 +296,10 @@ b.  For each unit increase in $X_1$, the predicted value of $y$ will increase by
 c.  For each unit increase in $X_2$, the predicted value of $y$ will decrease by 0.8, assuming $X_1$ remains constant.
 d.  The value of $y$ is independent of $X_1$ and only depends on $X_2$.
 
-**Correct Answer:**\
-b. For each unit increase in $X_1$, the predicted value of $y$ will increase by 2.4, assuming $X_2$ remains constant.
-
-c\. For each unit increase in $X_2$, the predicted value of $y$ will decrease by 0.8, assuming $X_1$ remains constant.
+> **Answers:**\
+> b. For each unit increase in $X_1$, the predicted value of $y$ will increase by 2.4, assuming $X_2$ remains constant.
+>
+> c\. For each unit increase in $X_2$, the predicted value of $y$ will decrease by 0.8, assuming $X_1$ remains constant.
 
 # Task 2: Code explanation - 20p
 
@@ -367,45 +370,51 @@ happiness_income_data <- rbind(happiness_income_data, data)
 
 ### Data Description:
 
-The dataset consists of 111 observations. You will work with a sample (task 2.1) and the full data set (task 2.2 and task 2).
+The dataset consists of 111 observations. You will work with a subset in task 2.1, and the full data set in task 2.2 and task 2.
 
-| name | valuetype | scale | explanation |
-|-----------------|-----------------|-----------------|---------------------|
-| adjusted_satisfaction | numeric | 0 to 100 | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction |
-| avg_income | numeric | 0\$ to thousands of \$ | average annual income in \$ |
-| median_income | numeric | 0\$ to thousands of \$ | median annual income in \$ |
-| income_inequality | numeric | 0 to 100 | income inequality, lower values indicate a lower inequality, higher values indicate a higher inequality |
-| happyScore | numeric | 0-10 | lower values indicate a lower overall happiness, higher values indicate a higher overall happiness |
-| gdp | numeric |  | GDP in trillions of \$ (Milliarden auf deutsch) |
-| country | character | \- | country name |
+| name                  | valuetype | scale                  | explanation                                                                                             |
+|------------------|------------------|------------------|-------------------|
+| adjusted_satisfaction | numeric   | 0 to 100               | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction          |
+| avg_income            | numeric   | 0\$ to thousands of \$ | average annual income in \$                                                                             |
+| median_income         | numeric   | 0\$ to thousands of \$ | median annual income in \$                                                                              |
+| income_inequality     | numeric   | 0 to 100               | income inequality, lower values indicate a lower inequality, higher values indicate a higher inequality |
+| happyScore            | numeric   | 0-10                   | lower values indicate a lower overall happiness, higher values indicate a higher overall happiness      |
+| gdp                   | numeric   |                        | GDP in trillions of \$ (Milliarden auf deutsch)                                                         |
+| country               | character | \-                     | country name                                                                                            |
 
 ## Task 2.1 (14p)
 
-a.  The following code snippet works with the data set `happiness_income_data`. You see a sample of this original data set below. Some transformations and selections etc. were made - trace those steps and execute them manually to fill in the sampled data table by hand. Your result represents `happiness_data_clean` and includes the same observations as the original sample (8p)\
-    ***answer: 1p for each correctly changed value and eliminated row***
+2.1.1. Below is a subset of the dataset happiness_income_data. The code applies steps for data cleaning (i.e., dealing with missing values and outliers). **Follow the steps in the code and update the table by hand. Your final table should be happiness_data_clean** (8p).
 
-    ```{r}
-       # load("happiness_income_data.RData") #loading data
-    load("happiness_income_data.RData")
+> *answer: 1p for each correctly changed value and eliminated row*
 
-    happiness_income_data$happyScore <- ifelse(happiness_income_data$happyScore > 10, NA, happiness_income_data$happyScore)
+```{r}
+   # load("happiness_income_data.RData") #loading data
+load("happiness_income_data.RData")
 
-    happiness_income_data$median_income <- ifelse(happiness_income_data$median_income < 0, NA, happiness_income_data$median_income)
+happiness_income_data$happyScore <- ifelse(happiness_income_data$happyScore > 10, NA, happiness_income_data$happyScore)
 
-    happiness_income_data$income_inequality <- ifelse(happiness_income_data$income_inequality < 0 | happiness_income_data$income_inequality > 100, NA, happiness_income_data$income_inequality)
+happiness_income_data$median_income <- ifelse(happiness_income_data$median_income < 0, NA, happiness_income_data$median_income)
 
-    happiness_income_data_clean <- na.omit(happiness_income_data)
+happiness_income_data$income_inequality <- ifelse(happiness_income_data$income_inequality < 0 | happiness_income_data$income_inequality > 100, NA, happiness_income_data$income_inequality)
 
-    ```
+happiness_income_data_clean <- na.omit(happiness_income_data)
+
+```
 
 ![](tabelle_Klausur.PNG)
 
-b.  Did you remove singular values and/or rows and/or columns? If you did so, explain why. (2p)\
-    ***answer***: ***4 rows were removed due to including NAs***
-c.  Did you change the content or name of singular values and/or rows and/or columns? If you did so, explain why. (2p)\
-    ***answer: 4 values were changed to NA, because they were below/above the allowed value range***
-d.  After applying the code: Are any values left that could potentially lead to problems? If so, how could we fix that problem (answer verbally, no code needed)? (2p)\
-    ***answer: for happyScore a negative value remains that potentially causes distortion***
+**2.1.2. Did you remove singular values and/or rows and/or columns? If you did so, explain why. (2p)**
+
+> *answer*: *4 rows were removed due to including NAs*
+
+**2.1.3. Did you change the content or name of singular values and/or rows and/or columns? If you did so, explain why. (2p)**
+
+> *answer: 4 values were changed to NA, because they were below/above the allowed value range*
+
+**2.1.3. After applying the code: Are any values left that could potentially lead to problems? If so, how could we fix that problem (answer verbally, no code needed)? (2p)**
+
+> *answer: for happyScore a negative value remains that potentially causes distortion*
 
 ![](tabelle_Klausur_solution.PNG)
 
@@ -427,10 +436,11 @@ model1 <- lm(adjusted_satisfaction ~ avg_income, happiness_income_data_clean)
 summary(model1)
 ```
 
-a.  Explain which of these graphs illustrates the results of the linear regression (model1) best and why it is the best illustration? (3p)\
-    ***answer: Graph1 illustrates the results of the linear regression best (1p) since it includes a straight line that starts at an adjusted satisfaction of around 40 - so at the intercept b0 of the regression output (1p). Model1 proclaims that with each additional \$ in the average income the adjusted satisfaction raises by 0.0014197 points - meaning that with additional 1000\$ in average income the adjusted satisfaction should rise by about 1.42points which is the case for the blue line in graph1 (1p)***
+2.2.1. Explain **which of these graphs illustrates the results of the linear regression (model1) best** and **why** it is the best illustration? (3p)
 
-b.  Why are the other graphics not suitable? (1p each)
+> *answer: Graph1 illustrates the results of the linear regression best (1p) since it includes a straight line that starts at an adjusted satisfaction of around 40 - so at the intercept b0 of the regression output (1p). Model1 proclaims that with each additional \$ in the average income the adjusted satisfaction raises by 0.0014197 points - meaning that with additional 1000\$ in average income the adjusted satisfaction should rise by about 1.42points which is the case for the blue line in graph1 (1p)*
+
+2.2.2. Why are the other graphics not suitable? (1p each)
 
 Graph 1
 
@@ -461,7 +471,7 @@ ggplot(data=happiness_income_data_clean, mapping = aes(x = avg_income, y=adjuste
 
 ```
 
-***answer: Graph2 represents a polynomial regression degree 2 and therefore does not represent the linear regression results of our model correctly. The line is warped and not straight (1p)***
+> *answer: Graph2 represents a polynomial regression degree 2 and therefore does not represent the linear regression results of our model correctly. The line is warped and not straight (1p)*
 
 Graph 3
 
@@ -476,7 +486,7 @@ ggplot(data=happiness_income_data_clean, mapping = aes(x = avg_income, y=adjuste
 
 ```
 
-***answer: Graph3 represents a polynomial regression degree 7 and therefore does not represent the linear regression results of our model correctly. The line is wavy and not straight (1p)***
+> *answer: Graph3 represents a polynomial regression degree 7 and therefore does not represent the linear regression results of our model correctly. The line is wavy and not straight (1p)*
 
 Graph 4
 
@@ -492,26 +502,28 @@ ggplot(data=happiness_income_data_clean, mapping = aes(x=avg_income, y=adjusted_
     ylab("adjusted satisfaction")
 ```
 
-***answer: Graph4 consists of a straight line similar to Graph1 but we cannot see specific values since the axis labels and tick-marks as well as scales are completely missing (1p)***
+> *answer: Graph4 consists of a straight line similar to Graph1 but we cannot see specific values since the axis labels and tick-marks as well as scales are completely missing (1p)*
 
 # Task 3: Regression - 22p
 
-1.  What kind of question do the different models answer? Think of a research question for `model1` and of a research question for `model2`. (2p each) –\> 4p total
+3.1. **What kind of question do the different models answer?** Think of a research question for `model1` and of a research question for `model2`. (2p each) –\> 4p total
 
-    ***answer: model1: How do a countries income inequality, gdp and median income influence the happyScore? (2p)***
+> *answer: model1: How do a countries income inequality, gdp and median income influence the happyScore? (2p)*
+>
+> *answer: model2: How do income inequality, gdp and median income influence the chances that a country has a high happyScore (7 or more points)? (2p)*
 
-    ***answer: model2: How do income inequality, gdp and median income influence the chances that a country has a high happyScore (7 or more points)? (2p)***
+3.2. **Explain each model in your own words** –\> 1p each, 2p total
 
-2.  Explain each model in your own words –\> 1p each, 2p total\
-    ***answer: model1: In the first model we assume a linear relationship between the happyScore of a country and its characteristics such as income inequality, gdp and median income.\
-    answer: model2: In the second model we assume that the chance, that a country has a high happyScore is influenced by its characteristics such as income inequality, gdp and median income.***
+> *answer: model1: In the first model we assume a linear relationship between the happyScore of a country and its characteristics such as income inequality, gdp and median income.\
+> answer: model2: In the second model we assume that the chance, that a country has a high happyScore is influenced by its characteristics such as income inequality, gdp and median income.*
 
-3.  Write down the mathematical formula for each of the models -\> 2p each –\> 4p total\
-    ***answer: model1: happyScore = b0 + b1\*income_inequality+b2\*gdp+b3\*median_income***
+3.3. **Write down the mathematical formula for each of the models** -\> 2p each –\> 4p total
 
-    ***answer: model2: high_happyScore = b0 + b1\*income_inequality+b2\*gdp+b3\*median_income***
+> *answer: model1: happyScore = b0 + b1\*income_inequality+b2\*gdp+b3\*median_income*
+>
+> *answer: model2: high_happyScore = b0 + b1\*income_inequality+b2\*gdp+b3\*median_income*
 
-4.  Interpret the coefficients for the models (value, meaning, significance), use two post decimal positions–\> 2p per coefficient –\> 4 coefficients per model (0.5 per element) –\> 4\*0,5\*3 -\> 6p per model -\> 12p total
+3.4. **Interpret the coefficients for the models** (value, meaning, significance), use two post decimal positions–\> 2p per coefficient –\> 4 coefficients per model (0.5 per element) –\> 4\*0,5\*3 -\> 6p per model -\> 12p total
 
 ```{r}
 options(scipen = 999)
@@ -519,14 +531,14 @@ linear_model <- lm(happyScore~income_inequality+gdp+median_income,data=happiness
 summary(linear_model)
 ```
 
-***answer: Interpretation model1:***
-
-| coefficients | interpretation |
-|----------------------------------|--------------------------------------|
-| (Intercept) 3.244930846\*\*\* | When all other variables are 0 the happyScore is approximately 3.24p. there is no meaningful explanation in our case. The value is highly significant on the 99.9% level. |
-| income_inequality 0.031412802\*\*\* | Keeping all other values stable the happyScore increases approx. 0.03p with each additional point of income inequality. This means that a rise in income inequality slightly increases the happyScore. The value is highly significant on the 99.9% level. |
-| gdp -0.000008244 - | Keeping all other values stable the happyScore lowers by 0.000008244p if the gdp rises by 1 unit, meaning by 1 trillion. This value is not significant on any of the standard levels (p = 0.77) and therefore has little explanatory power. |
-| median_income 0.000183292\*\*\* | Keeping all other values stable the happyScore rises approx. by 0.000183292 points with each additional dollar in median income. This means that a rise in the median income increases the happyScore slightly. The value is highly significant on the 99.9% level. |
+> *answer: Interpretation model1:*
+>
+> | coefficients                        | interpretation                                                                                                                                                                                                                                                      |
+> |----------------------------------|--------------------------------------|
+> | (Intercept) 3.244930846\*\*\*       | When all other variables are 0 the happyScore is approximately 3.24p. there is no meaningful explanation in our case. The value is highly significant on the 99.9% level.                                                                                           |
+> | income_inequality 0.031412802\*\*\* | Keeping all other values stable the happyScore increases approx. 0.03p with each additional point of income inequality. This means that a rise in income inequality slightly increases the happyScore. The value is highly significant on the 99.9% level.          |
+> | gdp -0.000008244 -                  | Keeping all other values stable the happyScore lowers by 0.000008244p if the gdp rises by 1 unit, meaning by 1 trillion. This value is not significant on any of the standard levels (p = 0.77) and therefore has little explanatory power.                         |
+> | median_income 0.000183292\*\*\*     | Keeping all other values stable the happyScore rises approx. by 0.000183292 points with each additional dollar in median income. This means that a rise in the median income increases the happyScore slightly. The value is highly significant on the 99.9% level. |
 
 ```{r}
 #logistic regression for "happy country" or not
@@ -538,18 +550,58 @@ summary(logistic_model)
 
 # Task 4: Regularization and Generalizability - 18p
 
-#### 4.1 Feature Selection with Regularization (4 points)
-
-Suppose you use **Ridge** or **Lasso regression** on the linear regression model (as the following equation) to identify the most important predictors in the above dataset
+Given the linear regression models below, answer the following questions:
 
 happyScore = $\beta_1$ income_inequality + $\beta_2$ gdp + $\beta_3$ median_income
 
-Say, income_inequality and median_income are highly correlated. How might the coefficients change if you use ridge regression? What about lasso regression?
+#### 4.1 Feature Selection with Regularization (6 points)
 
-**Answer:** Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model. Lasso, on the other hand, may set one coefficient (e.g., median income) to zero, effectively removing it and prioritizing GDP.
+4.1.1 Suppose you want to use **Ridge** or **Lasso regression** to reduce overfitting and to identify the most important predictors. Say, income_inequality and median_income are highly correlated. How might the coefficients ($\beta_1$ and $\beta_3$) change if you use ridge regression? (3p)
 
-#### 4.2 Generalizability Testing (3 points)
+> **Answer:** Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model.
 
-Describe a method to evaluate the **generalizability** of the linear regression model in Task 3.
+4.1.2 What about lasso regression? (3p)
 
-**Answer**: split the data into training, validation and/or testing set; apply validation method such as k-fold cross-validation
+> **Answer:** Ridge regression will shrink their coefficients proportionally, reducing their individual contributions but keeping both predictors in the model.
+
+#### 4.2 Generalizability Testing (6 points)
+
+4.2.1 Generalizability refers to models' ability to make correct predictions on unseen data. Given the happiness_income_data_clean dataset, please describe a method to evaluate the **generalizability** of the linear regression model. (2p)
+
+> **Answer**: split the data into training, validation and/or testing set; apply validation method such as k-fold cross-validation
+
+4.2.2 Given the following results from a 5-fold cross-validation, calculate the average R-squared value. (2p)
+
+| **Fold** | **R-squared Value** |
+|----------|---------------------|
+| Fold 1   | 0.85                |
+| Fold 2   | 0.85                |
+| Fold 3   | 0.84                |
+| Fold 4   | 0.83                |
+| Fold 5   | 0.83                |
+
+> **Answer:** (0.85 + 0.85 + 0.84 + 0.83 + 0.83) / 5 = 0.84
+>
+> 4.2.3. What does this average, combined with the consistency of the fold results, tell you about the model's ability to generalize? (2p)
+>
+> **Answer**: The average R-squared value of 0.84indicates that, on average, the model explains 84% of the variance in the data, which suggests good predictive performance. The results are consistent across the folds (with values ranging from 0.83 to 0.85), showing that the model performs reliably on different subsets of the data. This consistency indicates that the model generalizes well to unseen data and is not overfitting or underfitting.
+
+#### 4.3 **Decision Tree Construction (6 points)**
+
+Given the following dataset for predicting happiness score (HappyScore) based on **GDP** and **Income Inequality** (all variables are categorical variables), draw the decision tree you would construct for predicting HappyScore based on GDP and Income Inequality. (6p)
+
+| **GDP** | **Income Inequality** | **HappyScore** |
+|---------|-----------------------|----------------|
+| Low     | High                  | Low            |
+| Low     | Medium                | High           |
+| Low     | Low                   | High           |
+| Medium  | High                  | Low            |
+| Medium  | Medium                | Low            |
+| Medium  | Low.                  | Low            |
+| High    | High                  | Low            |
+| High    | Medium                | Low            |
+| High    | Low                   | High           |
+
+> **Answer**:
+>
+> ![](images/tree.drawio.png)
