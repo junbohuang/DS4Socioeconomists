@@ -33,8 +33,8 @@ Please select the teacher with whom you attended the exercise!
 
 | Lisa Wegner (room 1005) | Junbo Huang (room 1004) |
 |------------------------------------|------------------------------------|
-| ![](Evaluation - Lisa Wegner.png){width="500"} |  |
-| Link: [you can also find the evaluation here](https://evasys-online.uni-hamburg.de/evasys/public/online/index/index?online_php=&pswd=13H21&ONLINEID=731445110896615737267747654673098693629915) |  |
+| ![](Evaluation - Lisa Wegner.png){width="500"} | ![](Evaluation Junbo.png){width="500"} |
+| Link: [Evaluation Lisa Wegner](https://evasys-online.uni-hamburg.de/evasys/public/online/index/index?online_php=&pswd=13H21&ONLINEID=731445110896615737267747654673098693629915) | [Evaluation Junbo Huang](https://evasys-online.uni-hamburg.de/evasys/online.php?pswd=TQ69P ) |
 
 ------------------------------------------------------------------------
 
