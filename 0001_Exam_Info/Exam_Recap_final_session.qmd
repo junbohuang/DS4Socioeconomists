@@ -1,0 +1,83 @@
+---
+title: "Exam recap"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# Today
+
+1.  Evaluation
+
+2.  little input on exam
+
+3.  room for questions
+
+------------------------------------------------------------------------
+
+# Evaluation
+
+We would like to kindly invite you to take a moment to fill in the evaluation form for the tutorials. Your feedback is invaluable, not only for us (Junbo and Lisa), who are eager to learn and improve our teaching methods, but also for you as students.
+
+By sharing your thoughts and experiences, you contribute to creating a better learning environment for yourself and future cohorts. As you already know, this course is still a subject of change and we use your feedback to refine the content, structure, and delivery of the tutorials.
+
+Remember, your voice matters! Let’s work together to enhance the quality of our course and make it an even more rewarding experience for everyone involved.
+
+Thank you for your time and input!
+
+::: callout-caution
+Please select the teacher with whom you attended the exercise!
+:::
+
+| Lisa Wegner (room 1005) | Junbo Huang (room 1004) |
+|------------------------------------|------------------------------------|
+| ![](Evaluation - Lisa Wegner.png){width="500"} |  |
+| Link: [you can also find the evaluation here](https://evasys-online.uni-hamburg.de/evasys/public/online/index/index?online_php=&pswd=13H21&ONLINEID=731445110896615737267747654673098693629915) |  |
+
+------------------------------------------------------------------------
+
+## For the exam:
+
+-   There will be no coding "by hand" - but you should have basic code-understanding
+
+-   structure follows the exam prep materials that are already online
+
+-   Look into the tutorial slides and solutions for applications of concepts and methods
+
+-   post decimal digits ("Nachkommastellen"): specified in each task, otherwise use two post decimal digits
+
+-   you should be able to recognize formulas and to use and explain them, but don't have to learn complex mathematical derivations
+
+-   regarding the language: exam will be in English, but we will help you in case you have problems with comprehension of certain terms and give you the translation
+
+## Priorities (more + represent a greater importance)
+
+1.  R_Markdown_Quarto (+)
+
+2.  R_Basics_and_Algorithms_and_Structures (+)
+
+3.  Data_and_Basic_Transformations_in_R (+)
+
+4.  Transparency_and_Reproducability_in_Work_and_Research (+)
+
+5.  Data_Visualisation (+)
+
+6.  Foundations_of_SL (++)
+
+7.  Linear_Regression_Part_1 (+++)
+
+8.  Linear_Regression_Part_2 (+++)
+
+9.  LPM_Logit (++)
+
+10. evaluation_cv_dimensionality (++)
+
+11. Trees (+)
+
+## Points: 90p
+
+-   1/3 of points: via single choice tasks, 10 tasks with 3p each — 30p total
+
+-   2/3 of points: 3 tasks with multiple sub tasks (like in exam-prep materials) — around 20p per task
