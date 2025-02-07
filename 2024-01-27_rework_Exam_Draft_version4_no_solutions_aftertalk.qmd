@@ -1,0 +1,645 @@
+---
+title: "First Exam Data Science for Socioeconomists Ws 24/25 - 07. February 2025"
+format: 
+  html:
+    theme: minty
+    self-contained: true
+editor: visual
+---
+
+# Info on exam
+
+There will be four different tasks with various sub-tasks and the following points:
+
+1.  MC questions - 30p
+2.  Code explanation - 20p
+3.  Regression - 22p
+4.  Regularization and Generalisability - 18p
+
+-   The exam consists of 90p total.
+
+-   You are not supposed to answer with handwritten code but rather with "normal" text.
+
+-   Use as many post decimal digits ("Nachkommastellen") as stated - if NOT stated, use two
+
+::: callout-important
+If you are not sure on the translation of a certain term from English to German please ask the exam supervisors!
+:::
+
+# Task 1: single choice Questions (30p)
+
+10 questions, 3p each!
+
+::: callout-note
+Please note, that exactly one single answers is correct.
+:::
+
+## Task 1.1
+
+**Working with R**: Given the following matrix in R: `matrix_data <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3, byrow = TRUE)`. Which of the following R code lines correctly returns the number of columns in this matrix?
+
+a.  ⬜ `ncol(matrix_data)`
+b.  ⬜ `nrow(matrix_data)`
+c.  ⬜ `length(matrix_data)`
+d.  ⬜ `dim(matrix_data)[2]`
+
+## Task 1.2
+
+**Algorithms**: What is the main purpose of an algorithm?
+
+a.  ⬜ Database management
+b.  ⬜ Automatic generation of graphics
+c.  ⬜ Solving a problem through a sequence of steps
+d.  ⬜ Implementation of hardware components
+
+## Task 1.3
+
+**Model validation**: What is a fundamental step in model validation in data science?
+
+a.  ⬜ Train the model
+b.  ⬜ Collect data
+c.  ⬜ Verify the model performance with new data
+d.  ⬜ Save the model in a database
+
+## Task 1.4
+
+Which of the following methods is least effective for **simplifying a model or reducing overfitting**?
+
+a.  ⬜ Feature selection to remove irrelevant or redundant features.
+b.  ⬜ Regularization techniques like Lasso and Ridge regression to penalize large coefficients.
+c.  ⬜ Increasing the number of features with techniques like feature engineering and feature expansion to capture more information about the data.
+d.  ⬜ Pruning techniques in decision trees to remove branches that have little importance.
+
+## Task 1.5
+
+What is the main objective of regularization as seen in **Ridge/Lasso regression**?
+
+a.  ⬜ To improve training speed by reducing the dataset size.
+b.  ⬜ To handle missing values in the dataset effectively.
+c.  ⬜ To prevent overfitting by penalizing model coefficients under assumption of a specific loss function.
+d.  ⬜ To increase the complexity of the model for better accuracy.
+
+## Task 1.6
+
+What type of problem is **logistic regression** primarily used to solve?
+
+a.  ⬜ Regression problems where the target variable is continuous.
+b.  ⬜ Classification problems where the target variable is categorical.
+c.  ⬜ Clustering problems where the data is grouped into clusters.
+d.  ⬜ Dimensionality reduction problems.
+
+## Task 1.7
+
+Which of the following metrics is most commonly used to evaluate the **goodness of fit in a linear regression model**?
+
+a.  ⬜ Accuracy
+b.  ⬜ Mean Squared Error (MSE)
+c.  ⬜ F1-score
+d.  ⬜ Precision
+
+## Task 1.8
+
+In Ordinary Least Squares (OLS) linear regression, **which of the following does Residual Sum of Squares (RSS) measure**? The equation for RSS is:
+
+\begin{equation}
+RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\end{equation}
+
+a.  ⬜ The sum of the squared differences between the observed values and the values predicted by the model.
+b.  ⬜ The total variation in the dependent variable around its mean.
+c.  ⬜ The sum of the squared differences between the observed values and the mean of the dependent variable.
+d.  ⬜ The proportion of the variance in the dependent variable explained by the independent variable(s).
+
+## Task 1.9
+
+Which of the following are **NOT** considered good practices in data analysis and coding?
+
+a.  ⬜ **Transparency** ensures that the analysis process, including the code and assumptions, is documented clearly so others can follow and understand the methodology.
+b.  ⬜ **Reproducibility** guarantees that anyone with the same data and code can obtain the same results, supporting consistent and reliable findings.
+c.  ⬜ **Validity** refers to using appropriate methods to ensure that the conclusions drawn from the analysis accurately reflect the problem being studied.
+d.  ⬜ **Efficiency** emphasizes optimizing code for speed, even if it results in a more complex or harder-to-read structure.
+
+## Task 1.10
+
+**Model performance**: Which term describes the ability of a model to perform well on unseen data?
+
+a.  ⬜ Overfitting
+b.  ⬜ Generalization
+c.  ⬜ Data cleaning
+d.  ⬜ Underfitting
+
+# Task 2: Code explanation (20p in total)
+
+We will work with `happiness_income_data`. This dataset includes information about different countries and income, satisfaction of the inhabitants, the GDP, income inequality and other variables. Below you get an extensive data description and the tasks.
+
+```{r}
+#| echo: false
+
+library(readr)
+happiness_income_data <- read_csv("happyscore_income.csv")
+#View(happiness_income_data)
+happiness_income_data$country...11 <- NULL
+happiness_income_data$country <- happiness_income_data$country...1
+happiness_income_data$country...1 <- NULL
+```
+
+```{r}
+#| echo: false
+library(openxlsx)
+gdp_clean <- read.xlsx("GDP_clean_2023.xlsx")
+gdp_clean$GDP_2023 <- as.numeric(gdp_clean$GDP_2023)
+gdp_clean$gdp <- gdp_clean$GDP_2023/1000000000
+gdp_clean$country <- gdp_clean$Country.Name
+gdp_clean$Country.Name <- NULL
+gdp_clean$GDP_2023 <- NULL
+
+happiness_income_data <- merge(happiness_income_data, gdp_clean, by.x = "country", by.y="country", all.x = TRUE)
+
+happiness_income_data$GDP <- NULL
+
+happiness_income_data_orig <- happiness_income_data
+
+```
+
+```{r}
+#| echo: false
+data <- data.frame(
+  adjusted_satisfaction = c(37, NA, 60, 59, 65, NA, 43, 63, 37, 34),
+  avg_satisfaction = c(4.9, NA, 7.1, 7.2, 7.6, NA, 5.3, 7.2, 4.4, 4.6),
+  std_satisfaction = c(2.42, 3.19, 1.91, NA, 1.80, 5.0, 2.10, 1.72, 2.02, 2.57),
+  avg_income = c(2096.760, NA, 7101.120, 19457.040, 19917.000, NA, 
+                 1265.340, 17168.505, 870.840, 5354.820),
+  median_income = c(-999, NA, 5109.400, 16879.620, 15846.060, NA, 
+                    994.140, 15166.455, 630.240, 4523.565),
+  income_inequality = c(31.44556, NA, -20.56, 30.29625, 35.28500, NA, 
+                        32.66500, 113.5, 39.76000, 34.16250),
+  region = c('Central and Eastern Europe', 'Sub-Saharan Africa', 
+             'Latin America and Caribbean', 'Western Europe', 
+             'Australia and New Zealand', NA, 'Southern Asia', 
+             'Western Europe', 'Sub-Saharan Africa', 
+             'Central and Eastern Europe'),
+  happyScore = c(4.350, NA, 12.32, 7.200, 7.284, NA, 4.694, -6.937, 
+                 3.587, 4.218),
+  gdp = c(14.08, NA, 800, NA, -1.3, NA, 0.39753, 
+          261.4, 0.25812, NA),
+  country = c('Malawi', 'Zambia', 'Guatemala', 'Sierra Leone', 
+              'Panama', NA, 'Burundi', 'Kazakhstan', 
+              'Ghana', 'Laos')
+)
+
+
+happiness_income_data <- rbind(happiness_income_data, data)
+
+#install.packages("openxlsx")
+#library(openxlsx)
+#write.xlsx(happiness_income_data, 'export.xlsx')
+```
+
+### Data Description:
+
+The dataset consists of 111 observations. You will work with a subset in task 2.1, and the full data set in task 2.2 and task 2.
+
+| name | valuetype | scale | explanation |
+|------------------|------------------|------------------|--------------------|
+| adjusted_satisfaction | numeric | 0 to 100 | lower values indicate lower life satisfaction, higher values indicate higher life satisfaction |
+| avg_income | numeric | 0\$ to thousands of \$ | average annual income in \$ |
+| median_income | numeric | 0\$ to thousands of \$ | median annual income in \$ |
+| income_inequality | numeric | 0 to 100 | income inequality, lower values indicate a lower inequality, higher values indicate a higher inequality |
+| happyScore | numeric | 0-10 | lower values indicate a lower overall happiness, higher values indicate a higher overall happiness |
+| gdp | numeric |  | GDP in billions of \$ (Milliarden auf deutsch) |
+| country | character | \- | country name |
+
+## Task 2.1 (14p)
+
+2.1.1. Below is a subset of the dataset happiness_income_data. The code applies steps for data cleaning (i.e., dealing with missing values and outliers). **Follow the steps in the code and update the table by hand. Your final table should be happiness_data_clean** (8p).
+
+![](tabelle_Klausur_clean.PNG){fig-align="center"}
+
+```{r}
+   # load("happiness_income_data.RData") #loading data
+load("happiness_income_data.RData")
+
+happiness_income_data$happyScore <- ifelse(
+  happiness_income_data$happyScore > 10, NA, happiness_income_data$happyScore
+)
+
+happiness_income_data$median_income <- ifelse(
+  happiness_income_data$median_income < 0, NA, happiness_income_data$median_income
+)
+
+happiness_income_data$income_inequality <- ifelse(
+  happiness_income_data$income_inequality < 0 | 
+  happiness_income_data$income_inequality > 100, NA, happiness_income_data$income_inequality
+)
+
+happiness_income_data_clean <- na.omit(
+  happiness_income_data
+)
+
+```
+
+2.1.2. Did you **remove singular values and/or rows and/or columns**? If you did so, explain why.(2p)
+
+```         
+
+
+```
+
+2.1.3. Did you **change the content or name of singular values and/or rows and/or columns**? If you did so, explain why. (2p)
+
+```         
+
+
+
+
+```
+
+2.1.3. After applying the code: **Are any values left that could potentially lead to problems**? If so, how could we fix that problem (answer verbally, no code needed)? (2p)
+
+```         
+
+
+```
+
+## Task 2.2 (6p)
+
+After the listed data transformation steps we apply a linear regression to our full data set (111 observations) and are left with this output:
+
+```{r}
+#| echo: false
+happiness_income_data_clean <- happiness_income_data_orig 
+happiness_income_data_clean <- na.omit(happiness_income_data_clean)
+#make sure the students have the dataset with real values, not the missings/errors that were intentionally included in task 1.1
+summary(happiness_income_data_clean)
+```
+
+```{r}
+options(scipen=999)
+model1 <- lm(adjusted_satisfaction ~ avg_income, happiness_income_data_clean)
+summary(model1)
+```
+
+2.2.1. Explain **which of these graphs illustrates the results of the linear regression (model1) best** and **why** it is the best illustration? (3p)
+
+```         
+
+
+
+
+
+
+
+
+```
+
+2.2.2. Why are the **other graphics not suitable**? (1p each)
+
+Graph 1
+
+```{r}
+#| echo: false
+
+library(ggplot2)
+  ggplot(data=happiness_income_data_clean, mapping = aes(x=avg_income, y=adjusted_satisfaction)) +
+    geom_point() +
+    geom_smooth(method = lm, formula = y ~ x) +
+    scale_x_continuous(breaks = seq(0, 25000, 1000)) +
+    scale_y_continuous(breaks = seq(0, 80, 10)) +
+  theme(axis.text.x = element_text(angle = 45), axis.text.y = element_text(angle = 45)) +
+    xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+```
+
+```         
+
+
+```
+
+Graph 2
+
+```{r}
+#| echo: false
+library(ggplot2)
+ggplot(data=happiness_income_data_clean, mapping = aes(x = avg_income, y=adjusted_satisfaction)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2)) +
+ xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+
+```
+
+```         
+
+```
+
+Graph 3
+
+```{r}
+#| echo: false
+library(ggplot2)
+ggplot(data=happiness_income_data_clean, mapping = aes(x = avg_income, y=adjusted_satisfaction)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 7)) +
+ xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+
+```
+
+```         
+
+```
+
+Graph 4
+
+```{r}
+#| echo: false
+ggplot(data=happiness_income_data_clean, mapping = aes(x=avg_income, y=adjusted_satisfaction)) +
+    geom_point() +
+    geom_smooth(method = lm) +
+    theme(axis.ticks = element_blank(),     
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank()) +
+ xlab("average annual income in $") +
+    ylab("adjusted satisfaction")
+```
+
+```         
+
+
+
+```
+
+# Task 3: Regression (22p in total)
+
+## Task 3.1 (4p)
+
+**What kind of question do the different models answer?** Think of a research question for `model1` and of a research question for `model2`.
+
+```         
+
+
+
+
+
+
+```
+
+## Task 3.2 (2p)
+
+**Explain** each model in your own words
+
+```         
+
+
+
+
+
+
+
+```
+
+## Task 3.3 (4p)
+
+Write down the **mathematical formula** for each of the models
+
+```         
+
+
+
+```
+
+## **Task 3.4 (6p)**
+
+**Interpret the coefficients for the linear model** (value, meaning, significance), use five post decimal positions
+
+```{r}
+options(
+  scipen = 999
+)
+
+linear_model <- lm(
+  happyScore ~ income_inequality + gdp + median_income, 
+  data = happiness_income_data_clean
+)
+
+summary(
+  linear_model
+)
+```
+
+```         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+## Task 3.5. (6p)
+
+**Interpret the coefficients for the logistic model** (value, meaning, significance), use five post decimal positions. Are those coefficients the same as marginal effects?
+
+```{r}
+options(
+  scipen = 999
+)#creates readable numbers
+
+# Logistic regression for "happy country" or not
+happiness_income_data_clean$high_happyScore <- ifelse(
+  happiness_income_data_clean$happyScore >= 7, 1, 0
+)
+
+logistic_model <- glm(
+  high_happyScore ~ income_inequality + gdp + median_income, 
+  family = binomial, 
+  data = happiness_income_data_clean
+)
+
+summary(
+  logistic_model
+)
+
+```
+
+```         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+# Task 4: Regularization and Generalizability (18p in total)
+
+Given the linear regression models below,
+
+happyScore = $\beta_1$ income_inequality + $\beta_2$ gdp + $\beta_3$ median_income
+
+answer the following questions:
+
+## Task 4.1 Regularization: Ridge and Lasso regression (6p)
+
+4.1.1 Suppose you want to use Ridge or Lasso regression to reduce overfitting of the model to training data. **Say, variables income_inequality and median_income are highly correlated. How might the coefficients (**$\beta_1$ **and** $\beta_3$**) change if you use ridge regression?** (3p)
+
+```         
+
+
+
+
+
+```
+
+4.1.2 **What about Lasso regression?** (3p)
+
+```         
+
+
+
+
+
+```
+
+## Task 4.2 Generalizability Testing (6p)
+
+4.2.1 Generalizability refers to models' ability to make correct predictions on unseen data. Given the happiness_income_data_clean dataset, **please describe a method to evaluate the generalizability of the linear regression model.** (2p)
+
+```         
+
+
+
+
+
+
+
+```
+
+4.2.2 Given the following results from a 5-fold cross-validation, **calculate the average R-squared value**. (2p)
+
+| **Fold** | **R-squared Value** |
+|----------|---------------------|
+| Fold 1   | 0.85                |
+| Fold 2   | 0.85                |
+| Fold 3   | 0.84                |
+| Fold 4   | 0.83                |
+| Fold 5   | 0.83                |
+
+```         
+
+
+
+
+
+
+```
+
+4.2.3. What does this average, combined with the consistency of the fold results, tell you about the **model's ability to generalize**? (2p)
+
+```         
+
+
+
+
+
+
+
+
+
+
+
+```
+
+## Task 4.3 **Decision Tree Construction (6p)**
+
+Given the following dataset for predicting happiness score (cat_HappyScore) based on cat_GDP and cat_income_inequality (all variables are categorical variables), **draw the decision tree you would construct for predicting HappyScore based on GDP and Income Inequality.** (6p)
+
+Please note: gdp, income_inequality and HappyScore as you know them from the dataset in task 2 and 3 were transformed into categorical variables (indicated by the prefix `cat_`)
+
+| **cat_GDP** | **cat_income_inequality** | **cat_HappyScore** |
+|-------------|---------------------------|--------------------|
+| Low         | High                      | Low                |
+| Low         | Medium                    | High               |
+| Low         | Low                       | High               |
+| Medium      | High                      | Low                |
+| Medium      | Medium                    | Low                |
+| Medium      | Low.                      | Low                |
+| High        | High                      | Low                |
+| High        | Medium                    | Low                |
+| High        | Low                       | High               |
+
+```         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
