@@ -1,0 +1,229 @@
+---
+title: "Linear Regression Part I - Session 7"
+format: 
+  html:
+    self-contained: true
+    theme: minty
+editor: visual
+---
+
+# What you will learn today {#sec-goals}
+
+::: nonincremental
+-   how to familiarise with a new data set (airbnb data set)
+
+-   how to derive regression coefficient estimates by hand
+
+-   how to run a linear regression model
+
+-   how to interpret it
+:::
+
+# Recap
+
+## in simple terms:
+
+Imagine you have a scatterplot, which is a graph showing lots of points where each point represents a person's income and their years of experience in a company. Linear regression helps us draw a straight line that best fits these points. This straight line shows how weight tends to change when height changes.
+
+Linear regression answers the question: "If I know one thing (like years worked in company), what can I predict about another thing (like income)?" The line we draw helps us make these predictions. The goal is to make the best guess possible about how the two things are related.
+
+```{r}
+
+# Load the necessary ggplot2 library
+library(ggplot2)
+
+# Set a seed for reproducibility
+set.seed(123)
+
+# Generate random data for years of employment
+years_of_employment <- seq(0, 30, by = 1)  # 0 to 30 years
+
+# Create income based on years of employment with a reasonable starting value
+income <- 1500 + 45 * years_of_employment + rnorm(length(years_of_employment), mean = 0, sd = 100)  # Adding random noise
+
+# Create a data frame
+data <- data.frame(years_of_employment, income)
+
+# Create the scatterplot with the linear regression line
+ggplot(data, aes(x = years_of_employment, y = income)) +
+  geom_point(color = "blue") +  # Add points
+  geom_smooth(method = "lm", color = "red", se = FALSE) +  # Add linear regression line
+  labs(title = "Scatterplot of Monthly Income vs. Years of Employment",
+       x = "Years of Employment in Company",
+       y = " Monthly Income (EUR)") +
+  theme_minimal()
+```
+
+The equation of a simple linear regression can be expressed as: $y=β0​+β1​x$
+
+Here’s what each part means:
+
+-   $y$ is the thing we want to predict (like weight).
+-   $x$ is the thing we know (like height).
+-   $β0​$ is the intercept, which is the value of $y$ when $x$ is 0. It can be thought of as the starting point of our prediction.
+-   $β1$​ is the coefficient (slope) of $x$. It tells us how much $y$ (monthly income) is expected to change for a one-unit change in $x$ (years of employment in company). In other words, it shows the strength and direction of the relationship between $x$ and $y$.
+
+```{r}
+# Create a data frame
+data <- data.frame(years_of_employment, income)
+
+# Fit the linear model for income vs. years of employment
+model <- lm(income ~ years_of_employment, data = data)
+
+# Get the coefficients
+coefficients <- summary(model)$coefficients
+
+# Extracting beta0 and beta1
+beta0hat <- coefficients[1, 1]  # Intercept (b0 hat)
+beta1hat <- coefficients[2, 1]  # Slope (b1 hat)
+
+# Print the coefficients
+cat("Intercept (β0 hat):", beta0hat, "\n")
+cat("Slope (β1 hat):", beta1hat, "\n")
+```
+
+What do the coefficients tell us?
+
+# Digging deeper into the formulas:
+
+real world: $y_i = \beta_0 + \beta_1 x_i + u_i$
+
+our model: $\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i$
+
+**important formulas:**
+
+***RSS***\
+$$RSS = \sum_{i=1}^{n} \left(y_i - \hat{y_i} \right)^2 =  \sum_{i=1}^{n} \left(y_i - \hat{\beta_0} - \hat{\beta_1} x_i \right)^2$$
+
+RSS (residual sum of squares) should be minimized
+
+***Covariance***
+
+$Cov(x, y) = \frac{1}{n} \sum_{i=1}^n (x_i - E(x)) (y_i - E(y)) \\= \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})$
+
+***Calculating the coefficients***
+
+![](bhat.png)
+
+## commands to run a linear regression:
+
+```{r}
+library(sozoekds)
+airbnbsmall<- airbnbsmall
+```
+
+We want to know how the cleaning fee can be explained by the number of beds (x \~ y)
+
+```{r}
+usd_cleaning_fee <- airbnbsmall$usd_cleaning_fee
+n_beds <- airbnbsmall$n_beds
+lm(usd_cleaning_fee ~ n_beds)
+```
+
+Interpretation: For a flat with zero beds the cleaning fee would be on average 14.43\$. By each additional bed the cleaning fee would rise up by 11.64\$
+
+Does this sound reasonable to us? Paying more for the cleaning of the flat if it allows for more people to sleep there sounds legit.
+
+# Exercises
+
+Create a .qmd-file and solve the tasks there. Store it in the JupyterHub folder "Session 7".
+
+Please use the airbnbsmall data set. Use our package "sozoekds" to load the data set. Make sure to have installed the package first.
+
+Some of you had difficulties using this package.
+
+This is why we have created a workaround:
+
+Make sure, that the file called *data_sozoekds_package.RData* is copied into your working folder (click on it, then on more, then use copy-to and select your working folder)
+
+```{r}
+load("data_sozoekds_package.RData")
+```
+
+## 1) Make yourself familiar with the dataset:
+
+1.  How many observations does it comprise?
+
+2.  How many variables?
+
+## 2) Linear Regression:
+
+1.  Think about a simple linear regression model with one exogenous variable explaining "price" (= endogenous variable). Write down the equation of your model.\
+    Note: Do NOT use a variable that starts with d\_ , those are dummy variables and will be handled later on
+
+2.  Calculate the intercept and regression coefficient estimate by hand. Remember the formula from the lecture (p.11).
+
+3.  Then, run the regression using a suitable R command. Compare your results to the ones you calculated by hand and interpret the coefficient and intercept.
+
+## 3) Plotting
+
+Plot the relationship of price and number of accommodates, include a trend-line. Take a closer look at the plot and draw conclusions in terms of the explanatory power of the model.
+
+------------------------------------------------------------------------
+
+# Solutions:
+
+First: Load data, add package to library etc.
+
+1\)
+
+```{r}
+airbnbsmall <- airbnbsmall
+
+# number of rows: number of observations
+nrow(airbnbsmall)
+
+# number of columns: number of different variables
+ncol(airbnbsmall)
+```
+
+2\)
+
+**my model:** $$\hat{price} = \hat{basiccosts} + \hat{cost per guest} * numberaccommodates$$
+
+**true model**
+
+$${price} = {basiccosts} + {cost per guest} * numberaccommodates + errorterm $$
+
+```{r}
+#calculation of b1hat
+# y is price (this is supposed to be explained)
+# x is n_accommodates (this is used for the explanation)
+cov_xy <- cov(airbnbsmall$n_accommodates, airbnbsmall$price)
+var_x <- var(airbnbsmall$n_accommodates)
+
+b1hat <- cov_xy/var_x
+
+mean_y <- mean(airbnbsmall$price)
+mean_x <- mean(airbnbsmall$n_accommodates)
+
+b0hat <- mean_y-b1hat*mean_x
+
+print (paste("b1hat is", b1hat))
+print (paste("b0hat (intercept) is", b0hat))
+```
+
+```{r}
+#regression
+lm(airbnbsmall$price ~ airbnbsmall$n_accommodates)
+```
+
+## Interpretation:
+
+Explaining the price of the airbnb listing by the number of accommodates leads to the following results:
+
+-   the basic-price regardless of guests is 14.33\$. This could represent a standard fee that the host always has to pay to the platform and that is therefore always existent.
+
+-   an increase by one of the number of accommodates increases the price by 25.83\$. This seems reasonable since more guests need more space, more beds, more dishes...
+
+## Plot
+
+We can see that the price varies a lot. Using only the number of accommodates as a metric to explain the price does not serve the complexity of the data.
+
+```{r}
+library(ggplot2)
+ggplot(data=airbnbsmall, mapping = aes(x=n_accommodates, y= price)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Price and number of accommodates for Airbnb listings", x = "Number of accommodates", y= "price in $")
+```
