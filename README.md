@@ -1,5 +1,8 @@
-# WS24-25-Data-Science
-Repository for Lisa and Junbo
+# DS4Socioeconomists
+Repository for the course "Data Science for Socioeconomists".
 
-![grafik](https://github.com/user-attachments/assets/c4cc406f-576c-46af-9d97-cbac2921fa54)
+![grafik](./images/timetable_ws2526.png)
+
+[Todos](./todos.md)
+
 
