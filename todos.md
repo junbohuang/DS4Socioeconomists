@@ -13,6 +13,7 @@
         1. missing images
     c. Suggestions: 
         1. add content on using R (what is a "package" and how to install packages?)
+        2. intro to different programming languages (R, Python, Stata, Julia, Matlab ...)
 
 ### Session 2: Quarto Introduction 
     a. Goal: 
