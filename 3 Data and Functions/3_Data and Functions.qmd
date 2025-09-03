@@ -68,9 +68,9 @@ print (result)
 :::
 :::::
 
-## Taking a closer look #TODO: missing images {#sec-taking-a-closer-look}
+## Taking a closer look  {#sec-taking-a-closer-look}
 
-![](images/Function_Important_Terms.PNG)
+![](../images/Function_Important_Terms.PNG)
 
 # 2. Recap on loading data {#sec-types}
 
@@ -107,7 +107,7 @@ therefore `read_csv` should work
 In our course we will use a data package. It contains data sets and descriptions of the different variables. The package consists of several data sets:
 
 |  |  |
-|-------------------------|------------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | [airbnbbig](http://127.0.0.1:11415/help/library/sozoekds/html/airbnbbig.html) | This data set comprises Airbnb listings in London, UK from 2009 to 5th November 2019. Please note: this is the bigger version of the data set. |
 | [airbnbsmall](http://127.0.0.1:11415/help/library/sozoekds/html/airbnbsmall.html) | This data set comprises Airbnb listings in London, UK from 2009 to 5th November 2019. Please note: this is the smaller version of the data set. |
 | [calhouse](http://127.0.0.1:11415/help/library/sozoekds/html/calhouse.html) | The data pertains to the houses found in a given California district and some summary stats about them based on the 1990 census data. |

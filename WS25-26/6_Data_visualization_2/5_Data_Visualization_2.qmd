@@ -1,0 +1,180 @@
+---
+title: "Data Science for Socioeconomists"
+subtitle: "Excercise 6 - Data visualization pt. 2"
+author: Lisa Wegner & Junbo Huang
+format:
+  revealjs:
+    code-overflow: wrap
+    output-file: "Session_5_Data_Visualization_2.html"
+    incremental: false
+    transition: none
+    background-transition: none
+    theme: white
+    slide-number: true
+    footer: "Data Science for Socioeconomists"
+    embed-resources: true
+    preview-links: auto 
+    smaller: false
+    scrollable: true
+    fig-width: 8
+    fig-height: 6
+    execute:
+      echo: TRUE
+    editor: visual
+code-annotations: below
+---
+
+# Visualization session 2 {#sec-visualization-session-2}
+
+## Agenda {#sec-agenda}
+
+1.  Axis labeling
+2.  scales
+3.  legends
+4.  readability
+5.  color usage
+6.  accessibility
+7.  Tasks for today
+
+## Axis labeling & Scaling {#sec-axis-labeling}
+
+-   We can look at:
+    -   labeling the axis
+    -   decision about units
+    -   aspect ratio (wide enhances changes on the x-axis, narrow and tall enhances changes on the y-axis)
+    -   grid spacing
+
+## labels {#sec-labels}
+
+We get the axis title of the variable we inserted - ugly names create ugly axis titles
+
+```{r}
+library(sozoekds)
+library(ggplot2)
+test_dataset <- testdata
+test_dataset$ag2341 <- test_dataset$age
+test_dataset$inc34 <- test_dataset$income
+ ggplot(data=test_dataset) +
+   geom_point(aes(ag2341,inc34))
+   
+```
+
+```{r}
+ ggplot(data=test_dataset) +
+   geom_point(aes(ag2341,inc34)) +
+   xlab("age") +
+   ylab ("income")
+```
+
+## adding scales {#sec-adding-scales}
+
+***changing the range of values that are plotted***
+
+```{r}
+ ggplot(data=test_dataset) +
+   geom_point(aes(ag2341,inc34)) +
+   xlab("age") +
+   ylab ("income") +
+    xlim(20, 60) 
+```
+
+***setting "tick marks"***
+
+```{r}
+ ggplot(data=test_dataset) +
+   geom_point(aes(ag2341,inc34)) +
+   xlab("age") +
+   ylab ("income") +
+scale_x_continuous(breaks=c(0, 20, 40, 60))
+```
+
+## Legend {#sec-legend}
+
+```{r}
+ggplot(data = test_dataset, aes(x = age, y = income, fill = age)) +
+  geom_bar(stat = "identity") +
+  xlab("Age") +
+  ylab("Income")
+```
+
+we can also:
+
+-   change the order of the elements in our legend
+-   change the name of the categories in the legend
+-   change the position of the legend.... and a lot more
+
+## Readability and Color Usage {#sec-readability-and-color-usage}
+
+What's bad about these visualizations? What can we do better?
+
+::::: columns
+::: {.column width="50%"}
+![via: https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-vs-popsize-colored-1.png](https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-vs-popsize-colored-1.png){fig-align="center" width="365"}
+:::
+
+::: {.column width="50%"}
+![via: https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-US-rainbow-1.png](https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/popgrowth-US-rainbow-1.png){fig-align="center" width="375"}
+:::
+:::::
+
+## Things to keep in mind when using colors {#sec-things-to-keep-in-mind-when-using-colors}
+
+-   Fewer colors enable the brain to process the information more clearly
+
+-   There are three main types of color palettes used in the world of data visualizations:
+
+    -   **Qualitative palette ---** each color is distinct from the others
+
+    -   **Sequential palette ---** a single color in a variety of saturations or a gradient
+
+    -   **Diverging palette ---** color variables sit on a spectrum, such as cold to hot
+
+    🔄 What can we change in the graphics we saw before?
+
+Info and Inspo:
+
+-   <https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/>
+-   <https://ggplot2-book.org/scales-colour>
+
+## Accessibility {#sec-accessibility}
+
+colors need to be easy to distinguish - What about color-blindness?
+
+1.  deutanomaly: green-blind
+
+2.  protanomaly: red-blind
+
+3.  tritanomaly: blue-blind
+
+⭆ [check acessability](https://www.color-blindness.com/coblis-color-blindness-simulator/) via a website or via an R-package [colorblindr](https://www.rdocumentation.org/packages/colorblindr/versions/0.1.0)
+
+# Tasks for today
+
+1.  Revisit last weeks plots - how can you transform them with the principles we learned today?
+
+Choose **one** of the two data sets and do the exercises regarding this set.
+
+## ***California Housing*** {#sec-california-housing}
+
+1.  Create a new variable called `Avg_Rooms` that displays the average amount of rooms in each household in a certain neighborhood (block)
+
+*Hint: for one observation there might be 20 households, and 50 rooms in total - this leads to an average of 2.5 rooms per household*
+
+2.  Plot Avg_Rooms against Median_Income - interpret the result
+
+3.  Eliminate values in Avg_Rooms that are greater then 10 rooms from your data set - then plot task 2 again
+
+4.  as before: Explain your decision of the type of visualization + Interpret the results
+
+## ***Exam Score*** {#sec-exam-score}
+
+1.  Create a new variable called `full_score` that is the mean score of all three testscores (Math, Reading, Writing)
+
+2.  Calculate grades from the `full_score` using the american system ([hint here](https://en.wikipedia.org/wiki/Academic_grading_in_the_United_States))
+
+3.  Plot the distribution of grades by number of study hours per week\
+    Hint: create a factor variable from WklyStudyHours
+
+    Hint: You could do this in one plot with multiple lines or in more than one graphic where all the plots are printed in one frame (<https://intro2r.com/mult_graphs.html>)
+
+4.  as before: Explain your decision of the type of visualization + Interpret the results

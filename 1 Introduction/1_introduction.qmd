@@ -95,7 +95,7 @@ exercises take place in rooms WiWi 1005 (Lisa) and WiWi 1004 (Junbo)
 | 23/01/2025 |                             |
 | 30/01/2025 |                             |
 
-# Pair programming? #TODO: what do we want to talk about here? we do not {#sec-pair-programming .illustration}
+# Pair programming? {#sec-pair-programming .illustration}
 
 :::: notes
 ::: nonincremental
@@ -147,7 +147,7 @@ exercises take place in rooms WiWi 1005 (Lisa) and WiWi 1004 (Junbo)
 
 # Opening the course page #TODO: missing images {#sec-opening-the-course-page}
 
-![](images/Course_page-01.png)
+![](../images/Course_page-01.png)
 
 # going to section "sign in for group work" #TODO: missing images {#sec-going-to-section-sign-in-for-group-work}
 

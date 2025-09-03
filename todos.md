@@ -7,7 +7,7 @@
 ### Session 1: Introduction
 
     a. Goal: We want to ask ourselves what the motivation is for introducing pair programming? does the current content deliever our goal?
-        1. I personally find it a bit shallow. Since it is the first class I prefer to give students a session to show them what they can expect, content-wise and tool-wise. 
+        1. I personally find it a bit too theoretical. Since it is the first class I prefer to give students a session to show them what they can expect, content-wise and tool-wise. 
         2. We can talk about AI use in this session. 
     b. Todos: 
         1. missing images
